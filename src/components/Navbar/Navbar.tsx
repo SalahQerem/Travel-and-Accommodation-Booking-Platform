@@ -10,7 +10,7 @@ import Typography from "@mui/material/Typography";
 import MenuItem from "@mui/material/MenuItem";
 import Drawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
-import fullLogo from "../../assets/images/full-logo.png";
+import fullLogo from "@/assets/images/full-logo.png";
 import ToggleColorMode from "./ToggleColorMode";
 
 const logoStyle = {
