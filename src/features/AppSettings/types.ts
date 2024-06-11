@@ -1,6 +1,5 @@
 import { PaletteMode } from "@mui/material";
 
-export interface AppLayoutProps {
+export interface AppSettingsState {
   themeMode: PaletteMode;
-  toggleThemeMode: () => void;
 }

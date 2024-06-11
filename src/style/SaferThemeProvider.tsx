@@ -1,25 +1,18 @@
-import {
-  CssBaseline,
-  PaletteMode,
-  ThemeProvider,
-  createTheme,
-} from "@mui/material";
-import { PropsWithChildren, useState } from "react";
-import getSaferTheme from "./getSaferTheme";
+import { selectThemeMode } from "@/features/AppSettings/selectors";
+import { useAppSelector } from "@/store";
+import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
+import { PropsWithChildren } from "react";
 import Navbar from "../components/Navbar";
+import getSaferTheme from "./getSaferTheme";
 
 const SaferThemeProvider = ({ children }: PropsWithChildren) => {
-  const [themeMode, setThemeMode] = useState<PaletteMode>("light");
+  const themeMode = useAppSelector(selectThemeMode);
   const saferTheme = createTheme(getSaferTheme(themeMode));
-
-  const toggleThemeMode = () => {
-    setThemeMode((prev) => (prev === "dark" ? "light" : "dark"));
-  };
 
   return (
     <ThemeProvider theme={saferTheme}>
       <CssBaseline />
-      <Navbar themeMode={themeMode} toggleThemeMode={toggleThemeMode} />
+      <Navbar />
       {children}
     </ThemeProvider>
   );

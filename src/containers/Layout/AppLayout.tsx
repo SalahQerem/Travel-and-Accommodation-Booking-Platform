@@ -3,12 +3,11 @@ import Navbar from "@/components/Navbar";
 import { FC } from "react";
 import { Outlet } from "react-router-dom";
 import { AppLayoutContainer } from "./styled";
-import { AppLayoutProps } from "./types";
 
-const AppLayout: FC<AppLayoutProps> = ({ themeMode, toggleThemeMode }) => {
+const AppLayout: FC = () => {
   return (
     <>
-      <Navbar themeMode={themeMode} toggleThemeMode={toggleThemeMode} />
+      <Navbar />
       <AppLayoutContainer container>
         <Outlet />
       </AppLayoutContainer>
