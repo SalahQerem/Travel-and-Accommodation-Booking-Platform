@@ -1,6 +1,6 @@
 import { PaletteMode } from "@mui/material";
 
-export interface NavbarProps {
+export interface AppLayoutProps {
   themeMode: PaletteMode;
   toggleThemeMode: () => void;
 }

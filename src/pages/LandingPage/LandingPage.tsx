@@ -11,7 +11,6 @@ import {
 } from "@mui/material";
 import FAQ from "./components/FAQ";
 import Features from "./components/Features";
-import Footer from "./components/Footer";
 import Highlights from "./components/Hignlights";
 import LogoCollection from "./components/LogoCollection";
 import Pricing from "./components/Pricing";
@@ -136,7 +135,6 @@ const LandingPage = () => {
       <Divider />
       <FAQ />
       <Divider />
-      <Footer />
     </Box>
   );
 };

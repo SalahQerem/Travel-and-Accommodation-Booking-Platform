@@ -19,8 +19,11 @@
     "@tanstack/react-query-devtools": "^5.40.1",
     "axios": "^1.7.2",
     "js-cookie": "^3.0.5",
+    "lottie-react": "^2.4.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.23.1",
+    "react-spinners": "^0.13.8"
   },
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "^5.43.1",
