@@ -9,17 +9,17 @@ import getSaferTheme from "./getSaferTheme";
 import Navbar from "../components/Navbar";
 
 const SaferThemeProvider = ({ children }: PropsWithChildren) => {
-  const [mode, setMode] = useState<PaletteMode>("light");
-  const saferTheme = createTheme(getSaferTheme(mode));
+  const [themeMode, setThemeMode] = useState<PaletteMode>("light");
+  const saferTheme = createTheme(getSaferTheme(themeMode));
 
-  const toggleColorMode = () => {
-    setMode((prev) => (prev === "dark" ? "light" : "dark"));
+  const toggleThemeMode = () => {
+    setThemeMode((prev) => (prev === "dark" ? "light" : "dark"));
   };
 
   return (
     <ThemeProvider theme={saferTheme}>
       <CssBaseline />
-      <Navbar mode={mode} toggleColorMode={toggleColorMode} />
+      <Navbar themeMode={themeMode} toggleThemeMode={toggleThemeMode} />
       {children}
     </ThemeProvider>
   );

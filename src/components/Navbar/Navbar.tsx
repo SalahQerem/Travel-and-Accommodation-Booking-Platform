@@ -17,7 +17,7 @@ import { StyledMenuItem, StyledToolbar } from "./StyledElements";
 import ToggleColorMode from "./ToggleColorMode";
 import { NavbarProps } from "./types";
 
-const Navbar: FC<NavbarProps> = ({ mode, toggleColorMode }) => {
+const Navbar: FC<NavbarProps> = ({ themeMode, toggleThemeMode }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const toggleDrawer = (newIsOpen: boolean) => () => {
@@ -94,7 +94,10 @@ const Navbar: FC<NavbarProps> = ({ mode, toggleColorMode }) => {
                 gap: 0.5,
               }}
             >
-              <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
+              <ToggleColorMode
+                mode={themeMode}
+                toggleColorMode={toggleThemeMode}
+              />
               <Button
                 color="primary"
                 variant="text"
@@ -141,8 +144,8 @@ const Navbar: FC<NavbarProps> = ({ mode, toggleColorMode }) => {
                 >
                   <Stack alignItems="end" flexGrow={1}>
                     <ToggleColorMode
-                      mode={mode}
-                      toggleColorMode={toggleColorMode}
+                      mode={themeMode}
+                      toggleColorMode={toggleThemeMode}
                     />
                   </Stack>
                   <MenuItem onClick={() => scrollToSection("features")}>
