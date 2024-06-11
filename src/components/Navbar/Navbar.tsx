@@ -1,4 +1,7 @@
 import fullLogo from "@/assets/images/full-logo.png";
+import { toggleThemeMode } from "@/features/AppSettings";
+import { selectThemeMode } from "@/features/AppSettings/selectors";
+import { useAppDispatch } from "@/store";
 import MenuIcon from "@mui/icons-material/Menu";
 import {
   AppBar,
@@ -13,11 +16,13 @@ import {
   Typography,
 } from "@mui/material";
 import { FC, useState } from "react";
+import { useSelector } from "react-redux";
 import { StyledMenuItem, StyledToolbar } from "./StyledElements";
 import ToggleColorMode from "./ToggleColorMode";
-import { NavbarProps } from "./types";
 
-const Navbar: FC<NavbarProps> = ({ themeMode, toggleThemeMode }) => {
+const Navbar: FC = () => {
+  const themeMode = useSelector(selectThemeMode);
+  const dispatch = useAppDispatch();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const toggleDrawer = (newIsOpen: boolean) => () => {
@@ -96,7 +101,7 @@ const Navbar: FC<NavbarProps> = ({ themeMode, toggleThemeMode }) => {
             >
               <ToggleColorMode
                 mode={themeMode}
-                toggleColorMode={toggleThemeMode}
+                toggleColorMode={() => dispatch(toggleThemeMode())}
               />
               <Button
                 color="primary"
@@ -145,7 +150,7 @@ const Navbar: FC<NavbarProps> = ({ themeMode, toggleThemeMode }) => {
                   <Stack alignItems="end" flexGrow={1}>
                     <ToggleColorMode
                       mode={themeMode}
-                      toggleColorMode={toggleThemeMode}
+                      toggleColorMode={() => dispatch(toggleThemeMode())}
                     />
                   </Stack>
                   <MenuItem onClick={() => scrollToSection("features")}>
