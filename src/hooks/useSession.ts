@@ -1,9 +1,11 @@
-import { getSession } from "@/lib/session";
+import { SessionData, getSession } from "@/lib/session";
 import { useEffect, useState } from "react";
-// import { jwtDecode } from "jwt-decode";
-// import { useAppDispatch } from "@/store";
+import { jwtDecode } from "jwt-decode";
+import { useAppDispatch } from "@/store";
+import { updateUserSession } from "@/features/User";
+import { useSnackBar } from "./useSnackbar";
 
-export const useSession = () => {
+const useSession = () => {
   const session = getSession();
 
   const [state, setState] = useState({
@@ -11,7 +13,8 @@ export const useSession = () => {
     isUpdatingSession: true,
   });
 
-  //   const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
+  const { showErrorSnackbar } = useSnackBar();
 
   useEffect(() => {
     if (!session) {
@@ -22,17 +25,18 @@ export const useSession = () => {
       return;
     }
     try {
-      //   const payload = jwtDecode<SessionData>(session);
-
-      // Dispatch an action to set the user's session data in the redux store
-      //   dispatch(updateUserSession(payload));
+      const payload = jwtDecode<SessionData>(session);
+      dispatch(updateUserSession(payload));
 
       setState({
         isLoggedIn: true,
         isUpdatingSession: false,
       });
-    } catch (error) {
-      console.log(error);
+    } catch (error: Error | unknown) {
+      if (error instanceof Error)
+        showErrorSnackbar({
+          message: `${error.name}: ${error.message}`,
+        });
     }
   }, []);
 
@@ -40,3 +44,5 @@ export const useSession = () => {
     ...state,
   };
 };
+
+export default useSession;

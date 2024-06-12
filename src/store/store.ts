@@ -4,6 +4,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import userReducer from "../features/User/userSlice";
+import snackbarReducer from "../features/Snackbar/snackbarSlice";
 
 const persistedAppSettings = {
   key: "appSettings",
@@ -18,6 +19,7 @@ const persistedAppSettingsReducer = persistReducer(
 const saferStore = configureStore({
   reducer: {
     user: userReducer,
+    snackbar: snackbarReducer,
     appSettings: persistedAppSettingsReducer,
   },
   middleware: (getDefaultMiddleware) =>
