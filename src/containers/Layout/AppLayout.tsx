@@ -8,7 +8,7 @@ const AppLayout: FC = () => {
   return (
     <AppLayoutContainer
       container
-      sx={{ bgcolor: (theme) => theme.palette.background.paper }}
+      sx={{ bgcolor: (theme) => theme.palette.background.default }}
     >
       <Navbar />
       <Outlet />
