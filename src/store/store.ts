@@ -3,6 +3,7 @@ import appSettingsReducer from "@/features/AppSettings/appSettingsSlice";
 import { configureStore } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import userReducer from "../features/User/userSlice";
 
 const persistedAppSettings = {
   key: "appSettings",
@@ -16,6 +17,7 @@ const persistedAppSettingsReducer = persistReducer(
 
 const saferStore = configureStore({
   reducer: {
+    user: userReducer,
     appSettings: persistedAppSettingsReducer,
   },
   middleware: (getDefaultMiddleware) =>
