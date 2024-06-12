@@ -5,7 +5,7 @@ const initialState: AppSettingsState = {
   themeMode: "light",
 };
 
-export const appSettingsSlice = createSlice({
+const appSettingsSlice = createSlice({
   name: "appSettings",
   initialState,
   reducers: {
