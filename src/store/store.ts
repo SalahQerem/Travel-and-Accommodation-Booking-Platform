@@ -18,6 +18,10 @@ const saferStore = configureStore({
   reducer: {
     appSettings: persistedAppSettingsReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 export const persistor = persistStore(saferStore);
