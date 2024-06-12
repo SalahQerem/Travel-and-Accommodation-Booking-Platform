@@ -6,13 +6,14 @@ import { AppLayoutContainer } from "./styled";
 
 const AppLayout: FC = () => {
   return (
-    <>
+    <AppLayoutContainer
+      container
+      sx={{ bgcolor: (theme) => theme.palette.background.paper }}
+    >
       <Navbar />
-      <AppLayoutContainer container>
-        <Outlet />
-      </AppLayoutContainer>
+      <Outlet />
       <Footer />
-    </>
+    </AppLayoutContainer>
   );
 };
 

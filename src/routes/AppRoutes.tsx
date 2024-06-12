@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { useRoutes } from "react-router-dom";
-import Loader from "../containers/BlockUI";
+import Loader from "@/containers/BlockUI";
 
 // routes
 import PrivateRoutes from "./PrivateRoutes";
