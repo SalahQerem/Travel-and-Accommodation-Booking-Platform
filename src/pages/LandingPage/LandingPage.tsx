@@ -5,7 +5,6 @@ import {
   Divider,
   Link,
   Stack,
-  TextField,
   Typography,
   alpha,
 } from "@mui/material";
@@ -15,6 +14,7 @@ import Highlights from "./components/Hignlights";
 import LogoCollection from "./components/LogoCollection";
 import Pricing from "./components/Pricing";
 import Testimonials from "./components/Testimonials";
+import FeaturedDeals from "./components/FeaturedDeals";
 
 const LandingPage = () => {
   return (
@@ -50,16 +50,7 @@ const LandingPage = () => {
               }}
             >
               Explore Our Latest&nbsp;
-              <Typography
-                component="span"
-                variant="h1"
-                sx={{
-                  color: (theme) =>
-                    theme.palette.mode === "light"
-                      ? "primary.main"
-                      : "primary.light",
-                }}
-              >
+              <Typography component="span" variant="h1" color="primary">
                 Booking&nbsp;
               </Typography>
               Services
@@ -69,21 +60,15 @@ const LandingPage = () => {
               color="text.secondary"
               sx={{ alignSelf: "center", width: { sm: "100%", md: "80%" } }}
             >
-              Discover and book tailored services with Safer. From vacation
-              rentals to event venues, enjoy a seamless booking experience. Plan
-              your next adventure with confidence, supported by top-tier
-              customer service and unbeatable deals. Make your next trip
-              unforgettable with&nbsp;
-              <Typography
-                component="span"
-                sx={{
-                  color: (theme) =>
-                    theme.palette.mode === "light"
-                      ? "primary.main"
-                      : "primary.light",
-                  fontWeight: 600,
-                }}
-              >
+              Discover and book tailored services with&nbsp;
+              <Typography component="span" color="primary" fontWeight={600}>
+                Safer
+              </Typography>
+              . From vacation rentals to event venues, enjoy a seamless booking
+              experience. Plan your next adventure with confidence, supported by
+              top-tier customer service and unbeatable deals. Make your next
+              trip unforgettable with&nbsp;
+              <Typography component="span" color="primary" fontWeight={600}>
                 Safer
               </Typography>
             </Typography>
@@ -94,7 +79,7 @@ const LandingPage = () => {
               useFlexGap
               sx={{ pt: 2, width: { xs: "100%", sm: "auto" } }}
             >
-              <TextField
+              {/* <TextField
                 id="outlined-basic"
                 hiddenLabel
                 size="small"
@@ -105,9 +90,9 @@ const LandingPage = () => {
                   autoComplete: "off",
                   "aria-label": "Enter your email address",
                 }}
-              />
+              /> */}
               <Button variant="contained" color="primary">
-                Start now
+                Start Booking now
               </Button>
             </Stack>
             <Typography
@@ -124,9 +109,10 @@ const LandingPage = () => {
           </Stack>
         </Container>
       </Box>
-      <LogoCollection />
+      <FeaturedDeals />
       <Features />
       <Divider />
+      <LogoCollection />
       <Testimonials />
       <Divider />
       <Highlights />
