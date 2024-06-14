@@ -1,10 +1,10 @@
-import Container from "@mui/material/Container";
-import useGetFeaturedDealsAPI from "./hooks/useGetFeaturedDealsAPI";
 import BlockUI from "@/containers/BlockUI";
-import Slider from "react-slick";
-import Deal from "./Deal";
-import { Typography } from "@mui/material";
 import useMediaQuery from "@/hooks/useMediaQuery";
+import { Typography } from "@mui/material";
+import Container from "@mui/material/Container";
+import Slider from "react-slick";
+import useGetFeaturedDealsAPI from "../hooks/useGetFeaturedDealsAPI";
+import Deal from "./Deal";
 
 const FeaturedDeals = () => {
   const { isTabletOrLess, isDesktopOrLess } = useMediaQuery();

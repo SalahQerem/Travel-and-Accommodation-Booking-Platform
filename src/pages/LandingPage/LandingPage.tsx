@@ -15,6 +15,7 @@ import LogoCollection from "./components/LogoCollection";
 import Pricing from "./components/Pricing";
 import Testimonials from "./components/Testimonials";
 import FeaturedDeals from "./components/FeaturedDeals";
+import TrendingDestinations from "./components/TrendingDestinations";
 
 const LandingPage = () => {
   return (
@@ -110,6 +111,7 @@ const LandingPage = () => {
         </Container>
       </Box>
       <FeaturedDeals />
+      <TrendingDestinations />
       <Features />
       <Divider />
       <LogoCollection />

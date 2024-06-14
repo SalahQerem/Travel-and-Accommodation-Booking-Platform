@@ -10,7 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import { FC } from "react";
-import { DealProps } from "./types";
+import { DealProps } from "../types";
 import { MapPin, University } from "lucide-react";
 
 const Deal: FC<DealProps> = ({ deal }) => {
