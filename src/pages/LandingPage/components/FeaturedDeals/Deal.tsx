@@ -31,7 +31,7 @@ const Deal: FC<DealProps> = ({ deal }) => {
       <CardMedia
         component="img"
         alt="green iguana"
-        height="200"
+        height="220"
         image={roomPhotoUrl}
       />
       <CardContent>
@@ -83,7 +83,12 @@ const Deal: FC<DealProps> = ({ deal }) => {
         </Stack>
       </CardContent>
       <CardActions>
-        <Button size="small" variant="contained" color="primary">
+        <Button
+          size="small"
+          variant="contained"
+          color="primary"
+          sx={{ m: "auto" }}
+        >
           Book now
         </Button>
       </CardActions>

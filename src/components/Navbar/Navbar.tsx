@@ -65,7 +65,7 @@ const Navbar: FC = () => {
               <img src={fullLogo} width="100px" alt="logo of safer" />
             </Link>
             <Box sx={{ display: { xs: "none", md: "flex" }, gap: 3, px: 3 }}>
-              <StyledMenuItem onClick={() => scrollToSection("features")}>
+              <StyledMenuItem onClick={() => scrollToSection("features deals")}>
                 <Typography variant="body2" color="text.primary">
                   Featured Deals
                 </Typography>
@@ -142,7 +142,7 @@ const Navbar: FC = () => {
                     toggleColorMode={() => dispatch(toggleThemeMode())}
                   />
                 </Stack>
-                <MenuItem onClick={() => scrollToSection("features")}>
+                <MenuItem onClick={() => scrollToSection("features deals")}>
                   Featured Deals
                 </MenuItem>
                 <MenuItem onClick={() => scrollToSection("testimonials")}>
