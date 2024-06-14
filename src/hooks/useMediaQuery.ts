@@ -8,7 +8,7 @@ const useMediaQuery = () => {
   const isTabletOrLess = useMuiMediaQuery<Theme>((theme) =>
     theme.breakpoints.down("md")
   );
-  const isDesktopOrMore = useMuiMediaQuery<Theme>((theme) =>
+  const isDesktopOrLess = useMuiMediaQuery<Theme>((theme) =>
     theme.breakpoints.down("lg")
   );
   const isLargeDesktop = useMuiMediaQuery<Theme>((theme) =>
@@ -18,7 +18,7 @@ const useMediaQuery = () => {
   return {
     isMobile,
     isTabletOrLess,
-    isDesktopOrMore,
+    isDesktopOrLess,
     isLargeDesktop,
   };
 };

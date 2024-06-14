@@ -4,23 +4,25 @@ import BlockUI from "@/containers/BlockUI";
 import Slider from "react-slick";
 import Deal from "./Deal";
 import { Typography } from "@mui/material";
-
-const settings = {
-  dots: true,
-  infinite: true,
-  speed: 500,
-  slidesToScroll: 1,
-  adaptiveHeight: true,
-  slidesToShow: 3,
-  autoplay: true,
-};
+import useMediaQuery from "@/hooks/useMediaQuery";
 
 const FeaturedDeals = () => {
+  const { isTabletOrLess, isDesktopOrLess } = useMediaQuery();
   const { featuredDeals, isFetching } = useGetFeaturedDealsAPI();
 
   const renderFeaturedDeals = featuredDeals?.map((deal) => (
     <Deal key={deal.hotelId} deal={deal} />
   ));
+
+  const sliderConfigs = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToScroll: 1,
+    adaptiveHeight: true,
+    slidesToShow: isTabletOrLess ? 1 : isDesktopOrLess ? 2 : 3,
+    autoplay: true,
+  };
 
   if (isFetching) return <BlockUI />;
 
@@ -35,7 +37,7 @@ const FeaturedDeals = () => {
       >
         Featured Deals
       </Typography>
-      <Slider {...settings}>{renderFeaturedDeals}</Slider>
+      <Slider {...sliderConfigs}>{renderFeaturedDeals}</Slider>
     </Container>
   );
 };
