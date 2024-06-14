@@ -30,12 +30,12 @@ const Deal: FC<DealProps> = ({ deal }) => {
       {/* <CardActionArea> */}
       <CardMedia
         component="img"
-        alt="green iguana"
+        alt="Features Deal image"
         height="220"
         image={roomPhotoUrl}
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
+        <Typography gutterBottom variant="h5" component="h3">
           {title}
         </Typography>
         <Typography variant="body2" color="text.secondary">

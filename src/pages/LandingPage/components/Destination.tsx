@@ -1,32 +1,42 @@
-import { Box, Card, Grid } from "@mui/material";
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  Typography,
+} from "@mui/material";
+import countries from "i18n-iso-countries";
+import enLocale from "i18n-iso-countries/langs/en.json";
+import { FC } from "react";
+import Flag from "react-world-flags";
+import { DestinationProps } from "../types";
+import styles from "../style.module.css";
 
-const Destination = () => {
+countries.registerLocale(enLocale);
+
+const Destination: FC<DestinationProps> = ({ destination }) => {
+  const { cityName, thumbnailUrl, countryName } = destination;
+
   return (
-    <Grid
-      item
-      xs={12}
-      md={6}
-      sx={{ display: { xs: "none", sm: "flex" }, width: "100%" }}
-    >
-      <Card
-        variant="outlined"
-        sx={{
-          height: "100%",
-          width: "100%",
-          display: { xs: "none", sm: "flex" },
-          pointerEvents: "none",
-        }}
-      >
-        <Box
-          sx={{
-            m: "auto",
-            width: 420,
-            height: 500,
-            backgroundSize: "contain",
-          }}
+    <Card variant="outlined" sx={{ position: "relative" }}>
+      <CardActionArea>
+        <CardMedia
+          component="img"
+          alt="Trending Destination image"
+          height="350"
+          image={thumbnailUrl}
         />
-      </Card>
-    </Grid>
+        <CardContent className={styles.destinationCardContent}>
+          <Typography variant="h5" component="h3" color="white">
+            {cityName}
+          </Typography>
+          <Flag
+            code={countries.getAlpha2Code(countryName, "en")}
+            className={styles.flag}
+          />
+        </CardContent>
+      </CardActionArea>
+    </Card>
   );
 };
 
