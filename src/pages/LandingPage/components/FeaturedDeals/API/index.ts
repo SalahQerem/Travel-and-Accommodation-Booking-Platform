@@ -1,4 +1,4 @@
-import { axiosInstance } from "@/config/axios/axios.config";
+import { axiosInstance } from "@/config/axios.config";
 import { GetFeaturesDealsResponse } from "./types";
 
 export const getFeaturedDealsAPI = async () => {

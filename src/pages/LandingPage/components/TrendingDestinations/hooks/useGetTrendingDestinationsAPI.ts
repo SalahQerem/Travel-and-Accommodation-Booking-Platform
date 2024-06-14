@@ -4,20 +4,20 @@ import { AxiosBaseError } from "@/types/axios";
 import { extractErrorMessage } from "@/utils/errorHandling";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { getFeaturedDealsAPI } from "../API";
-import { GetFeaturesDealsResponse } from "../API/types";
+import { getTrendingDestinationsAPI } from "../API";
+import { GetTrendingDestinationsResponse } from "../API/types";
 
-const useGetFeaturedDealsAPI = () => {
+const useGetTrendingDestinationsAPI = () => {
   const dispatch = useAppDispatch();
   const { showErrorSnackbar } = useSnackBar();
 
   const {
-    data: featuredDeals,
+    data: trendingDestinations,
     error,
     isFetching,
-  } = useQuery<GetFeaturesDealsResponse>({
-    queryKey: ["featured-deals"],
-    queryFn: getFeaturedDealsAPI,
+  } = useQuery<GetTrendingDestinationsResponse>({
+    queryKey: ["trending-destinations"],
+    queryFn: getTrendingDestinationsAPI,
   });
 
   useEffect(() => {
@@ -31,7 +31,7 @@ const useGetFeaturedDealsAPI = () => {
     );
   }, [error]);
 
-  return { featuredDeals, isFetching };
+  return { trendingDestinations, isFetching };
 };
 
-export default useGetFeaturedDealsAPI;
+export default useGetTrendingDestinationsAPI;

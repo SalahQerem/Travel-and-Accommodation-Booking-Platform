@@ -1,4 +1,4 @@
-export interface FeaturedDeal {
+export interface IFeaturedDeal {
   hotelId: number;
   originalRoomPrice: number;
   discount: number;
@@ -11,4 +11,4 @@ export interface FeaturedDeal {
   roomPhotoUrl: string;
 }
 
-export interface GetFeaturesDealsResponse extends Array<FeaturedDeal> {}
+export interface GetFeaturesDealsResponse extends Array<IFeaturedDeal> {}
