@@ -15,7 +15,7 @@ const getDesignTokens = (mode: PaletteMode) => ({
       ...(mode === "dark" && {
         contrastText: brand[100],
         light: brand[300],
-        main: brand[400],
+        main: brand[300],
         dark: brand[800],
       }),
     },

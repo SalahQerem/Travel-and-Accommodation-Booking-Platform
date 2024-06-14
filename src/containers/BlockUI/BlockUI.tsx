@@ -1,10 +1,10 @@
-import getSaferTheme from "@/style/getSaferTheme";
-import Box from "@mui/material/Box";
+import { Stack, useTheme } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import { SyncLoader } from "react-spinners";
 
 const BlockUI = () => {
-  const theme = getSaferTheme("light");
+  const theme = useTheme();
+
   return (
     <Modal
       aria-labelledby="suspense-modal"
@@ -13,18 +13,17 @@ const BlockUI = () => {
       style={{ zIndex: 1400 }}
       hideBackdrop
     >
-      <Box
+      <Stack
         sx={{
-          width: "100vw",
           height: "100vh",
-          display: "flex",
           alignItems: "center",
           justifyContent: "center",
           outline: "none",
+          bgcolor: "background.paper",
         }}
       >
-        <SyncLoader color={theme.palette!.primary as string} />
-      </Box>
+        <SyncLoader color={theme.palette.primary.main} />
+      </Stack>
     </Modal>
   );
 };

@@ -12,3 +12,14 @@ export interface FeaturedDeal {
 }
 
 export interface GetFeaturesDealsResponse extends Array<FeaturedDeal> {}
+
+export interface TrendingDestination {
+  cityId: number;
+  cityName: string;
+  countryName: string;
+  description: string;
+  thumbnailUrl: string;
+}
+
+export interface GetTrendingDestinationsResponse
+  extends Array<TrendingDestination> {}

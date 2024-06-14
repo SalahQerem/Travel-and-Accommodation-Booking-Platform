@@ -1,9 +1,7 @@
 import { PaletteMode } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-
-import WbSunnyRoundedIcon from "@mui/icons-material/WbSunnyRounded";
-import ModeNightRoundedIcon from "@mui/icons-material/ModeNightRounded";
+import { Sun, Moon } from "lucide-react";
 
 interface ToggleColorModeProps {
   mode: PaletteMode;
@@ -20,11 +18,7 @@ function ToggleColorMode({ mode, toggleColorMode }: ToggleColorModeProps) {
         aria-label="button to toggle theme"
         sx={{ minWidth: "32px", height: "32px", p: "4px" }}
       >
-        {mode === "dark" ? (
-          <WbSunnyRoundedIcon fontSize="small" />
-        ) : (
-          <ModeNightRoundedIcon fontSize="small" />
-        )}
+        {mode === "dark" ? <Sun fontSize="small" /> : <Moon fontSize="small" />}
       </Button>
     </Box>
   );
