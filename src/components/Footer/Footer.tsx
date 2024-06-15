@@ -12,6 +12,7 @@ import {
   Typography,
 } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
+import { FC } from "react";
 import { Link as RouterLink } from "react-router-dom";
 
 const logoStyle = {
@@ -23,15 +24,19 @@ const Copyright = () => {
   return (
     <Typography variant="body2" color="text.secondary" mt={1}>
       {"Copyright © "}
-      <Link component={RouterLink} to={"https://mui.com/"}>
-        Sitemark&nbsp;
+      <Link
+        component={RouterLink}
+        to={"https://www.linkedin.com/in/salah-al-din-qerem-83833423a/"}
+        target="_blank"
+      >
+        Salah AlDin Qerem&nbsp;
       </Link>
       {new Date().getFullYear()}
     </Typography>
   );
 };
 
-const Footer = () => {
+const Footer: FC = () => {
   return (
     <Box>
       <Divider />

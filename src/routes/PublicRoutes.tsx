@@ -1,8 +1,6 @@
-import AppLayout from "@/containers/Layout/AppLayout";
 import { RouteObject } from "react-router-dom";
 import {
   AccessDenied,
-  LandingPage,
   Login,
   MockedUI,
   NotFound,
@@ -11,12 +9,7 @@ import {
 
 const publicRoutes: RouteObject = {
   path: "",
-  element: <AppLayout />,
   children: [
-    {
-      index: true,
-      element: <LandingPage />,
-    },
     {
       path: "login",
       element: <Login />,
