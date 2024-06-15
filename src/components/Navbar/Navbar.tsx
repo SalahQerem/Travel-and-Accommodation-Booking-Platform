@@ -94,7 +94,7 @@ const Navbar: FC = () => {
               variant="contained"
               size="small"
               component={Link}
-              to={"/login"}
+              to={"/auth/login"}
             >
               Login
             </Button>

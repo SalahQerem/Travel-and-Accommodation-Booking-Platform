@@ -8,7 +8,7 @@ import {
 } from "./imports";
 
 const publicRoutes: RouteObject = {
-  path: "",
+  path: "/auth",
   children: [
     {
       path: "login",
