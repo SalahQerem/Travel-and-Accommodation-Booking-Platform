@@ -1,4 +1,4 @@
-import { textSlicer } from "@/utils";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import {
   Button,
   Card,
@@ -9,38 +9,54 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { FC } from "react";
-import { DealProps } from "../types";
 import { MapPin, University } from "lucide-react";
+import { FC } from "react";
+import { PremiumChoicesProps } from "../types";
 
-const Deal: FC<DealProps> = ({ deal }) => {
+const PremiumChoice: FC<PremiumChoicesProps> = ({ chioce }) => {
   const {
     roomPhotoUrl,
     hotelName,
-    description,
-    title,
-    hotelStarRating,
     cityName,
-    finalPrice,
-    originalRoomPrice,
-  } = deal;
+    starRating,
+    roomPrice,
+    discount,
+    roomType,
+    amenities,
+  } = chioce;
 
+  const renderAmenities = amenities.map((amenity) => (
+    <Stack direction="row" gap={1}>
+      <CheckCircleIcon color="success" />
+      <Typography
+        variant="subtitle2"
+        color="text.secondary"
+        textTransform="capitalize"
+      >
+        {amenity.name}
+      </Typography>
+    </Stack>
+  ));
   return (
-    <Card sx={{ maxWidth: 370, mb: 2, mx: "auto" }}>
-      {/* <CardActionArea> */}
+    <Card>
       <CardMedia
         component="img"
-        alt="Features Deal image"
-        height="220"
+        alt="Premium Choice image"
+        height="350"
         image={roomPhotoUrl}
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="h3">
-          {title}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {textSlicer(description)}
-        </Typography>
+        <Stack direction="row" gap={2} alignItems="center" mb={2}>
+          <Typography gutterBottom variant="h5" component="h3" m={0}>
+            {hotelName}
+          </Typography>
+          <Typography variant="subtitle2" color="text.secondary">
+            {roomType}
+          </Typography>
+        </Stack>
+        <Stack direction="row" flexWrap="wrap" gap={2}>
+          {renderAmenities}
+        </Stack>
         <Stack
           direction="row"
           alignItems="center"
@@ -53,7 +69,7 @@ const Deal: FC<DealProps> = ({ deal }) => {
               {cityName}
             </Typography>
           </Stack>
-          <Rating name="deal star rating" value={hotelStarRating} readOnly />
+          <Rating name="hotel star rating" value={starRating} readOnly />
         </Stack>
         <Stack
           direction="row"
@@ -67,18 +83,17 @@ const Deal: FC<DealProps> = ({ deal }) => {
               {hotelName}
             </Typography>
           </Stack>
-          <Typography variant="h6" color="red">
+          <Typography variant="h6" color="text.secondary">
             <Typography
               variant="h6"
               component="span"
-              color="text.secondary"
+              color="red"
               fontSize={14}
               mr={1}
-              sx={{ textDecoration: "line-through" }}
             >
-              {originalRoomPrice}$
+              {discount * 100}% OFF
             </Typography>
-            {finalPrice}$
+            {roomPrice}$
           </Typography>
         </Stack>
       </CardContent>
@@ -89,12 +104,11 @@ const Deal: FC<DealProps> = ({ deal }) => {
           color="primary"
           sx={{ m: "auto" }}
         >
-          Book now
+          Show more details
         </Button>
       </CardActions>
-      {/* </CardActionArea> */}
     </Card>
   );
 };
 
-export default Deal;
+export default PremiumChoice;

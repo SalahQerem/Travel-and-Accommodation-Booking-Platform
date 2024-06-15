@@ -8,11 +8,14 @@ import {
   Typography,
   alpha,
 } from "@mui/material";
-import FeaturedDeals from "./components/FeaturedDeals";
-import TrendingDestinations from "./components/TrendingDestinations";
-import PremiumChoices from "./components/PremiumChoices";
+import FAQ from "./components/FAQ";
+import Features from "./components/Features";
+import Highlights from "./components/Hignlights";
+import LogoCollection from "./components/LogoCollection";
+import Pricing from "./components/Pricing";
+import Testimonials from "./components/Testimonials";
 
-const LandingPage = () => {
+const MockedUI = () => {
   return (
     <Box>
       <Box
@@ -76,17 +79,17 @@ const LandingPage = () => {
               sx={{ pt: 2, width: { xs: "100%", sm: "auto" } }}
             >
               {/* <TextField
-                id="outlined-basic"
-                hiddenLabel
-                size="small"
-                variant="outlined"
-                aria-label="Enter your email address"
-                placeholder="Your email address"
-                inputProps={{
-                  autoComplete: "off",
-                  "aria-label": "Enter your email address",
-                }}
-              /> */}
+                  id="outlined-basic"
+                  hiddenLabel
+                  size="small"
+                  variant="outlined"
+                  aria-label="Enter your email address"
+                  placeholder="Your email address"
+                  inputProps={{
+                    autoComplete: "off",
+                    "aria-label": "Enter your email address",
+                  }}
+                /> */}
               <Button variant="contained" color="primary">
                 Start Booking now
               </Button>
@@ -105,12 +108,20 @@ const LandingPage = () => {
           </Stack>
         </Container>
       </Box>
-      <FeaturedDeals />
-      <TrendingDestinations />
-      <PremiumChoices />
+      <LogoCollection />
+      <Features />
+      <Divider />
+      <LogoCollection />
+      <Testimonials />
+      <Divider />
+      <Highlights />
+      <Divider />
+      <Pricing />
+      <Divider />
+      <FAQ />
       <Divider />
     </Box>
   );
 };
 
-export default LandingPage;
+export default MockedUI;

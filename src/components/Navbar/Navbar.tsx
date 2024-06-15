@@ -70,14 +70,18 @@ const Navbar: FC = () => {
                   Featured Deals
                 </Typography>
               </StyledMenuItem>
-              <StyledMenuItem onClick={() => scrollToSection("testimonials")}>
+              <StyledMenuItem
+                onClick={() => scrollToSection("trending destinations")}
+              >
                 <Typography variant="body2" color="text.primary">
                   Trending Destinations
                 </Typography>
               </StyledMenuItem>
-              <StyledMenuItem onClick={() => scrollToSection("highlights")}>
+              <StyledMenuItem
+                onClick={() => scrollToSection("premium choices")}
+              >
                 <Typography variant="body2" color="text.primary">
-                  Recently Visited Hotels
+                  Premium Choices
                 </Typography>
               </StyledMenuItem>
             </Box>
@@ -145,11 +149,13 @@ const Navbar: FC = () => {
                 <MenuItem onClick={() => scrollToSection("features deals")}>
                   Featured Deals
                 </MenuItem>
-                <MenuItem onClick={() => scrollToSection("testimonials")}>
+                <MenuItem
+                  onClick={() => scrollToSection("trending destinations")}
+                >
                   Trending Destinations
                 </MenuItem>
-                <MenuItem onClick={() => scrollToSection("highlights")}>
-                  Recently Visited Hotels
+                <MenuItem onClick={() => scrollToSection("premium choices")}>
+                  Premium Choices
                 </MenuItem>
                 <Divider />
                 <MenuItem>
