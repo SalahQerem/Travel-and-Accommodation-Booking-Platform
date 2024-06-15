@@ -9,8 +9,8 @@ import countries from "i18n-iso-countries";
 import enLocale from "i18n-iso-countries/langs/en.json";
 import { FC } from "react";
 import Flag from "react-world-flags";
-import { DestinationProps } from "../types";
 import styles from "../style.module.css";
+import { DestinationProps } from "../types";
 
 countries.registerLocale(enLocale);
 

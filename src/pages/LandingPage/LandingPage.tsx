@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import FeaturedDeals from "./components/FeaturedDeals";
 import TrendingDestinations from "./components/TrendingDestinations";
+import PremiumChoices from "./components/PremiumChoices";
 
 const LandingPage = () => {
   return (
@@ -106,7 +107,7 @@ const LandingPage = () => {
       </Box>
       <FeaturedDeals />
       <TrendingDestinations />
-
+      <PremiumChoices />
       <Divider />
     </Box>
   );
