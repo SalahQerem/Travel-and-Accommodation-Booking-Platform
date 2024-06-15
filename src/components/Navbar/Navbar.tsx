@@ -9,7 +9,6 @@ import {
   Container,
   Divider,
   Drawer,
-  Link,
   MenuItem,
   Stack,
   Typography,
@@ -19,6 +18,7 @@ import { FC, useState } from "react";
 import { useSelector } from "react-redux";
 import { StyledMenuItem, StyledToolbar } from "./StyledElements";
 import ToggleColorMode from "./ToggleColorMode";
+import { Link } from "react-router-dom";
 
 const Navbar: FC = () => {
   const themeMode = useSelector(selectThemeMode);
@@ -54,14 +54,7 @@ const Navbar: FC = () => {
       <Container maxWidth="lg">
         <StyledToolbar variant="regular">
           <Stack direction="row" flexGrow={1} ml={-1}>
-            <Link
-              href="/"
-              sx={{
-                "&:hover::before": {
-                  width: 0,
-                },
-              }}
-            >
+            <Link to={"/"}>
               <img src={fullLogo} width="100px" alt="logo of safer" />
             </Link>
             <Box sx={{ display: { xs: "none", md: "flex" }, gap: 3, px: 3 }}>
@@ -89,7 +82,7 @@ const Navbar: FC = () => {
           <Box
             sx={{
               display: { xs: "none", md: "flex" },
-              gap: 0.5,
+              gap: 3,
             }}
           >
             <ToggleColorMode
@@ -98,23 +91,12 @@ const Navbar: FC = () => {
             />
             <Button
               color="primary"
-              variant="text"
-              size="small"
-              component="a"
-              href="/material-ui/getting-started/templates/sign-in/"
-              target="_blank"
-            >
-              Sign in
-            </Button>
-            <Button
-              color="primary"
               variant="contained"
               size="small"
-              component="a"
-              href="/material-ui/getting-started/templates/sign-up/"
-              target="_blank"
+              component={Link}
+              to={"/login"}
             >
-              Sign up
+              Login
             </Button>
           </Box>
           <Box sx={{ display: { sm: "", md: "none" } }}>

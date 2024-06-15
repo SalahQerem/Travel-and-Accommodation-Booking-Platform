@@ -3,6 +3,7 @@ import { RouteObject } from "react-router-dom";
 import {
   AccessDenied,
   LandingPage,
+  Login,
   MockedUI,
   NotFound,
   Unauthenticated,
@@ -15,6 +16,10 @@ const publicRoutes: RouteObject = {
     {
       index: true,
       element: <LandingPage />,
+    },
+    {
+      path: "login",
+      element: <Login />,
     },
     {
       path: "mocked-ui",
