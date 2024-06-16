@@ -16,9 +16,9 @@ import {
 import { Menu } from "lucide-react";
 import { FC, useState } from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { StyledMenuItem, StyledToolbar } from "./StyledElements";
 import ToggleColorMode from "./ToggleColorMode";
-import { Link } from "react-router-dom";
 
 const Navbar: FC = () => {
   const themeMode = useSelector(selectThemeMode);
@@ -107,7 +107,7 @@ const Navbar: FC = () => {
               onClick={toggleDrawer(true)}
               sx={{ minWidth: "30px", p: "4px" }}
             >
-              <Menu />{" "}
+              <Menu />
             </Button>
             <Drawer
               anchor="right"
