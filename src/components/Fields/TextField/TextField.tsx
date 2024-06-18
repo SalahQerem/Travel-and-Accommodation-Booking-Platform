@@ -7,7 +7,6 @@ const TextField: FC<TextFieldProps> = ({ name, ...rest }) => {
   const [field, meta] = useField<string>(name);
 
   const textFieldConfigs = {
-    fullwidth: true,
     ...field,
     ...rest,
   };
@@ -17,7 +16,14 @@ const TextField: FC<TextFieldProps> = ({ name, ...rest }) => {
     textFieldConfigs.helperText = meta.error;
   }
 
-  return <MuiTextField {...textFieldConfigs} />;
+  return (
+    <MuiTextField
+      size="small"
+      variant="outlined"
+      fullWidth
+      {...textFieldConfigs}
+    />
+  );
 };
 
 export default TextField;

@@ -1,15 +1,14 @@
-import { FC, MouseEvent, useState } from "react";
-import { PasswordFieldProps } from "./types";
 import { IconButton, InputAdornment, TextField } from "@mui/material";
 import { useField } from "formik";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { Eye, EyeOff } from "lucide-react";
+import { FC, MouseEvent, useState } from "react";
+import { PasswordFieldProps } from "./types";
 
 const PasswordField: FC<PasswordFieldProps> = ({ name, ...rest }) => {
   const [field, meta] = useField<string>(name);
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const passwordFieldConfigs = {
-    fullwidth: true,
     ...field,
     ...rest,
   };
@@ -27,8 +26,10 @@ const PasswordField: FC<PasswordFieldProps> = ({ name, ...rest }) => {
 
   return (
     <TextField
-      {...passwordFieldConfigs}
+      size="small"
+      variant="outlined"
       type={showPassword ? "text" : "password"}
+      fullWidth
       InputProps={{
         endAdornment: (
           <InputAdornment position="end">
@@ -38,11 +39,12 @@ const PasswordField: FC<PasswordFieldProps> = ({ name, ...rest }) => {
               onMouseDown={handleMouseDownPassword}
               edge="end"
             >
-              {showPassword ? <VisibilityOff /> : <Visibility />}
+              {showPassword ? <EyeOff /> : <Eye />}
             </IconButton>
           </InputAdornment>
         ),
       }}
+      {...passwordFieldConfigs}
     />
   );
 };
