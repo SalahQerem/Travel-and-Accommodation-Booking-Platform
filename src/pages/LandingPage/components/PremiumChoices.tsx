@@ -13,6 +13,7 @@ const PremiumChoices = () => {
   ));
 
   if (isFetching) return <BlockUI />;
+
   return (
     <Container id="premium choices" sx={{ py: { xs: 4, sm: 8 } }}>
       <Typography

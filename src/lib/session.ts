@@ -9,15 +9,15 @@ export interface SessionData {
 }
 
 export const setSession = (token: string) => {
-  Cookies.set(import.meta.env.TOKEN_ACCESS_KEY, token, {
+  Cookies.set(import.meta.env.VITE_TOKEN_ACCESS_KEY, token, {
     expires: 1 / 24,
   });
 };
 
 export const getSession = () => {
-  return Cookies.get(import.meta.env.TOKEN_ACCESS_KEY);
+  return Cookies.get(import.meta.env.VITE_TOKEN_ACCESS_KEY);
 };
 
 export const clearSession = () => {
-  Cookies.remove(import.meta.env.TOKEN_ACCESS_KEY);
+  Cookies.remove(import.meta.env.VITE_TOKEN_ACCESS_KEY);
 };

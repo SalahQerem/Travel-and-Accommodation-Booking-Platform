@@ -2,7 +2,6 @@ import { selectThemeMode } from "@/features/AppSettings/selectors";
 import { useAppSelector } from "@/store";
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import { PropsWithChildren } from "react";
-import Navbar from "../components/Navbar";
 import getSaferTheme from "./getSaferTheme";
 
 const SaferThemeProvider = ({ children }: PropsWithChildren) => {
@@ -12,7 +11,6 @@ const SaferThemeProvider = ({ children }: PropsWithChildren) => {
   return (
     <ThemeProvider theme={saferTheme}>
       <CssBaseline />
-      <Navbar />
       {children}
     </ThemeProvider>
   );

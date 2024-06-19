@@ -135,6 +135,20 @@ const getDesignTokens = (mode: PaletteMode) => ({
 });
 
 const getSaferTheme = (mode: PaletteMode): ThemeOptions => {
+  const AlertBgColors = {
+    success: mode === "dark" ? "#4caf50" : "#d4edda",
+    info: mode === "dark" ? "#2196f3" : "#d1ecf1",
+    warning: mode === "dark" ? "#ff9800" : "#fff3cd",
+    error: mode === "dark" ? "#f44336" : "#f8d7da",
+  };
+
+  const AlertTextColor = {
+    success: mode === "dark" ? "#ffffff" : "#155724",
+    info: mode === "dark" ? "#ffffff" : "#0c5460",
+    warning: mode === "dark" ? "#ffffff" : "#856404",
+    error: mode === "dark" ? "#ffffff" : "#721c24",
+  };
+
   return {
     ...getDesignTokens(mode),
     components: {
@@ -164,6 +178,28 @@ const getSaferTheme = (mode: PaletteMode): ThemeOptions => {
             ...(theme.palette.mode === "dark" && {
               backgroundColor: gray[900],
               borderColor: gray[800],
+            }),
+          }),
+        },
+      },
+      MuiAlert: {
+        styleOverrides: {
+          root: ({ ownerState }) => ({
+            ...(ownerState.severity === "success" && {
+              backgroundColor: AlertBgColors.success,
+              color: AlertTextColor.success,
+            }),
+            ...(ownerState.severity === "info" && {
+              backgroundColor: AlertBgColors.info,
+              color: AlertTextColor.info,
+            }),
+            ...(ownerState.severity === "warning" && {
+              backgroundColor: AlertBgColors.warning,
+              color: AlertTextColor.warning,
+            }),
+            ...(ownerState.severity === "error" && {
+              backgroundColor: AlertBgColors.error,
+              color: AlertTextColor.error,
             }),
           }),
         },
@@ -296,6 +332,75 @@ const getSaferTheme = (mode: PaletteMode): ThemeOptions => {
                 },
               }),
             }),
+          }),
+        },
+      },
+      MuiLoadingButton: {
+        styleOverrides: {
+          root: ({ theme, ownerState }) => ({
+            boxSizing: "border-box",
+            boxShadow: "none",
+            borderRadius: "10px",
+            textTransform: "none",
+            "&:active": {
+              transform: "scale(0.98)",
+            },
+            ...(ownerState.size === "small" && {
+              maxHeight: "32px",
+            }),
+            ...(ownerState.size === "medium" && {
+              height: "40px",
+            }),
+            ...(ownerState.variant === "contained" &&
+              ownerState.color === "primary" && {
+                color: brand[50],
+                background: brand[500],
+                backgroundImage: `linear-gradient(to bottom, ${brand[400]}, ${brand[600]})`,
+                boxShadow: `inset 0 1px ${alpha(brand[300], 0.4)}`,
+                outline: `1px solid ${brand[700]}`,
+                "&:hover": {
+                  background: brand[400],
+                  backgroundImage: "none",
+                  boxShadow: `0 0 0 1px  ${alpha(brand[300], 0.5)}`,
+                },
+              }),
+            ...(ownerState.variant === "outlined" && {
+              backgroundColor: alpha(brand[300], 0.1),
+              borderColor: brand[300],
+              color: brand[500],
+              "&:hover": {
+                backgroundColor: alpha(brand[300], 0.3),
+                borderColor: brand[200],
+              },
+            }),
+            ...(ownerState.variant === "text" && {
+              color: brand[500],
+              "&:hover": {
+                backgroundColor: alpha(brand[300], 0.3),
+                borderColor: brand[200],
+              },
+            }),
+            ...(theme.palette.mode === "dark" && {
+              ...(ownerState.variant === "outlined" && {
+                backgroundColor: alpha(brand[600], 0.1),
+                borderColor: brand[700],
+                color: brand[300],
+                "&:hover": {
+                  backgroundColor: alpha(brand[600], 0.3),
+                  borderColor: brand[700],
+                },
+              }),
+              ...(ownerState.variant === "text" && {
+                color: brand[300],
+                "&:hover": {
+                  backgroundColor: alpha(brand[600], 0.3),
+                  borderColor: brand[700],
+                },
+              }),
+            }),
+            "& .MuiLoadingButton-loadingIndicator": {
+              color: theme.palette.background.paper,
+            },
           }),
         },
       },
@@ -515,7 +620,7 @@ const getSaferTheme = (mode: PaletteMode): ThemeOptions => {
             },
             "& .MuiOutlinedInput-root": {
               boxSizing: "border-box",
-              minWidth: 280,
+              minWidth: 180,
               minHeight: 40,
               height: "100%",
               borderRadius: "10px",

@@ -1,7 +1,8 @@
 import fullLogo from "@/assets/images/full-logo.png";
 import { toggleThemeMode } from "@/features/AppSettings";
 import { selectThemeMode } from "@/features/AppSettings/selectors";
-import { useAppDispatch } from "@/store";
+import { logout, selectIsLoggedIn } from "@/features/User";
+import { useAppDispatch, useAppSelector } from "@/store";
 import {
   AppBar,
   Box,
@@ -9,24 +10,32 @@ import {
   Container,
   Divider,
   Drawer,
-  Link,
   MenuItem,
   Stack,
   Typography,
 } from "@mui/material";
-import { Menu } from "lucide-react";
+import { LogIn, LogOut, Menu } from "lucide-react";
 import { FC, useState } from "react";
 import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import { StyledMenuItem, StyledToolbar } from "./StyledElements";
 import ToggleColorMode from "./ToggleColorMode";
 
 const Navbar: FC = () => {
   const themeMode = useSelector(selectThemeMode);
   const dispatch = useAppDispatch();
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
+  const navigate = useNavigate();
+
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const toggleDrawer = (newIsOpen: boolean) => () => {
     setIsDrawerOpen(newIsOpen);
+  };
+
+  const Logout = () => {
+    dispatch(logout());
+    navigate("/");
   };
 
   const scrollToSection = (sectionId: string) => {
@@ -54,14 +63,7 @@ const Navbar: FC = () => {
       <Container maxWidth="lg">
         <StyledToolbar variant="regular">
           <Stack direction="row" flexGrow={1} ml={-1}>
-            <Link
-              href="/"
-              sx={{
-                "&:hover::before": {
-                  width: 0,
-                },
-              }}
-            >
+            <Link to={"/"}>
               <img src={fullLogo} width="100px" alt="logo of safer" />
             </Link>
             <Box sx={{ display: { xs: "none", md: "flex" }, gap: 3, px: 3 }}>
@@ -89,33 +91,37 @@ const Navbar: FC = () => {
           <Box
             sx={{
               display: { xs: "none", md: "flex" },
-              gap: 0.5,
+              alignItems: "center",
+              gap: 3,
             }}
           >
             <ToggleColorMode
               mode={themeMode}
               toggleColorMode={() => dispatch(toggleThemeMode())}
             />
-            <Button
-              color="primary"
-              variant="text"
-              size="small"
-              component="a"
-              href="/material-ui/getting-started/templates/sign-in/"
-              target="_blank"
-            >
-              Sign in
-            </Button>
-            <Button
-              color="primary"
-              variant="contained"
-              size="small"
-              component="a"
-              href="/material-ui/getting-started/templates/sign-up/"
-              target="_blank"
-            >
-              Sign up
-            </Button>
+
+            {isLoggedIn ? (
+              <Button
+                color="primary"
+                variant="contained"
+                size="small"
+                onClick={Logout}
+                endIcon={<LogOut size={20} />}
+              >
+                Logout
+              </Button>
+            ) : (
+              <Button
+                color="primary"
+                variant="contained"
+                size="small"
+                component={Link}
+                to={"/auth/login"}
+                endIcon={<LogIn size={20} />}
+              >
+                Login
+              </Button>
+            )}
           </Box>
           <Box sx={{ display: { sm: "", md: "none" } }}>
             <Button
@@ -125,7 +131,7 @@ const Navbar: FC = () => {
               onClick={toggleDrawer(true)}
               sx={{ minWidth: "30px", p: "4px" }}
             >
-              <Menu />{" "}
+              <Menu />
             </Button>
             <Drawer
               anchor="right"
