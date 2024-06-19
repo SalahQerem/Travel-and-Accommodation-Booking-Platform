@@ -5,24 +5,30 @@ import { LoadingButton } from "@mui/lab";
 import { Card, CircularProgress, Stack } from "@mui/material";
 import { Form, FormikProvider, useFormik } from "formik";
 import { LogIn } from "lucide-react";
+import { initialValues } from "../constants";
+import { validationSchema } from "../formSchema";
+import { LoginPayload } from "../API/types";
+import useLoginAPI from "../hooks/useLoginAPI";
 
 const LoginForm = () => {
-  const onSubmit = (values) => {
-    console.log(values);
+  const { loginUser, isPending } = useLoginAPI();
+
+  const onSubmit = (values: LoginPayload) => {
+    loginUser({ ...values });
   };
+
   const formikProps = useFormik({
-    initialValues: {
-      userName: "",
-      password: "",
-    },
+    initialValues,
     onSubmit,
+    validationSchema,
   });
+
   return (
     <Card sx={{ p: 3, m: 2, maxWidth: "100%" }}>
       <FormikProvider value={formikProps}>
         <Form>
           <Stack direction="row" justifyContent="center" mb={3} py={2}>
-            <img src={saferLogo} alt="safer logo" width="65%" />
+            <img src={saferLogo} alt="safer logo" width="60%" />
           </Stack>
           <Stack gap={2}>
             <TextField
@@ -41,6 +47,7 @@ const LoginForm = () => {
               variant="contained"
               loadingIndicator={<CircularProgress color="inherit" size={20} />}
               endIcon={<LogIn size={20} />}
+              loading={isPending}
             >
               Login
             </LoadingButton>

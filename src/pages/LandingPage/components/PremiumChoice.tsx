@@ -26,7 +26,7 @@ const PremiumChoice: FC<PremiumChoicesProps> = ({ chioce }) => {
   } = chioce;
 
   const renderAmenities = amenities.map((amenity) => (
-    <Stack direction="row" gap={1}>
+    <Stack key={amenity.id + amenity.name} direction="row" gap={1}>
       <CheckCircleIcon color="success" />
       <Typography
         variant="subtitle2"

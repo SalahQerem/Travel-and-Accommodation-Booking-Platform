@@ -15,7 +15,7 @@ const LoginPage = () => {
         sx={{ overflow: "hidden" }}
       >
         {!isTabletOrLess && (
-          <Grid item xs={0} md={6}>
+          <Grid item xs={12} md={6}>
             <Card
               sx={{
                 borderTopRightRadius: 0,
