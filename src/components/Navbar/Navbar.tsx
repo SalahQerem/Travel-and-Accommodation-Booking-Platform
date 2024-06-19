@@ -1,7 +1,8 @@
 import fullLogo from "@/assets/images/full-logo.png";
 import { toggleThemeMode } from "@/features/AppSettings";
 import { selectThemeMode } from "@/features/AppSettings/selectors";
-import { useAppDispatch } from "@/store";
+import { logout, selectIsLoggedIn } from "@/features/User";
+import { useAppDispatch, useAppSelector } from "@/store";
 import {
   AppBar,
   Box,
@@ -13,20 +14,28 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { Menu } from "lucide-react";
+import { LogIn, LogOut, Menu } from "lucide-react";
 import { FC, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { StyledMenuItem, StyledToolbar } from "./StyledElements";
 import ToggleColorMode from "./ToggleColorMode";
 
 const Navbar: FC = () => {
   const themeMode = useSelector(selectThemeMode);
   const dispatch = useAppDispatch();
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
+  const navigate = useNavigate();
+
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const toggleDrawer = (newIsOpen: boolean) => () => {
     setIsDrawerOpen(newIsOpen);
+  };
+
+  const Logout = () => {
+    dispatch(logout());
+    navigate("/");
   };
 
   const scrollToSection = (sectionId: string) => {
@@ -82,6 +91,7 @@ const Navbar: FC = () => {
           <Box
             sx={{
               display: { xs: "none", md: "flex" },
+              alignItems: "center",
               gap: 3,
             }}
           >
@@ -89,15 +99,29 @@ const Navbar: FC = () => {
               mode={themeMode}
               toggleColorMode={() => dispatch(toggleThemeMode())}
             />
-            <Button
-              color="primary"
-              variant="contained"
-              size="small"
-              component={Link}
-              to={"/auth/login"}
-            >
-              Login
-            </Button>
+
+            {isLoggedIn ? (
+              <Button
+                color="primary"
+                variant="contained"
+                size="small"
+                onClick={Logout}
+                endIcon={<LogOut size={20} />}
+              >
+                Logout
+              </Button>
+            ) : (
+              <Button
+                color="primary"
+                variant="contained"
+                size="small"
+                component={Link}
+                to={"/auth/login"}
+                endIcon={<LogIn size={20} />}
+              >
+                Login
+              </Button>
+            )}
           </Box>
           <Box sx={{ display: { sm: "", md: "none" } }}>
             <Button

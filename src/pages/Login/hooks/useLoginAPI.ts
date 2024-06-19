@@ -8,20 +8,26 @@ import { useAppDispatch } from "@/store";
 import { updateUserSession } from "@/features/User";
 
 const useLoginAPI = () => {
-  const { showSuccessSnackbar } = useSnackBar();
+  const { showSuccessSnackbar, showErrorSnackbar } = useSnackBar();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const { mutate: loginUser, isPending } = useMutation({
     mutationFn: loginAPI,
     onSuccess: ({ authentication }) => {
-      showSuccessSnackbar({ message: "Welcome to Safer!" });
+      setTimeout(
+        () => showSuccessSnackbar({ message: "Welcome to Safer!" }),
+        1000
+      );
 
       setSession(authentication);
       const payload = jwtDecode<SessionData>(authentication);
       dispatch(updateUserSession(payload));
 
       navigate("/me");
+    },
+    onError: () => {
+      showErrorSnackbar({ message: "Invalid Credentials" });
     },
   });
 

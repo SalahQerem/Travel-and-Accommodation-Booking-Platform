@@ -135,6 +135,20 @@ const getDesignTokens = (mode: PaletteMode) => ({
 });
 
 const getSaferTheme = (mode: PaletteMode): ThemeOptions => {
+  const AlertBgColors = {
+    success: mode === "dark" ? "#4caf50" : "#d4edda",
+    info: mode === "dark" ? "#2196f3" : "#d1ecf1",
+    warning: mode === "dark" ? "#ff9800" : "#fff3cd",
+    error: mode === "dark" ? "#f44336" : "#f8d7da",
+  };
+
+  const AlertTextColor = {
+    success: mode === "dark" ? "#ffffff" : "#155724",
+    info: mode === "dark" ? "#ffffff" : "#0c5460",
+    warning: mode === "dark" ? "#ffffff" : "#856404",
+    error: mode === "dark" ? "#ffffff" : "#721c24",
+  };
+
   return {
     ...getDesignTokens(mode),
     components: {
@@ -164,6 +178,28 @@ const getSaferTheme = (mode: PaletteMode): ThemeOptions => {
             ...(theme.palette.mode === "dark" && {
               backgroundColor: gray[900],
               borderColor: gray[800],
+            }),
+          }),
+        },
+      },
+      MuiAlert: {
+        styleOverrides: {
+          root: ({ ownerState }) => ({
+            ...(ownerState.severity === "success" && {
+              backgroundColor: AlertBgColors.success,
+              color: AlertTextColor.success,
+            }),
+            ...(ownerState.severity === "info" && {
+              backgroundColor: AlertBgColors.info,
+              color: AlertTextColor.info,
+            }),
+            ...(ownerState.severity === "warning" && {
+              backgroundColor: AlertBgColors.warning,
+              color: AlertTextColor.warning,
+            }),
+            ...(ownerState.severity === "error" && {
+              backgroundColor: AlertBgColors.error,
+              color: AlertTextColor.error,
             }),
           }),
         },
