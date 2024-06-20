@@ -4,6 +4,7 @@ import { jwtDecode } from "jwt-decode";
 import { useAppDispatch } from "@/store";
 import { updateUserSession } from "@/features/User";
 import { useSnackBar } from "./useSnackbar";
+import { axiosInstance } from "@/config/axios.config";
 
 const useSession = () => {
   const session = getSession();
@@ -27,6 +28,10 @@ const useSession = () => {
     try {
       const payload = jwtDecode<SessionData>(session);
       dispatch(updateUserSession(payload));
+
+      axiosInstance.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${session}`;
 
       setState({
         isLoggedIn: true,

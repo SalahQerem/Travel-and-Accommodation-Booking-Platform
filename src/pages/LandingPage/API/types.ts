@@ -45,3 +45,17 @@ export interface PremiumChoice {
 }
 
 export interface GetPremiumChoicesResponse extends Array<PremiumChoice> {}
+
+export interface RecentlyVisitedHotel {
+  hotelId: number;
+  hotelName: string;
+  starRating: number;
+  visitDate: string;
+  cityName: string;
+  thumbnailUrl: string;
+  priceLowerBound: number;
+  priceUpperBound: number;
+}
+
+export interface GetRecentlyVisitedHotelsResponse
+  extends Array<RecentlyVisitedHotel> {}
