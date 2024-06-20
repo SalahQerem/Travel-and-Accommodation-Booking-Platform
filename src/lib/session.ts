@@ -6,6 +6,7 @@ export interface SessionData {
   given_name: string;
   family_name: string;
   userType: UserRole;
+  authentication: string;
 }
 
 export const setSession = (token: string) => {

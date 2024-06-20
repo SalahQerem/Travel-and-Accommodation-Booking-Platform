@@ -1,4 +1,9 @@
-import { FeaturedDeal, PremiumChoice, TrendingDestination } from "./API/types";
+import {
+  FeaturedDeal,
+  PremiumChoice,
+  RecentlyVisitedHotel,
+  TrendingDestination,
+} from "./API/types";
 
 export interface DealProps {
   deal: FeaturedDeal;
@@ -10,4 +15,8 @@ export interface DestinationProps {
 
 export interface PremiumChoicesProps {
   chioce: PremiumChoice;
+}
+
+export interface RecentlyVisitedHotelProps {
+  hotel: RecentlyVisitedHotel;
 }

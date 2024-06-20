@@ -24,11 +24,11 @@ const LoginForm = () => {
   });
 
   return (
-    <Card sx={{ p: 3, m: 2, maxWidth: "100%" }}>
+    <Card sx={{ p: 3, m: 2, maxWidth: "70%" }}>
       <FormikProvider value={formikProps}>
         <Form>
           <Stack direction="row" justifyContent="center" mb={3} py={2}>
-            <img src={saferLogo} alt="safer logo" width="60%" />
+            <img src={saferLogo} alt="safer logo" width="45%" />
           </Stack>
           <Stack gap={2}>
             <TextField

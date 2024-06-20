@@ -1,11 +1,12 @@
-import { useMutation } from "@tanstack/react-query";
-import { loginAPI } from "../API";
+import { login } from "@/features/User";
 import { useSnackBar } from "@/hooks/useSnackbar";
-import { useNavigate } from "react-router-dom";
-import { jwtDecode } from "jwt-decode";
 import { SessionData, setSession } from "@/lib/session";
 import { useAppDispatch } from "@/store";
-import { updateUserSession } from "@/features/User";
+import { useMutation } from "@tanstack/react-query";
+import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
+import { loginAPI } from "../API";
+import { axiosInstance } from "@/config/axios.config";
 
 const useLoginAPI = () => {
   const { showSuccessSnackbar, showErrorSnackbar } = useSnackBar();
@@ -22,7 +23,11 @@ const useLoginAPI = () => {
 
       setSession(authentication);
       const payload = jwtDecode<SessionData>(authentication);
-      dispatch(updateUserSession(payload));
+      dispatch(login(payload));
+
+      axiosInstance.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${authentication}`;
 
       navigate("/me");
     },
