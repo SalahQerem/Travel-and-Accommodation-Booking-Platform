@@ -8,10 +8,13 @@ import {
   alpha,
 } from "@mui/material";
 import FeaturedDeals from "./components/FeaturedDeals";
-import PremiumChoices from "./components/PremiumChoices";
+import RecentlyVisitedHotels from "./components/RecentlyVisitedHotels";
 import TrendingDestinations from "./components/TrendingDestinations";
+import { useAppSelector } from "@/store";
+import { selectIsLoggedIn } from "@/features/User";
 
 const LandingPage = () => {
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
   return (
     <Box>
       <Box
@@ -94,7 +97,8 @@ const LandingPage = () => {
       </Box>
       <FeaturedDeals />
       <TrendingDestinations />
-      <PremiumChoices />
+      {/* <PremiumChoices /> */}
+      {isLoggedIn && <RecentlyVisitedHotels />}
     </Box>
   );
 };

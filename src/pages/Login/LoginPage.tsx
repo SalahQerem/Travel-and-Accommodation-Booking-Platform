@@ -7,7 +7,9 @@ const LoginPage = () => {
   const { isTabletOrLess } = useMediaQuery();
 
   return (
-    <Container sx={{ py: { xs: 4, sm: 8 }, height: "100vh" }}>
+    <Container
+      sx={{ py: { xs: 4, sm: 8 }, maxWidth: { lg: 1400 }, height: "100vh" }}
+    >
       <Grid
         container
         height="100%"
@@ -24,7 +26,7 @@ const LoginPage = () => {
               }}
             >
               <Stack justifyContent="center" alignItems="center" height="100%">
-                <img src={loginImg} alt="booking" width="80%" />
+                <img src={loginImg} alt="booking" width="65%" />
               </Stack>
             </Card>
           </Grid>

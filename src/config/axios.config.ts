@@ -1,14 +1,10 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { getSession } from "@/lib/session";
 
 const getDefaultAxiosSettings = (): AxiosRequestConfig => {
-  const authToken = getSession();
-
   const headers: Record<string, string> = {
     Accept: "application/json",
     "Content-Type": "application/json",
   };
-  if (authToken) headers.Authorization = `Bearer ${authToken}`;
 
   return { headers };
 };
