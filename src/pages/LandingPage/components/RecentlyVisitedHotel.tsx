@@ -23,8 +23,7 @@ const RecentlyVisitedHotel: FC<RecentlyVisitedHotelProps> = ({ hotel }) => {
     priceUpperBound,
   } = hotel;
 
-  const date = new Date(visitDate).toLocaleDateString("en-CA");
-  console.log(new Date(visitDate));
+  const visitedDay = new Date(visitDate).toLocaleDateString("en-CA");
 
   return (
     <Card>
@@ -40,7 +39,7 @@ const RecentlyVisitedHotel: FC<RecentlyVisitedHotelProps> = ({ hotel }) => {
             {hotelName}
           </Typography>
           <Typography variant="subtitle2" color="text.secondary">
-            {date}
+            {visitedDay}
           </Typography>
         </Stack>
         <Stack
