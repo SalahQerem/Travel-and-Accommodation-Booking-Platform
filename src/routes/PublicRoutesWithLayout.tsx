@@ -1,6 +1,6 @@
 import AppLayout from "@/containers/Layout/AppLayout";
 import { RouteObject } from "react-router-dom";
-import { LandingPage, MockedUI } from "./imports";
+import { LandingPage, MockedUI, SearchForReservations } from "./imports";
 
 const publicRoutesWithLayout: RouteObject = {
   path: "",
@@ -9,6 +9,10 @@ const publicRoutesWithLayout: RouteObject = {
     {
       index: true,
       element: <LandingPage />,
+    },
+    {
+      path: "search",
+      element: <SearchForReservations />,
     },
     {
       path: "mocked-ui",
