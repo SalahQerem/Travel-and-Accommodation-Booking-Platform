@@ -1,11 +1,13 @@
+import { useSnackBar } from "@/hooks/useSnackbar";
 import { Box, Button, Typography } from "@mui/material";
 import { CalendarDays } from "lucide-react";
 import { FC, useState } from "react";
 import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
-import { DateRangeFieldProps, Ranges } from "./types";
 import styles from "./styles.module.css";
+import { DateRangeFieldProps, Ranges } from "./types";
+import dayjs from "dayjs";
 
 const DateRangeField: FC<DateRangeFieldProps> = ({
   checkInDate,
@@ -13,9 +15,21 @@ const DateRangeField: FC<DateRangeFieldProps> = ({
   setCheckInDate,
   setCheckOutDate,
 }) => {
+  const { showErrorSnackbar } = useSnackBar();
   const handleSelect = ({ selection }: Ranges) => {
-    setCheckInDate(selection.startDate.toLocaleDateString("en-CA"));
-    setCheckOutDate(selection.endDate.toLocaleDateString("en-CA"));
+    const current = dayjs(new Date()).format("YYYY-MM-DD");
+    const checkIn = dayjs(selection.startDate).format("YYYY-MM-DD");
+    const checkout = dayjs(selection.endDate).format("YYYY-MM-DD");
+    if (checkIn > current) {
+      setCheckInDate(selection.startDate.toLocaleDateString("en-CA"));
+    } else if (checkout > current) {
+      setCheckOutDate(selection.endDate.toLocaleDateString("en-CA"));
+    } else {
+      showErrorSnackbar({
+        message: "Check-in date or check-out date cannot be in the past!",
+        autoHideDuration: 3000,
+      });
+    }
   };
 
   const [isDateRangeBarOpen, setIsDateRangeBarOpen] = useState(false);

@@ -3,24 +3,28 @@ import TextField from "@/components/Fields/TextField";
 import UpDownCounter from "@/components/Fields/UpDownCounter";
 import { LoadingButton } from "@mui/lab";
 import {
+  Autocomplete,
   Button,
   Card,
   CircularProgress,
   Grid,
+  Rating,
   Stack,
   Typography,
 } from "@mui/material";
 import { Form, FormikProvider, useFormik } from "formik";
-import { Search, UsersRound } from "lucide-react";
+import { Filter, Search, UsersRound } from "lucide-react";
 import { FC, useState } from "react";
 import { SearchForReservationsRequest } from "../API/types";
-import { counters, initialValues } from "../constants";
+import { counters, initialValues, sortOptions } from "../constants";
 import { validationSchema } from "../formSchema";
 import styles from "../styles.module.css";
 import { SearchFormProps } from "../types";
 
 const SearchForm: FC<SearchFormProps> = ({ setSearchQuery, isFetching }) => {
   const [isCountersBarOpen, setIsCountersBarOpen] = useState(false);
+  const [isFiltersBarOpen, setIsFiltersBarOpen] = useState(false);
+
   const onSubmit = (values: SearchForReservationsRequest) => {
     setSearchQuery({ ...values });
   };
@@ -31,11 +35,22 @@ const SearchForm: FC<SearchFormProps> = ({ setSearchQuery, isFetching }) => {
     validationSchema,
   });
 
-  const { adults, checkInDate, checkOutDate, children, numberOfRooms } =
-    formikProps.values;
+  const {
+    adults,
+    checkInDate,
+    checkOutDate,
+    children,
+    numberOfRooms,
+    starRate,
+    sort,
+  } = formikProps.values;
 
   const toggleOpenCountersBar = () => {
     setIsCountersBarOpen((prev) => !prev);
+  };
+
+  const toggleOpenFiltersBar = () => {
+    setIsFiltersBarOpen((prev) => !prev);
   };
 
   const renderCounters = counters.map(({ name, label, min }) => (
@@ -44,6 +59,7 @@ const SearchForm: FC<SearchFormProps> = ({ setSearchQuery, isFetching }) => {
       gap={3}
       alignItems="center"
       justifyContent="space-between"
+      key={name}
     >
       <Typography variant="h5">{label}</Typography>
       <UpDownCounter
@@ -62,14 +78,14 @@ const SearchForm: FC<SearchFormProps> = ({ setSearchQuery, isFetching }) => {
         <Form>
           <Stack direction="row" gap={2}>
             <Grid container spacing={2} alignItems="center">
-              <Grid item xs={4}>
+              <Grid item xs={3}>
                 <TextField
                   name="city"
                   aria-label="Enter your Destination"
                   placeholder="Where are you going?"
                 />
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={3}>
                 <DateRangeField
                   checkInDate={checkInDate}
                   checkOutDate={checkOutDate}
@@ -81,7 +97,7 @@ const SearchForm: FC<SearchFormProps> = ({ setSearchQuery, isFetching }) => {
                   }
                 />
               </Grid>
-              <Grid item xs={4} sx={{ position: "relative" }}>
+              <Grid item xs={3} sx={{ position: "relative" }}>
                 <Button
                   type="button"
                   onClick={toggleOpenCountersBar}
@@ -91,11 +107,73 @@ const SearchForm: FC<SearchFormProps> = ({ setSearchQuery, isFetching }) => {
                   <UsersRound />
                   <Typography
                     fontWeight={500}
-                  >{`${adults} adults. ${children} children. ${numberOfRooms} rooms`}</Typography>
+                  >{`${adults} Adults. ${children} Children. ${numberOfRooms} Rooms`}</Typography>
                 </Button>
                 {isCountersBarOpen && (
-                  <Card className={styles.countersBar}>
+                  <Card className={styles.optionsBar}>
                     <Stack gap={2}>{renderCounters}</Stack>
+                  </Card>
+                )}
+              </Grid>
+              <Grid item xs={3} sx={{ position: "relative" }}>
+                <Button
+                  type="button"
+                  onClick={toggleOpenFiltersBar}
+                  className={styles.countersBtn}
+                  sx={{ m: "auto" }}
+                >
+                  <Filter />
+                  <Typography
+                    fontWeight={500}
+                  >{`Sort by ${sort} .${starRate} Stars`}</Typography>
+                </Button>
+                {isFiltersBarOpen && (
+                  <Card
+                    className={styles.optionsBar}
+                    sx={{ overflow: "visible" }}
+                  >
+                    <Stack gap={2}>
+                      <Stack
+                        direction="row"
+                        gap={3}
+                        alignItems="center"
+                        justifyContent="space-between"
+                      >
+                        <Typography variant="h5">Rating</Typography>
+                        <Rating
+                          name="rating"
+                          value={starRate}
+                          onChange={(_, newValue) => {
+                            formikProps.setFieldValue("starRate", newValue);
+                          }}
+                        />
+                      </Stack>
+                      <Stack
+                        direction="row"
+                        gap={3}
+                        alignItems="center"
+                        justifyContent="space-between"
+                      >
+                        <Typography variant="h5" width={70}>
+                          Sort by
+                        </Typography>
+                        <Autocomplete
+                          disablePortal
+                          options={sortOptions}
+                          defaultValue={"Rating"}
+                          sx={{ width: 130 }}
+                          onChange={(_, newValue) => {
+                            formikProps.setFieldValue(
+                              "sort",
+                              newValue ? newValue : ""
+                            );
+                          }}
+                          renderInput={(params) => (
+                            <TextField name="sort" {...params} />
+                          )}
+                        />
+                      </Stack>
+                    </Stack>
                   </Card>
                 )}
               </Grid>

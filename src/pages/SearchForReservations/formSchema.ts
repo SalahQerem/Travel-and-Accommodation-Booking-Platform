@@ -7,4 +7,6 @@ export const validationSchema = yup.object().shape({
   numberOfRooms: yup.number(),
   adults: yup.number(),
   children: yup.number(),
+  starRating: yup.number(),
+  sort: yup.string(),
 });

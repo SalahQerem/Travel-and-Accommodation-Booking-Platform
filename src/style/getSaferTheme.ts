@@ -618,15 +618,15 @@ const getSaferTheme = (mode: PaletteMode): ThemeOptions => {
                 opacity: 0.7,
               },
               "&[type=number]": {
-                "-moz-appearance": "textfield",
+                MozAppearance: "textfield",
                 textAlign: "center",
               },
               "&[type=number]::-webkit-outer-spin-button": {
-                "-webkit-appearance": "none",
+                WebkitAppearance: "none",
                 margin: 0,
               },
               "&[type=number]::-webkit-inner-spin-button": {
-                "-webkit-appearance": "none",
+                WebkitAppearance: "none",
                 margin: 0,
               },
             },

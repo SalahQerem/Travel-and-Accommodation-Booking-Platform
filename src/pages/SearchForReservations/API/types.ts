@@ -5,8 +5,8 @@ export interface SearchForReservationsRequest {
   numberOfRooms?: number;
   adults?: number;
   children?: number;
-  // sort?: string;
-  // starRate?: number;
+  sort?: string;
+  starRate?: number;
 }
 
 export interface Amenity {

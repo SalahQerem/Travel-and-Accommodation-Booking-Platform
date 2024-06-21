@@ -15,7 +15,7 @@ export const initialValues = {
   numberOfRooms: 1,
   adults: 2,
   children: 0,
-  sort: "",
+  sort: "Rating",
   starRate: 0,
 };
 
@@ -35,3 +35,5 @@ export const counters: Array<Counter> = [
     min: 1,
   },
 ];
+
+export const sortOptions = ["Price", "Rating"];

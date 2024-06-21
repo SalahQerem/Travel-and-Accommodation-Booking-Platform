@@ -11,9 +11,11 @@ export const searchForReservationsAPI = async ({
   city,
   children,
   numberOfRooms,
+  sort,
+  starRate,
 }: SearchForReservationsRequest) => {
   const res = await axiosInstance.get<SearchForReservationsResponse>(
-    `/home/search?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}&city=${city}&numberOfRooms=${numberOfRooms}&adults=${adults}&children=${children}`
+    `/home/search?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}&city=${city}&starRate=${starRate}&sort=${sort}&numberOfRooms=${numberOfRooms}&adults=${adults}&children=${children}`
   );
   return res.data;
 };
