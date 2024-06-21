@@ -8,7 +8,6 @@ const publicRoutes: RouteObject = {
       path: "login",
       element: <Login />,
     },
-
     {
       path: "access-denied",
       element: <AccessDenied />,

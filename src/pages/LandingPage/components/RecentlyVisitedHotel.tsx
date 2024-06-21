@@ -8,6 +8,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import dayjs from "dayjs";
 import { MapPin, University } from "lucide-react";
 import { FC } from "react";
 import { RecentlyVisitedHotelProps } from "../types";
@@ -23,7 +24,7 @@ const RecentlyVisitedHotel: FC<RecentlyVisitedHotelProps> = ({ hotel }) => {
     priceUpperBound,
   } = hotel;
 
-  const visitedDay = new Date(visitDate).toLocaleDateString("en-CA");
+  const visitedDay = dayjs(visitDate).format("YYYY-MM-DD");
 
   return (
     <Card>

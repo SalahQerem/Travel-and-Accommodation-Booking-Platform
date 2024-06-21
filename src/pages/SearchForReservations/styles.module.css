@@ -1,0 +1,14 @@
+.optionsBar {
+  position: absolute;
+  transform: translateX(-50%);
+  left: 53%;
+  top: 65px;
+  padding: 1rem;
+  z-index: 1;
+}
+
+.countersBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}

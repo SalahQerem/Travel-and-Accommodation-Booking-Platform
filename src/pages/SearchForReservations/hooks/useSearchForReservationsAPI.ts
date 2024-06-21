@@ -4,20 +4,25 @@ import { AxiosBaseError } from "@/types/axios";
 import { extractErrorMessage } from "@/utils/errorHandling";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { getPremiumChoicesAPI } from "../API";
-import { GetPremiumChoicesResponse } from "../API/types";
+import { searchForReservationsAPI } from "../API";
+import {
+  SearchForReservationsRequest,
+  SearchForReservationsResponse,
+} from "../API/types";
 
-const useGetPremiumChoicesAPI = () => {
+const useSearchForReservationsAPI = (
+  searchQuery: SearchForReservationsRequest
+) => {
   const dispatch = useAppDispatch();
   const { showErrorSnackbar } = useSnackBar();
 
   const {
-    data: premiumChoices,
+    data: reservations,
     error,
     isFetching,
-  } = useQuery<GetPremiumChoicesResponse>({
-    queryKey: ["premium-choices"],
-    queryFn: getPremiumChoicesAPI,
+  } = useQuery<SearchForReservationsResponse>({
+    queryKey: ["reservations", searchQuery],
+    queryFn: () => searchForReservationsAPI(searchQuery),
   });
 
   useEffect(() => {
@@ -31,7 +36,7 @@ const useGetPremiumChoicesAPI = () => {
     );
   }, [error]);
 
-  return { premiumChoices, isFetching };
+  return { reservations, isFetching };
 };
 
-export default useGetPremiumChoicesAPI;
+export default useSearchForReservationsAPI;

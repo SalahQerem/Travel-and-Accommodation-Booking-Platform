@@ -17,7 +17,7 @@ const TrendingDestinations = () => {
   if (isFetching) return <BlockUI />;
 
   return (
-    <Container id="trending destinations" sx={{ py: { xs: 4, sm: 8 } }}>
+    <Container id="trending destinations" sx={{ py: { xs: 2, sm: 4 } }}>
       <Typography
         component="h2"
         variant="h4"

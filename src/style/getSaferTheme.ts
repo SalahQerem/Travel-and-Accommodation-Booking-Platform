@@ -617,10 +617,22 @@ const getSaferTheme = (mode: PaletteMode): ThemeOptions => {
               "&::placeholder": {
                 opacity: 0.7,
               },
+              "&[type=number]": {
+                MozAppearance: "textfield",
+                textAlign: "center",
+              },
+              "&[type=number]::-webkit-outer-spin-button": {
+                WebkitAppearance: "none",
+                margin: 0,
+              },
+              "&[type=number]::-webkit-inner-spin-button": {
+                WebkitAppearance: "none",
+                margin: 0,
+              },
             },
             "& .MuiOutlinedInput-root": {
               boxSizing: "border-box",
-              minWidth: 180,
+              minWidth: 50,
               minHeight: 40,
               height: "100%",
               borderRadius: "10px",
@@ -637,14 +649,14 @@ const getSaferTheme = (mode: PaletteMode): ThemeOptions => {
               },
               "&.Mui-focused": {
                 borderColor: brand[400],
-                outline: "4px solid",
+                outline: "1px solid",
                 outlineColor: brand[200],
               },
             },
             ...(theme.palette.mode === "dark" && {
               "& .MuiOutlinedInput-root": {
                 boxSizing: "border-box",
-                minWidth: 280,
+                minWidth: 50,
                 minHeight: 40,
                 height: "100%",
                 borderRadius: "10px",
@@ -661,7 +673,7 @@ const getSaferTheme = (mode: PaletteMode): ThemeOptions => {
                 },
                 "&.Mui-focused": {
                   borderColor: brand[400],
-                  outline: "4px solid",
+                  outline: "1px solid",
                   outlineColor: alpha(brand[500], 0.5),
                 },
               },

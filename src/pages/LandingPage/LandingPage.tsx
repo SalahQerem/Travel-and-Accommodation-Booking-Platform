@@ -1,3 +1,5 @@
+import { selectIsLoggedIn } from "@/features/User";
+import { useAppSelector } from "@/store";
 import {
   Box,
   Button,
@@ -10,11 +12,12 @@ import {
 import FeaturedDeals from "./components/FeaturedDeals";
 import RecentlyVisitedHotels from "./components/RecentlyVisitedHotels";
 import TrendingDestinations from "./components/TrendingDestinations";
-import { useAppSelector } from "@/store";
-import { selectIsLoggedIn } from "@/features/User";
+import styles from "./style.module.css";
+import SearchForm from "../SearchForReservations/components/SearchForm";
 
 const LandingPage = () => {
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
+
   return (
     <Box>
       <Box
@@ -28,16 +31,8 @@ const LandingPage = () => {
           backgroundRepeat: "no-repeat",
         })}
       >
-        <Container
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            pt: { xs: 14, sm: 20 },
-            pb: { xs: 8, sm: 12 },
-          }}
-        >
-          <Stack spacing={2} sx={{ width: { xs: "100%", sm: "80%" } }}>
+        <Container className={styles.landingPageContainer}>
+          <Stack spacing={2} mb={5} sx={{ width: { xs: "100%", sm: "80%" } }}>
             <Typography
               variant="h1"
               sx={{
@@ -93,11 +88,11 @@ const LandingPage = () => {
               .
             </Typography>
           </Stack>
+          <SearchForm />
         </Container>
       </Box>
       <FeaturedDeals />
       <TrendingDestinations />
-      {/* <PremiumChoices /> */}
       {isLoggedIn && <RecentlyVisitedHotels />}
     </Box>
   );
