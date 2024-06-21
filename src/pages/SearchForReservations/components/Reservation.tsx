@@ -11,9 +11,9 @@ import {
 } from "@mui/material";
 import { MapPin, University } from "lucide-react";
 import { FC } from "react";
-import { PremiumChoicesProps } from "../types";
+import { ReservationProps } from "../types";
 
-const PremiumChoice: FC<PremiumChoicesProps> = ({ chioce }) => {
+const Reservation: FC<ReservationProps> = ({ reservation }) => {
   const {
     roomPhotoUrl,
     hotelName,
@@ -23,7 +23,7 @@ const PremiumChoice: FC<PremiumChoicesProps> = ({ chioce }) => {
     discount,
     roomType,
     amenities,
-  } = chioce;
+  } = reservation;
 
   const renderAmenities = amenities.map((amenity) => (
     <Stack key={amenity.id + amenity.name} direction="row" gap={1}>
@@ -111,4 +111,4 @@ const PremiumChoice: FC<PremiumChoicesProps> = ({ chioce }) => {
   );
 };
 
-export default PremiumChoice;
+export default Reservation;

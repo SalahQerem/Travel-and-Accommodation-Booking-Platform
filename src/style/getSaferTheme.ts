@@ -656,7 +656,7 @@ const getSaferTheme = (mode: PaletteMode): ThemeOptions => {
             ...(theme.palette.mode === "dark" && {
               "& .MuiOutlinedInput-root": {
                 boxSizing: "border-box",
-                minWidth: 280,
+                minWidth: 50,
                 minHeight: 40,
                 height: "100%",
                 borderRadius: "10px",

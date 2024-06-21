@@ -1,5 +1,6 @@
 import DateRangeField from "@/components/Fields/DateRangeField";
 import TextField from "@/components/Fields/TextField";
+import UpDownCounter from "@/components/Fields/UpDownCounter";
 import { LoadingButton } from "@mui/lab";
 import {
   Button,
@@ -10,18 +11,18 @@ import {
   Typography,
 } from "@mui/material";
 import { Form, FormikProvider, useFormik } from "formik";
-import { UsersRound } from "lucide-react";
-import { useState } from "react";
+import { Search, UsersRound } from "lucide-react";
+import { FC, useState } from "react";
 import { SearchForReservationsRequest } from "../API/types";
 import { counters, initialValues } from "../constants";
 import { validationSchema } from "../formSchema";
 import styles from "../styles.module.css";
-import UpDownCounter from "@/components/Fields/UpDownCounter";
+import { SearchFormProps } from "../types";
 
-const SearchForm = () => {
+const SearchForm: FC<SearchFormProps> = ({ setSearchQuery, isFetching }) => {
   const [isCountersBarOpen, setIsCountersBarOpen] = useState(false);
   const onSubmit = (values: SearchForReservationsRequest) => {
-    console.log(values);
+    setSearchQuery({ ...values });
   };
 
   const formikProps = useFormik({
@@ -56,61 +57,60 @@ const SearchForm = () => {
   ));
 
   return (
-    <Card sx={{ p: 3, m: 2, maxWidth: "100%", overflow: "visible" }}>
+    <Card sx={{ p: 3, maxWidth: "100%", overflow: "visible" }}>
       <FormikProvider value={formikProps}>
         <Form>
-          <Grid container spacing={2} alignItems="center">
-            <Grid item xs={3}>
-              <TextField
-                name="city"
-                aria-label="Enter your Destination"
-                placeholder="Where are you going?"
-              />
+          <Stack direction="row" gap={2}>
+            <Grid container spacing={2} alignItems="center">
+              <Grid item xs={4}>
+                <TextField
+                  name="city"
+                  aria-label="Enter your Destination"
+                  placeholder="Where are you going?"
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <DateRangeField
+                  checkInDate={checkInDate}
+                  checkOutDate={checkOutDate}
+                  setCheckInDate={(newValue: string) =>
+                    formikProps.setFieldValue("checkInDate", newValue)
+                  }
+                  setCheckOutDate={(newValue: string) =>
+                    formikProps.setFieldValue("checkOutDate", newValue)
+                  }
+                />
+              </Grid>
+              <Grid item xs={4} sx={{ position: "relative" }}>
+                <Button
+                  type="button"
+                  onClick={toggleOpenCountersBar}
+                  className={styles.countersBtn}
+                  sx={{ m: "auto" }}
+                >
+                  <UsersRound />
+                  <Typography
+                    fontWeight={500}
+                  >{`${adults} adults. ${children} children. ${numberOfRooms} rooms`}</Typography>
+                </Button>
+                {isCountersBarOpen && (
+                  <Card className={styles.countersBar}>
+                    <Stack gap={2}>{renderCounters}</Stack>
+                  </Card>
+                )}
+              </Grid>
             </Grid>
-            <Grid item xs={3}>
-              <DateRangeField
-                checkInDate={checkInDate}
-                checkOutDate={checkOutDate}
-                setCheckInDate={(newValue: string) =>
-                  formikProps.setFieldValue("checkInDate", newValue)
-                }
-                setCheckOutDate={(newValue: string) =>
-                  formikProps.setFieldValue("checkOutDate", newValue)
-                }
-              />
-            </Grid>
-            <Grid item xs={3} sx={{ position: "relative" }}>
-              <Button
-                type="button"
-                onClick={toggleOpenCountersBar}
-                className={styles.countersBtn}
-              >
-                <UsersRound />
-                <Typography
-                  fontWeight={500}
-                >{`${adults} adults. ${children} children. ${numberOfRooms} rooms`}</Typography>
-              </Button>
-              {isCountersBarOpen && (
-                <Card className={styles.countersBar}>
-                  <Stack gap={2}>{renderCounters}</Stack>
-                </Card>
-              )}
-            </Grid>
-            <Grid item xs={3}>
-              <LoadingButton
-                type="submit"
-                color="primary"
-                variant="contained"
-                loadingIndicator={
-                  <CircularProgress color="inherit" size={20} />
-                }
-                //   endIcon={<LogIn size={20} />}
-                //   loading={isPending}
-              >
-                Search
-              </LoadingButton>
-            </Grid>
-          </Grid>
+            <LoadingButton
+              type="submit"
+              color="primary"
+              variant="contained"
+              loadingIndicator={<CircularProgress color="inherit" size={20} />}
+              endIcon={<Search size={20} />}
+              loading={isFetching}
+            >
+              Search
+            </LoadingButton>
+          </Stack>
         </Form>
       </FormikProvider>
     </Card>
