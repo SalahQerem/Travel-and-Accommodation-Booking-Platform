@@ -4,6 +4,3 @@ export interface DateRangeFieldProps {
   setCheckInDate: (newValue: string) => void;
   setCheckOutDate: (newValue: string) => void;
 }
-export interface Ranges {
-  selection: { startDate: Date; endDate: Date };
-}
