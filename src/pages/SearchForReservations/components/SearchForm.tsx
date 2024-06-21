@@ -1,6 +1,7 @@
 import DateRangeField from "@/components/Fields/DateRangeField";
 import TextField from "@/components/Fields/TextField";
 import UpDownCounter from "@/components/Fields/UpDownCounter";
+import useMediaQuery from "@/hooks/useMediaQuery";
 import { LoadingButton } from "@mui/lab";
 import {
   Autocomplete,
@@ -24,6 +25,8 @@ import { SearchFormProps } from "../types";
 const SearchForm: FC<SearchFormProps> = ({ setSearchQuery, isFetching }) => {
   const [isCountersBarOpen, setIsCountersBarOpen] = useState(false);
   const [isFiltersBarOpen, setIsFiltersBarOpen] = useState(false);
+
+  const { isTabletOrLess } = useMediaQuery();
 
   const onSubmit = (values: SearchForReservationsRequest) => {
     setSearchQuery({ ...values });
@@ -76,16 +79,20 @@ const SearchForm: FC<SearchFormProps> = ({ setSearchQuery, isFetching }) => {
     <Card sx={{ p: 3, maxWidth: "100%", overflow: "visible" }}>
       <FormikProvider value={formikProps}>
         <Form>
-          <Stack direction="row" gap={2}>
-            <Grid container spacing={2} alignItems="center">
-              <Grid item xs={3}>
+          <Stack
+            direction={isTabletOrLess ? "column" : "row"}
+            alignItems="center"
+            gap={2}
+          >
+            <Grid container spacing={1} alignItems="center">
+              <Grid item xs={12} md={6} lg={2.9}>
                 <TextField
                   name="city"
                   aria-label="Enter your Destination"
                   placeholder="Where are you going?"
                 />
               </Grid>
-              <Grid item xs={3}>
+              <Grid item xs={12} md={6} lg={3.1}>
                 <DateRangeField
                   checkInDate={checkInDate}
                   checkOutDate={checkOutDate}
@@ -97,7 +104,7 @@ const SearchForm: FC<SearchFormProps> = ({ setSearchQuery, isFetching }) => {
                   }
                 />
               </Grid>
-              <Grid item xs={3} sx={{ position: "relative" }}>
+              <Grid item xs={12} md={6} lg={3.3} sx={{ position: "relative" }}>
                 <Button
                   type="button"
                   onClick={toggleOpenCountersBar}
@@ -115,7 +122,7 @@ const SearchForm: FC<SearchFormProps> = ({ setSearchQuery, isFetching }) => {
                   </Card>
                 )}
               </Grid>
-              <Grid item xs={3} sx={{ position: "relative" }}>
+              <Grid item xs={12} md={6} lg={2.7} sx={{ position: "relative" }}>
                 <Button
                   type="button"
                   onClick={toggleOpenFiltersBar}
@@ -160,8 +167,8 @@ const SearchForm: FC<SearchFormProps> = ({ setSearchQuery, isFetching }) => {
                         <Autocomplete
                           disablePortal
                           options={sortOptions}
-                          defaultValue={"Rating"}
                           sx={{ width: 130 }}
+                          value={sort}
                           onChange={(_, newValue) => {
                             formikProps.setFieldValue(
                               "sort",

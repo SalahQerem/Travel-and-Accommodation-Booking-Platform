@@ -1,3 +1,5 @@
+import { selectIsLoggedIn } from "@/features/User";
+import { useAppSelector } from "@/store";
 import {
   Box,
   Button,
@@ -10,11 +12,10 @@ import {
 import FeaturedDeals from "./components/FeaturedDeals";
 import RecentlyVisitedHotels from "./components/RecentlyVisitedHotels";
 import TrendingDestinations from "./components/TrendingDestinations";
-import { useAppSelector } from "@/store";
-import { selectIsLoggedIn } from "@/features/User";
 
 const LandingPage = () => {
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
+
   return (
     <Box>
       <Box
@@ -97,7 +98,6 @@ const LandingPage = () => {
       </Box>
       <FeaturedDeals />
       <TrendingDestinations />
-      {/* <PremiumChoices /> */}
       {isLoggedIn && <RecentlyVisitedHotels />}
     </Box>
   );

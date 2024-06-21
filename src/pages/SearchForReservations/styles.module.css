@@ -4,6 +4,7 @@
   left: 53%;
   top: 65px;
   padding: 1rem;
+  z-index: 1;
 }
 
 .countersBtn {

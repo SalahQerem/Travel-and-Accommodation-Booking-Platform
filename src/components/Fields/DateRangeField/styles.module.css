@@ -10,8 +10,6 @@
   top: 50px;
   left: 53%;
   transform: translateX(-50%);
-  border-radius: 10px;
-  border: 1px solid rgba(214, 226, 235, 0.8);
-  background-color: #fbfcfe;
   overflow: hidden;
+  z-index: 1;
 }

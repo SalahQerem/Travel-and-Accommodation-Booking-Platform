@@ -1,5 +1,5 @@
 import { useSnackBar } from "@/hooks/useSnackbar";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Card, Typography } from "@mui/material";
 import { CalendarDays } from "lucide-react";
 import { FC, useState } from "react";
 import { DateRange } from "react-date-range";
@@ -57,13 +57,14 @@ const DateRangeField: FC<DateRangeFieldProps> = ({
         >{`${checkInDate} - ${checkOutDate}`}</Typography>
       </Button>
       {isDateRangeBarOpen && (
-        <DateRange
-          ranges={[selectionRange]}
-          onChange={handleSelect}
-          editableDateInputs={true}
-          moveRangeOnFirstSelection={false}
-          className={styles.dateRange}
-        />
+        <Card className={styles.dateRange}>
+          <DateRange
+            ranges={[selectionRange]}
+            onChange={handleSelect}
+            editableDateInputs={true}
+            moveRangeOnFirstSelection={false}
+          />
+        </Card>
       )}
     </Box>
   );
