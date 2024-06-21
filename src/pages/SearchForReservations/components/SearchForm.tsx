@@ -15,25 +15,39 @@ import {
 } from "@mui/material";
 import { Form, FormikProvider, useFormik } from "formik";
 import { Filter, Search, UsersRound } from "lucide-react";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { SearchForReservationsRequest } from "../API/types";
 import { counters, initialValues, sortOptions } from "../constants";
 import { validationSchema } from "../formSchema";
 import styles from "../styles.module.css";
-import { SearchFormProps } from "../types";
+import { QueryObj, SearchFormProps } from "../types";
+import { useNavigate } from "react-router-dom";
 
 const SearchForm: FC<SearchFormProps> = ({ setSearchQuery, isFetching }) => {
+  const url = new URL(location.href);
+  const urlQuery = new URLSearchParams(url.search);
+  const queryObj: QueryObj = {};
+
+  urlQuery.forEach((value, key) => {
+    queryObj[key] = value;
+  });
+
   const [isCountersBarOpen, setIsCountersBarOpen] = useState(false);
   const [isFiltersBarOpen, setIsFiltersBarOpen] = useState(false);
 
   const { isTabletOrLess } = useMediaQuery();
+  const navigate = useNavigate();
 
   const onSubmit = (values: SearchForReservationsRequest) => {
-    setSearchQuery({ ...values });
+    if (setSearchQuery) setSearchQuery({ ...values });
+    else
+      navigate(
+        `/search?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}&city=${city}&starRate=${starRate}&sort=${sort}&numberOfRooms=${numberOfRooms}&adults=${adults}&children=${children}`
+      );
   };
 
   const formikProps = useFormik({
-    initialValues,
+    initialValues: Object.keys(queryObj).length > 0 ? queryObj : initialValues,
     onSubmit,
     validationSchema,
   });
@@ -46,6 +60,7 @@ const SearchForm: FC<SearchFormProps> = ({ setSearchQuery, isFetching }) => {
     numberOfRooms,
     starRate,
     sort,
+    city,
   } = formikProps.values;
 
   const toggleOpenCountersBar = () => {
@@ -66,7 +81,7 @@ const SearchForm: FC<SearchFormProps> = ({ setSearchQuery, isFetching }) => {
     >
       <Typography variant="h5">{label}</Typography>
       <UpDownCounter
-        value={formikProps.values[name]}
+        value={formikProps.values[name]!}
         onChange={(newValue: number) =>
           formikProps.setFieldValue(name, newValue)
         }
@@ -74,6 +89,12 @@ const SearchForm: FC<SearchFormProps> = ({ setSearchQuery, isFetching }) => {
       />
     </Stack>
   ));
+
+  useEffect(() => {
+    if (Object.keys(queryObj).length > 0 && setSearchQuery) {
+      setSearchQuery({ ...queryObj });
+    }
+  }, []);
 
   return (
     <Card sx={{ p: 3, maxWidth: "100%", overflow: "visible" }}>
@@ -94,8 +115,8 @@ const SearchForm: FC<SearchFormProps> = ({ setSearchQuery, isFetching }) => {
               </Grid>
               <Grid item xs={12} md={6} lg={3.1}>
                 <DateRangeField
-                  checkInDate={checkInDate}
-                  checkOutDate={checkOutDate}
+                  checkInDate={checkInDate!}
+                  checkOutDate={checkOutDate!}
                   setCheckInDate={(newValue: string) =>
                     formikProps.setFieldValue("checkInDate", newValue)
                   }

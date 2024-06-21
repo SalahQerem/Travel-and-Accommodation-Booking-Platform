@@ -14,6 +14,10 @@ export interface ReservationProps {
 }
 
 export interface SearchFormProps {
-  setSearchQuery: Dispatch<SetStateAction<SearchForReservationsRequest>>;
-  isFetching: boolean;
+  setSearchQuery?: Dispatch<SetStateAction<SearchForReservationsRequest>>;
+  isFetching?: boolean;
+}
+
+export interface QueryObj {
+  [index: string]: string | number;
 }
