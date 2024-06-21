@@ -1,0 +1,13 @@
+.countersBar {
+  position: absolute;
+  transform: translateX(-50%);
+  left: 50%;
+  top: 65px;
+  padding: 1rem;
+}
+
+.countersBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}

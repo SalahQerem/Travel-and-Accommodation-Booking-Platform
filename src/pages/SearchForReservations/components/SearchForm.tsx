@@ -1,13 +1,24 @@
 import DateRangeField from "@/components/Fields/DateRangeField";
 import TextField from "@/components/Fields/TextField";
 import { LoadingButton } from "@mui/lab";
-import { Card, CircularProgress, Grid } from "@mui/material";
+import {
+  Button,
+  Card,
+  CircularProgress,
+  Grid,
+  Typography,
+} from "@mui/material";
 import { Form, FormikProvider, useFormik } from "formik";
+import { UsersRound } from "lucide-react";
+import { useState } from "react";
 import { SearchForReservationsRequest } from "../API/types";
 import { initialValues } from "../constants";
 import { validationSchema } from "../formSchema";
+import styles from "../styles.module.css";
+import UpDownCounter from "@/components/Fields/UpDownCounter";
 
 const SearchForm = () => {
+  const [isCountersBarOpen, setIsCountersBarOpen] = useState(false);
   const onSubmit = (values: SearchForReservationsRequest) => {
     console.log(values);
   };
@@ -17,6 +28,13 @@ const SearchForm = () => {
     onSubmit,
     validationSchema,
   });
+
+  const { adults, checkInDate, checkOutDate, children, numberOfRooms } =
+    formikProps.values;
+
+  const toggleOpenCountersBar = () => {
+    setIsCountersBarOpen((prev) => !prev);
+  };
 
   return (
     <Card sx={{ p: 3, m: 2, maxWidth: "100%", overflow: "visible" }}>
@@ -32,8 +50,8 @@ const SearchForm = () => {
             </Grid>
             <Grid item xs={3}>
               <DateRangeField
-                checkInDate={formikProps.values.checkInDate}
-                checkOutDate={formikProps.values.checkOutDate}
+                checkInDate={checkInDate}
+                checkOutDate={checkOutDate}
                 setCheckInDate={(newValue: string) =>
                   formikProps.setFieldValue("checkInDate", newValue)
                 }
@@ -42,7 +60,28 @@ const SearchForm = () => {
                 }
               />
             </Grid>
-
+            <Grid item xs={3} sx={{ position: "relative" }}>
+              <Button
+                type="button"
+                onClick={toggleOpenCountersBar}
+                className={styles.countersBtn}
+              >
+                <UsersRound />
+                <Typography
+                  fontWeight={500}
+                >{`${adults} adults. ${children} children. ${numberOfRooms} rooms`}</Typography>
+              </Button>
+              {isCountersBarOpen && (
+                <Card className={styles.countersBar}>
+                  <UpDownCounter
+                    value={adults}
+                    onChange={(newValue: number) =>
+                      formikProps.setFieldValue("adults", newValue)
+                    }
+                  />
+                </Card>
+              )}
+            </Grid>
             <Grid item xs={3}>
               <LoadingButton
                 type="submit"

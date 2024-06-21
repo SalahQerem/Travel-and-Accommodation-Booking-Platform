@@ -617,10 +617,22 @@ const getSaferTheme = (mode: PaletteMode): ThemeOptions => {
               "&::placeholder": {
                 opacity: 0.7,
               },
+              "&[type=number]": {
+                "-moz-appearance": "textfield",
+                textAlign: "center",
+              },
+              "&[type=number]::-webkit-outer-spin-button": {
+                "-webkit-appearance": "none",
+                margin: 0,
+              },
+              "&[type=number]::-webkit-inner-spin-button": {
+                "-webkit-appearance": "none",
+                margin: 0,
+              },
             },
             "& .MuiOutlinedInput-root": {
               boxSizing: "border-box",
-              minWidth: 180,
+              minWidth: 50,
               minHeight: 40,
               height: "100%",
               borderRadius: "10px",

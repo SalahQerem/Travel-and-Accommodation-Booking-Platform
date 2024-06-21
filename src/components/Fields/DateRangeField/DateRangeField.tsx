@@ -38,7 +38,9 @@ const DateRangeField: FC<DateRangeFieldProps> = ({
         onClick={toggleDateSelection}
       >
         <CalendarDays />
-        <Typography>{`${checkInDate} - ${checkOutDate}`}</Typography>
+        <Typography
+          fontWeight={500}
+        >{`${checkInDate} - ${checkOutDate}`}</Typography>
       </Button>
       {isDateRangeBarOpen && (
         <DateRange
