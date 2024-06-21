@@ -24,28 +24,6 @@ export interface TrendingDestination {
 export interface GetTrendingDestinationsResponse
   extends Array<TrendingDestination> {}
 
-export interface Amenity {
-  id: number;
-  name: string;
-  description: string;
-}
-
-export interface PremiumChoice {
-  hotelId: number;
-  hotelName: string;
-  starRating: number;
-  latitude: number;
-  longitude: number;
-  roomPrice: number;
-  roomType: string;
-  cityName: string;
-  roomPhotoUrl: string;
-  discount: number;
-  amenities: Array<Amenity>;
-}
-
-export interface GetPremiumChoicesResponse extends Array<PremiumChoice> {}
-
 export interface RecentlyVisitedHotel {
   hotelId: number;
   hotelName: string;

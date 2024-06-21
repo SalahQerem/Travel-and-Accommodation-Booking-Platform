@@ -1,0 +1,17 @@
+.dateBtn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+}
+
+.dateRange {
+  position: absolute;
+  top: 50px;
+  left: 53%;
+  transform: translateX(-50%);
+  border-radius: 10px;
+  border: 1px solid rgba(214, 226, 235, 0.8);
+  background-color: #fbfcfe;
+  overflow: hidden;
+}
