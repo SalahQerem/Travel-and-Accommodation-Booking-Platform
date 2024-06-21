@@ -1,3 +1,5 @@
+import { Counter } from "./types";
+
 export const initialValues = {
   checkInDate: (() => {
     const nextDate = new Date();
@@ -16,3 +18,20 @@ export const initialValues = {
   sort: "",
   starRate: 0,
 };
+
+export const counters: Array<Counter> = [
+  {
+    name: "adults",
+    label: "Adults",
+    min: 1,
+  },
+  {
+    name: "children",
+    label: "Children",
+  },
+  {
+    name: "numberOfRooms",
+    label: "Rooms",
+    min: 1,
+  },
+];

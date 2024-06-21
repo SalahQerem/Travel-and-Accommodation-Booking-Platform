@@ -6,13 +6,14 @@ import {
   Card,
   CircularProgress,
   Grid,
+  Stack,
   Typography,
 } from "@mui/material";
 import { Form, FormikProvider, useFormik } from "formik";
 import { UsersRound } from "lucide-react";
 import { useState } from "react";
 import { SearchForReservationsRequest } from "../API/types";
-import { initialValues } from "../constants";
+import { counters, initialValues } from "../constants";
 import { validationSchema } from "../formSchema";
 import styles from "../styles.module.css";
 import UpDownCounter from "@/components/Fields/UpDownCounter";
@@ -35,6 +36,24 @@ const SearchForm = () => {
   const toggleOpenCountersBar = () => {
     setIsCountersBarOpen((prev) => !prev);
   };
+
+  const renderCounters = counters.map(({ name, label, min }) => (
+    <Stack
+      direction="row"
+      gap={3}
+      alignItems="center"
+      justifyContent="space-between"
+    >
+      <Typography variant="h5">{label}</Typography>
+      <UpDownCounter
+        value={formikProps.values[name]}
+        onChange={(newValue: number) =>
+          formikProps.setFieldValue(name, newValue)
+        }
+        min={min || 0}
+      />
+    </Stack>
+  ));
 
   return (
     <Card sx={{ p: 3, m: 2, maxWidth: "100%", overflow: "visible" }}>
@@ -73,12 +92,7 @@ const SearchForm = () => {
               </Button>
               {isCountersBarOpen && (
                 <Card className={styles.countersBar}>
-                  <UpDownCounter
-                    value={adults}
-                    onChange={(newValue: number) =>
-                      formikProps.setFieldValue("adults", newValue)
-                    }
-                  />
+                  <Stack gap={2}>{renderCounters}</Stack>
                 </Card>
               )}
             </Grid>

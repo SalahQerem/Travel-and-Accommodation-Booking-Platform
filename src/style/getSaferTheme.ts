@@ -649,7 +649,7 @@ const getSaferTheme = (mode: PaletteMode): ThemeOptions => {
               },
               "&.Mui-focused": {
                 borderColor: brand[400],
-                outline: "4px solid",
+                outline: "1px solid",
                 outlineColor: brand[200],
               },
             },
@@ -673,7 +673,7 @@ const getSaferTheme = (mode: PaletteMode): ThemeOptions => {
                 },
                 "&.Mui-focused": {
                   borderColor: brand[400],
-                  outline: "4px solid",
+                  outline: "1px solid",
                   outlineColor: alpha(brand[500], 0.5),
                 },
               },
