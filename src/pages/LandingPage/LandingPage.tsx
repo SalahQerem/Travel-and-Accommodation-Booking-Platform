@@ -1,7 +1,7 @@
 import StyledContainer from "@/containers/StyledContainer";
 import { selectIsLoggedIn } from "@/features/User";
 import { useAppSelector } from "@/store";
-import { Box, Container, Link, Stack, Typography } from "@mui/material";
+import { Container, Link, Stack, Typography } from "@mui/material";
 import SearchForm from "../SearchForReservations/components/SearchForm";
 import FeaturedDeals from "./components/FeaturedDeals";
 import RecentlyVisitedHotels from "./components/RecentlyVisitedHotels";
@@ -12,54 +12,52 @@ const LandingPage = () => {
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
 
   return (
-    <Box>
-      <StyledContainer id="header" minHeight="auto">
-        <Container className={styles.landingPageContainer}>
-          <Stack spacing={2} mb={5} sx={{ width: { xs: "100%", sm: "80%" } }}>
-            <Typography variant="h1" className={styles.headerTitle}>
-              Explore Our Latest&nbsp;
-              <Typography component="span" variant="h1" color="primary">
-                Booking&nbsp;
-              </Typography>
-              Services
+    <StyledContainer id="header" minHeight="auto">
+      <Container className={styles.header}>
+        <Stack spacing={2} mb={5} sx={{ width: { xs: "100%", sm: "80%" } }}>
+          <Typography variant="h1" className={styles.headerTitle}>
+            Explore Our Latest&nbsp;
+            <Typography component="span" variant="h1" color="primary">
+              Booking&nbsp;
             </Typography>
-            <Typography
-              textAlign="center"
-              color="text.secondary"
-              sx={{ alignSelf: "center", width: { sm: "100%", md: "80%" } }}
-            >
-              Discover and book tailored services with&nbsp;
-              <Typography component="span" color="primary" fontWeight={600}>
-                Safer
-              </Typography>
-              . From vacation rentals to event venues, enjoy a seamless booking
-              experience. Plan your next adventure with confidence, supported by
-              top-tier customer service and unbeatable deals. Make your next
-              trip unforgettable with&nbsp;
-              <Typography component="span" color="primary" fontWeight={600}>
-                Safer
-              </Typography>
-            </Typography>
-          </Stack>
-          <SearchForm />
-          <Typography
-            variant="caption"
-            textAlign="center"
-            sx={{ opacity: 0.8 }}
-            mt={2}
-          >
-            By clicking &quot;Search&quot; you agree to our&nbsp;
-            <Link href="#" color="primary">
-              Terms & Conditions
-            </Link>
-            .
+            Services
           </Typography>
-        </Container>
-      </StyledContainer>
+          <Typography
+            textAlign="center"
+            color="text.secondary"
+            sx={{ alignSelf: "center", width: { sm: "100%", md: "80%" } }}
+          >
+            Discover and book tailored services with&nbsp;
+            <Typography component="span" color="primary" fontWeight={600}>
+              Safer
+            </Typography>
+            . From vacation rentals to event venues, enjoy a seamless booking
+            experience. Plan your next adventure with confidence, supported by
+            top-tier customer service and unbeatable deals. Make your next trip
+            unforgettable with&nbsp;
+            <Typography component="span" color="primary" fontWeight={600}>
+              Safer
+            </Typography>
+          </Typography>
+        </Stack>
+        <SearchForm />
+        <Typography
+          variant="caption"
+          textAlign="center"
+          sx={{ opacity: 0.8 }}
+          mt={2}
+        >
+          By clicking &quot;Search&quot; you agree to our&nbsp;
+          <Link href="#" color="primary">
+            Terms & Conditions
+          </Link>
+          .
+        </Typography>
+      </Container>
       <FeaturedDeals />
       <TrendingDestinations />
       {isLoggedIn && <RecentlyVisitedHotels />}
-    </Box>
+    </StyledContainer>
   );
 };
 
