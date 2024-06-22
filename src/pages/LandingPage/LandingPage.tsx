@@ -13,8 +13,12 @@ const LandingPage = () => {
 
   return (
     <StyledContainer id="header" minHeight="auto">
-      <Container className={styles.header}>
-        <Stack spacing={2} mb={5} sx={{ width: { xs: "100%", sm: "80%" } }}>
+      <Container sx={{ pt: 20 }}>
+        <Stack
+          spacing={2}
+          mb={5}
+          sx={{ width: { xs: "100%", sm: "80%" }, mx: "auto" }}
+        >
           <Typography variant="h1" className={styles.headerTitle}>
             Explore Our Latest&nbsp;
             <Typography component="span" variant="h1" color="primary">
@@ -43,6 +47,7 @@ const LandingPage = () => {
         <SearchForm />
         <Typography
           variant="caption"
+          component="p"
           textAlign="center"
           sx={{ opacity: 0.8 }}
           mt={2}
