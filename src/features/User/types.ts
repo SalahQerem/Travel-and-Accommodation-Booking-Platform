@@ -1,4 +1,4 @@
-import { User } from "@/types";
+import { User } from "@/types/user";
 
 export interface UserState extends User {}
 

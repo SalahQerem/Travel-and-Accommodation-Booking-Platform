@@ -66,7 +66,7 @@ const Navbar: FC = () => {
             <Link to={"/"}>
               <img src={fullLogo} width="100px" alt="logo of safer" />
             </Link>
-            <Box sx={{ display: { xs: "none", md: "flex" }, gap: 3, px: 3 }}>
+            <Box sx={{ display: { xs: "none", md: "flex" }, gap: 1, px: 3 }}>
               <StyledMenuItem onClick={() => scrollToSection("features deals")}>
                 <Typography variant="body2" color="text.primary">
                   Featured Deals
@@ -79,13 +79,15 @@ const Navbar: FC = () => {
                   Trending Destinations
                 </Typography>
               </StyledMenuItem>
-              <StyledMenuItem
-                onClick={() => scrollToSection("premium choices")}
-              >
-                <Typography variant="body2" color="text.primary">
-                  Premium Choices
-                </Typography>
-              </StyledMenuItem>
+              {isLoggedIn && (
+                <StyledMenuItem
+                  onClick={() => scrollToSection("recently visited hotels")}
+                >
+                  <Typography variant="body2" color="text.primary">
+                    Recently visited Hotels
+                  </Typography>
+                </StyledMenuItem>
+              )}
             </Box>
           </Stack>
           <Box

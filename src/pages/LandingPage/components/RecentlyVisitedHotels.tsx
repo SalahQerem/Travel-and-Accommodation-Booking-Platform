@@ -16,7 +16,7 @@ const RecentlyVisitedHotels = () => {
   if (isFetching) return <BlockUI />;
 
   return (
-    <Container id="premium choices" sx={{ py: { xs: 2, sm: 4 } }}>
+    <Container id="recently visited hotels" sx={{ py: { xs: 2, sm: 4 } }}>
       <Typography
         component="h2"
         variant="h4"

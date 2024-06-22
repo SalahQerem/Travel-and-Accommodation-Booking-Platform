@@ -2,6 +2,7 @@ import DateRangeField from "@/components/Fields/DateRangeField";
 import TextField from "@/components/Fields/TextField";
 import UpDownCounter from "@/components/Fields/UpDownCounter";
 import useMediaQuery from "@/hooks/useMediaQuery";
+import { getUrlQueryObj, getUrlQueryString } from "@/utils/urlQueryParams";
 import { LoadingButton } from "@mui/lab";
 import {
   Autocomplete,
@@ -16,21 +17,15 @@ import {
 import { Form, FormikProvider, useFormik } from "formik";
 import { Filter, Search, UsersRound } from "lucide-react";
 import { FC, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { SearchForReservationsRequest } from "../API/types";
 import { counters, initialValues, sortOptions } from "../constants";
 import { validationSchema } from "../formSchema";
 import styles from "../styles.module.css";
-import { QueryObj, SearchFormProps } from "../types";
-import { useNavigate } from "react-router-dom";
+import { SearchFormProps } from "../types";
 
 const SearchForm: FC<SearchFormProps> = ({ setSearchQuery, isFetching }) => {
-  const url = new URL(location.href);
-  const urlQuery = new URLSearchParams(url.search);
-  const queryObj: QueryObj = {};
-
-  urlQuery.forEach((value, key) => {
-    queryObj[key] = value;
-  });
+  const queryObj = getUrlQueryObj(new URL(location.href));
 
   const [isCountersBarOpen, setIsCountersBarOpen] = useState(false);
   const [isFiltersBarOpen, setIsFiltersBarOpen] = useState(false);
@@ -40,10 +35,10 @@ const SearchForm: FC<SearchFormProps> = ({ setSearchQuery, isFetching }) => {
 
   const onSubmit = (values: SearchForReservationsRequest) => {
     if (setSearchQuery) setSearchQuery({ ...values });
-    else
-      navigate(
-        `/search?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}&city=${city}&starRate=${starRate}&sort=${sort}&numberOfRooms=${numberOfRooms}&adults=${adults}&children=${children}`
-      );
+    else {
+      const urlPath = getUrlQueryString("/search", formikProps.values);
+      navigate(urlPath);
+    }
   };
 
   const formikProps = useFormik({
@@ -60,7 +55,6 @@ const SearchForm: FC<SearchFormProps> = ({ setSearchQuery, isFetching }) => {
     numberOfRooms,
     starRate,
     sort,
-    city,
   } = formikProps.values;
 
   const toggleOpenCountersBar = () => {
@@ -105,15 +99,20 @@ const SearchForm: FC<SearchFormProps> = ({ setSearchQuery, isFetching }) => {
             alignItems="center"
             gap={2}
           >
-            <Grid container spacing={1} alignItems="center">
-              <Grid item xs={12} md={6} lg={2.9}>
+            <Grid
+              container
+              spacing={1}
+              alignItems="center"
+              justifyContent="space-between"
+            >
+              <Grid item xs={12} md={6} lg={2.6}>
                 <TextField
                   name="city"
                   aria-label="Enter your Destination"
                   placeholder="Where are you going?"
                 />
               </Grid>
-              <Grid item xs={12} md={6} lg={3.1}>
+              <Grid item xs={12} md={6} lg={3.2}>
                 <DateRangeField
                   checkInDate={checkInDate!}
                   checkOutDate={checkOutDate!}

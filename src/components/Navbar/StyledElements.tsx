@@ -22,5 +22,5 @@ export const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 
 export const StyledMenuItem = styled(MenuItem)({
   paddingBlock: "6px",
-  paddingInline: 0,
+  paddingInline: "10px",
 });
