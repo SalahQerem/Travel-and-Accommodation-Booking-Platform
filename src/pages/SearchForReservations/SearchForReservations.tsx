@@ -1,10 +1,11 @@
+import StyledContainer from "@/containers/StyledContainer";
 import { Container, Grid } from "@mui/material";
-import SearchForm from "./components/SearchForm";
-import useSearchForReservationsAPI from "./hooks/useSearchForReservationsAPI";
-import Reservation from "./components/Reservation";
-import { initialValues } from "./constants";
-import { SearchForReservationsRequest } from "./API/types";
 import { useState } from "react";
+import { SearchForReservationsRequest } from "./API/types";
+import Reservation from "./components/Reservation";
+import SearchForm from "./components/SearchForm";
+import { initialValues } from "./constants";
+import useSearchForReservationsAPI from "./hooks/useSearchForReservationsAPI";
 
 const SearchForReservations = () => {
   const [searchQuery, setSearchQuery] =
@@ -19,12 +20,14 @@ const SearchForReservations = () => {
   ));
 
   return (
-    <Container sx={{ pt: 15, pb: 10 }}>
-      <SearchForm setSearchQuery={setSearchQuery} isFetching={isFetching} />
-      <Grid container spacing={2} justifyContent="center" mt={2}>
-        {renderReservations}
-      </Grid>
-    </Container>
+    <StyledContainer>
+      <Container sx={{ pt: 15, pb: 10 }}>
+        <SearchForm setSearchQuery={setSearchQuery} isFetching={isFetching} />
+        <Grid container spacing={2} justifyContent="center" mt={2}>
+          {renderReservations}
+        </Grid>
+      </Container>
+    </StyledContainer>
   );
 };
 

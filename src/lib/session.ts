@@ -1,4 +1,4 @@
-import { UserRole } from "@/types";
+import { UserRole } from "@/types/user";
 import Cookies from "js-cookie";
 
 export interface SessionData {

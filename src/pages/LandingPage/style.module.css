@@ -21,3 +21,10 @@
   border-radius: 3px;
   width: 30px;
 }
+
+.headerTitle {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  text-align: center;
+}

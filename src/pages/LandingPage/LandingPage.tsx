@@ -1,47 +1,22 @@
+import StyledContainer from "@/containers/StyledContainer";
 import { selectIsLoggedIn } from "@/features/User";
 import { useAppSelector } from "@/store";
-import {
-  Box,
-  Button,
-  Container,
-  Link,
-  Stack,
-  Typography,
-  alpha,
-} from "@mui/material";
+import { Box, Container, Link, Stack, Typography } from "@mui/material";
+import SearchForm from "../SearchForReservations/components/SearchForm";
 import FeaturedDeals from "./components/FeaturedDeals";
 import RecentlyVisitedHotels from "./components/RecentlyVisitedHotels";
 import TrendingDestinations from "./components/TrendingDestinations";
 import styles from "./style.module.css";
-import SearchForm from "../SearchForReservations/components/SearchForm";
 
 const LandingPage = () => {
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
 
   return (
     <Box>
-      <Box
-        id="header"
-        sx={(theme) => ({
-          backgroundImage:
-            theme.palette.mode === "light"
-              ? "linear-gradient(180deg, #CEE5FD, #FFF)"
-              : `linear-gradient(#02294F, ${alpha("#090E10", 0.0)})`,
-          backgroundSize: "100% 45%",
-          backgroundRepeat: "no-repeat",
-        })}
-      >
+      <StyledContainer id="header" minHeight="auto">
         <Container className={styles.landingPageContainer}>
           <Stack spacing={2} mb={5} sx={{ width: { xs: "100%", sm: "80%" } }}>
-            <Typography
-              variant="h1"
-              sx={{
-                display: "flex",
-                flexWrap: "wrap",
-                justifyContent: "center",
-                textAlign: "center",
-              }}
-            >
+            <Typography variant="h1" className={styles.headerTitle}>
               Explore Our Latest&nbsp;
               <Typography component="span" variant="h1" color="primary">
                 Booking&nbsp;
@@ -65,32 +40,22 @@ const LandingPage = () => {
                 Safer
               </Typography>
             </Typography>
-            <Stack
-              direction={{ xs: "column", sm: "row" }}
-              alignSelf="center"
-              spacing={1}
-              useFlexGap
-              sx={{ pt: 2, width: { xs: "100%", sm: "auto" } }}
-            >
-              <Button variant="contained" color="primary">
-                Start Booking now
-              </Button>
-            </Stack>
-            <Typography
-              variant="caption"
-              textAlign="center"
-              sx={{ opacity: 0.8 }}
-            >
-              By clicking &quot;Start now&quot; you agree to our&nbsp;
-              <Link href="#" color="primary">
-                Terms & Conditions
-              </Link>
-              .
-            </Typography>
           </Stack>
           <SearchForm />
+          <Typography
+            variant="caption"
+            textAlign="center"
+            sx={{ opacity: 0.8 }}
+            mt={2}
+          >
+            By clicking &quot;Search&quot; you agree to our&nbsp;
+            <Link href="#" color="primary">
+              Terms & Conditions
+            </Link>
+            .
+          </Typography>
         </Container>
-      </Box>
+      </StyledContainer>
       <FeaturedDeals />
       <TrendingDestinations />
       {isLoggedIn && <RecentlyVisitedHotels />}
