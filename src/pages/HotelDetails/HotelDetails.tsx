@@ -4,14 +4,17 @@ import { useParams } from "react-router-dom";
 import useGetHotelDetailsAPI from "./hooks/useGetHotelDetailsAPI";
 import BlockUI from "@/containers/BlockUI";
 import useGetHotelGalaryAPI from "./hooks/useGetHotelGalaryAPI";
+import useGetHotelReviewsAPI from "./hooks/useGetHotelReviewsAPI";
 
 const HotelDetails = () => {
   const { hotelId } = useParams();
 
   const { hotel, isFetchingHotel } = useGetHotelDetailsAPI(hotelId!);
   const { galary, isFetchingGalary } = useGetHotelGalaryAPI(hotelId!);
+  const { reviews, isFetchingReviews } = useGetHotelReviewsAPI(hotelId!);
 
-  if (isFetchingHotel || isFetchingGalary) return <BlockUI />;
+  let isLoading = isFetchingHotel || isFetchingGalary || isFetchingReviews;
+  if (isLoading) return <BlockUI />;
   return (
     <StyledContainer>
       <Typography>{hotelId}</Typography>

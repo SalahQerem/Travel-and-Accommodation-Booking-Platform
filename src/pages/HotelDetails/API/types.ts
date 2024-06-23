@@ -22,3 +22,12 @@ export interface GalaryItem {
 }
 
 export interface GetHotelGalaryResponse extends Array<GalaryItem> {}
+
+export interface Review {
+  reviewId: number;
+  customerName: string;
+  rating: number;
+  description: string;
+}
+
+export interface GetHotelReviewsResponse extends Array<Review> {}
