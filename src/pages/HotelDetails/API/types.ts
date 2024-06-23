@@ -31,3 +31,17 @@ export interface Review {
 }
 
 export interface GetHotelReviewsResponse extends Array<Review> {}
+
+export interface Room {
+  roomId: number;
+  roomNumber: number;
+  roomPhotoUrl: string;
+  roomType: string;
+  capacityOfAdults: number;
+  capacityOfChildren: number;
+  roomAmenities: Array<Amenity>;
+  price: number;
+  availability: boolean;
+}
+
+export interface GetHotelRoomsResponse extends Array<Room> {}
