@@ -3,15 +3,15 @@ import { Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 import useGetHotelDetailsAPI from "./hooks/useGetHotelDetailsAPI";
 import BlockUI from "@/containers/BlockUI";
+import useGetHotelGalaryAPI from "./hooks/useGetHotelGalaryAPI";
 
 const HotelDetails = () => {
   const { hotelId } = useParams();
 
-  const { hotel, isFetching } = useGetHotelDetailsAPI(hotelId!);
+  const { hotel, isFetchingHotel } = useGetHotelDetailsAPI(hotelId!);
+  const { galary, isFetchingGalary } = useGetHotelGalaryAPI(hotelId!);
 
-  console.log(hotel);
-
-  if (isFetching) return <BlockUI />;
+  if (isFetchingHotel || isFetchingGalary) return <BlockUI />;
   return (
     <StyledContainer>
       <Typography>{hotelId}</Typography>

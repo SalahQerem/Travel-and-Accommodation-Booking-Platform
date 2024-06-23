@@ -15,3 +15,10 @@ export interface GetHotelDetailsResponse {
   imageUrl: string;
   cityId: number;
 }
+
+export interface GalaryItem {
+  id: string;
+  url: string;
+}
+
+export interface GetHotelGalaryResponse extends Array<GalaryItem> {}

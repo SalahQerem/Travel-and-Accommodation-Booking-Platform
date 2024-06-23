@@ -27,7 +27,7 @@ const useGetHotelDetailsAPI = (hotelId: string) => {
     });
   }, [error]);
 
-  return { hotel, isFetching };
+  return { hotel, isFetchingHotel: isFetching };
 };
 
 export default useGetHotelDetailsAPI;
