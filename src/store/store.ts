@@ -22,6 +22,7 @@ const saferStore = configureStore({
     snackbar: snackbarReducer,
     appSettings: persistedAppSettingsReducer,
   },
+  //combine the reducers in the features file
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
