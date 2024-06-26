@@ -20,12 +20,13 @@ import useGetHotelGalaryAPI from "./hooks/useGetHotelGalaryAPI";
 import useGetHotelReviewsAPI from "./hooks/useGetHotelReviewsAPI";
 import useGetHotelRoomsAPI from "./hooks/useGetHotelRoomsAPI";
 import styles from "./styles.module.css";
+import AvailableRoom from "./components/AvailableRoom";
 
 const HotelDetails = () => {
   const { hotelId } = useParams();
 
   const [reviewsCountToDisplay, setReviewsCountToDisplay] = useState(3);
-  const [imageToDisplay, setImageToDisplay] = useState<string>();
+  const [imageToDisplay, setImageToDisplay] = useState<string>("");
 
   const { hotel, isFetchingHotel } = useGetHotelDetailsAPI(hotelId!);
   const { outdoorImage, squareImages, wideImages, isFetchingGalary } =
@@ -77,6 +78,12 @@ const HotelDetails = () => {
         className={styles.hotelImg}
         onClick={() => handleSelectGalaryItem(galaryItem.url)}
       />
+    </Grid>
+  ));
+
+  const renderAvailableRooms = rooms?.map((room) => (
+    <Grid item key={room.roomId} xs={6}>
+      <AvailableRoom room={room} />
     </Grid>
   ));
 
@@ -144,7 +151,17 @@ const HotelDetails = () => {
             <Grid container item xs={12} md={6.5} spacing={1}>
               {renderWideImages}
             </Grid>
-            {renderSquareImages}
+            <Grid container item xs={12} spacing={1}>
+              {renderSquareImages}
+            </Grid>
+            <Grid container item xs={12} spacing={1} justifyContent="center">
+              <Grid item xs={12}>
+                <Typography variant="h4" component="h2" textAlign="center">
+                  Available Rooms
+                </Typography>
+              </Grid>
+              {renderAvailableRooms}
+            </Grid>
           </Grid>
         </Grid>
       </Container>
