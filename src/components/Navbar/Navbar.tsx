@@ -60,7 +60,7 @@ const Navbar: FC = () => {
         marginTop: 2,
       }}
     >
-      <Container maxWidth="lg">
+      <Container>
         <StyledToolbar variant="regular">
           <Stack direction="row" flexGrow={1} ml={-1}>
             <Link to={"/"}>
