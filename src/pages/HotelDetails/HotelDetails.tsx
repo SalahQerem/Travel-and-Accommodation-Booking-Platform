@@ -62,7 +62,7 @@ const HotelDetails = () => {
   ));
 
   const renderSquareImages = squareImages?.map((galaryItem) => (
-    <Grid item key={galaryItem.id} xs={12} sm={6} md={4}>
+    <Grid item key={galaryItem.id} xs={12} sm={4}>
       <img
         src={galaryItem.url}
         alt={hotel?.hotelName}
@@ -73,7 +73,7 @@ const HotelDetails = () => {
   ));
 
   const renderAvailableRooms = rooms?.map((room) => (
-    <Grid item key={room.roomId} xs={6}>
+    <Grid item key={room.roomId} xs={12} sm={6}>
       <AvailableRoom room={room} />
     </Grid>
   ));
@@ -85,9 +85,9 @@ const HotelDetails = () => {
 
   return (
     <StyledContainer>
-      <Container sx={{ py: { xs: 7, md: 14 } }}>
+      <Container sx={{ py: 14 }}>
         <Grid container spacing={2} alignItems="flex-start">
-          <Grid item xs={4}>
+          <Grid item xs={12} md={4}>
             <Card sx={{ p: 2 }}>
               <Stack gap={2}>
                 <Stack
@@ -128,23 +128,26 @@ const HotelDetails = () => {
               </Stack>
             </Card>
           </Grid>
-          <Grid item container spacing={1} xs={8}>
-            {outdoorImage && (
-              <Grid item xs={12} md={5.5}>
-                <img
-                  src={outdoorImage.url}
-                  alt={hotel?.hotelName}
-                  className={styles.hotelImg}
-                  onClick={() => handleSelectGalaryItem(outdoorImage.url)}
-                />
+          <Grid item container spacing={3} xs={12} md={8}>
+            <Grid container item spacing={1}>
+              {outdoorImage && (
+                <Grid item xs={12} sm={5.5}>
+                  <img
+                    src={outdoorImage.url}
+                    alt={hotel?.hotelName}
+                    className={styles.hotelImg}
+                    onClick={() => handleSelectGalaryItem(outdoorImage.url)}
+                  />
+                </Grid>
+              )}
+              <Grid container item xs={12} sm={6.5} spacing={1}>
+                {renderWideImages}
               </Grid>
-            )}
-            <Grid container item xs={12} md={6.5} spacing={1}>
-              {renderWideImages}
+              <Grid container item xs={12} spacing={1} justifyContent="center">
+                {renderSquareImages}
+              </Grid>
             </Grid>
-            <Grid container item xs={12} spacing={1}>
-              {renderSquareImages}
-            </Grid>
+
             <Grid container item xs={12} spacing={1} justifyContent="center">
               <Grid item xs={12}>
                 <Typography variant="h4" component="h2" textAlign="center">
