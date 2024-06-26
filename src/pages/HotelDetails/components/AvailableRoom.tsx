@@ -1,4 +1,5 @@
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import Amenity from "@/components/Amenity";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import {
   Button,
   Card,
@@ -8,10 +9,9 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { Baby, UsersRound } from "lucide-react";
 import { FC } from "react";
 import { AvailableRoomProps } from "../types";
-import { Baby, UsersRound } from "lucide-react";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
 const AvailableRoom: FC<AvailableRoomProps> = ({ room }) => {
   const {
@@ -25,16 +25,7 @@ const AvailableRoom: FC<AvailableRoomProps> = ({ room }) => {
   } = room;
 
   const renderAmenities = roomAmenities.map((amenity) => (
-    <Stack key={roomId + amenity.name} direction="row" gap={1}>
-      <CheckCircleIcon color="success" />
-      <Typography
-        variant="subtitle2"
-        color="text.secondary"
-        textTransform="capitalize"
-      >
-        {amenity.name}
-      </Typography>
-    </Stack>
+    <Amenity key={roomId + amenity.name} name={amenity.name} />
   ));
 
   return (

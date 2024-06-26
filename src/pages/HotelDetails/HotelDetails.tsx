@@ -1,6 +1,6 @@
+import Amenity from "@/components/Amenity";
 import BlockUI from "@/containers/BlockUI";
 import StyledContainer from "@/containers/StyledContainer";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import {
   Button,
   Card,
@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import AvailableRoom from "./components/AvailableRoom";
 import Location from "./components/Location";
 import Review from "./components/Review";
 import useGetHotelDetailsAPI from "./hooks/useGetHotelDetailsAPI";
@@ -20,7 +21,6 @@ import useGetHotelGalaryAPI from "./hooks/useGetHotelGalaryAPI";
 import useGetHotelReviewsAPI from "./hooks/useGetHotelReviewsAPI";
 import useGetHotelRoomsAPI from "./hooks/useGetHotelRoomsAPI";
 import styles from "./styles.module.css";
-import AvailableRoom from "./components/AvailableRoom";
 
 const HotelDetails = () => {
   const { hotelId } = useParams();
@@ -43,16 +43,7 @@ const HotelDetails = () => {
   };
 
   const renderAmenities = hotel?.amenities.map((amenity) => (
-    <Stack key={hotel.hotelName + amenity.name} direction="row" gap={1}>
-      <CheckCircleIcon color="success" />
-      <Typography
-        variant="subtitle2"
-        color="text.secondary"
-        textTransform="capitalize"
-      >
-        {amenity.name}
-      </Typography>
-    </Stack>
+    <Amenity key={hotel.hotelName + amenity.name} name={amenity.name} />
   ));
 
   const renderReviews = reviews
