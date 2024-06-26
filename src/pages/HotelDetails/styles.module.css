@@ -1,0 +1,22 @@
+.hotelImg {
+  width: 100%;
+  border-radius: 10px;
+  height: 100%;
+  cursor: pointer;
+}
+
+.hotelImg:hover {
+  filter: brightness(80%);
+}
+
+.popupImage {
+  border-radius: 10px;
+  width: 100%;
+}
+
+.popup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+}

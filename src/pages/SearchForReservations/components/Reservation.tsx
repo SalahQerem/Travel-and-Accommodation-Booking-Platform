@@ -1,4 +1,4 @@
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import Amenity from "@/components/Amenity";
 import {
   Button,
   Card,
@@ -26,17 +26,9 @@ const Reservation: FC<ReservationProps> = ({ reservation }) => {
   } = reservation;
 
   const renderAmenities = amenities.map((amenity) => (
-    <Stack key={amenity.id + amenity.name} direction="row" gap={1}>
-      <CheckCircleIcon color="success" />
-      <Typography
-        variant="subtitle2"
-        color="text.secondary"
-        textTransform="capitalize"
-      >
-        {amenity.name}
-      </Typography>
-    </Stack>
+    <Amenity key={amenity.id + amenity.name} name={amenity.name} />
   ));
+
   return (
     <Card>
       <CardMedia

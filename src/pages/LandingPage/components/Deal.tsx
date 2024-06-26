@@ -12,6 +12,7 @@ import {
 import { FC } from "react";
 import { DealProps } from "../types";
 import { MapPin, University } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Deal: FC<DealProps> = ({ deal }) => {
   const {
@@ -23,11 +24,11 @@ const Deal: FC<DealProps> = ({ deal }) => {
     cityName,
     finalPrice,
     originalRoomPrice,
+    hotelId,
   } = deal;
 
   return (
     <Card sx={{ maxWidth: 370, mb: 2, mx: "auto" }}>
-      {/* <CardActionArea> */}
       <CardMedia
         component="img"
         alt="Features Deal image"
@@ -87,12 +88,13 @@ const Deal: FC<DealProps> = ({ deal }) => {
           size="small"
           variant="contained"
           color="primary"
+          component={Link}
+          to={`hotel/${hotelId}`}
           sx={{ m: "auto" }}
         >
-          Book now
+          Show more details
         </Button>
       </CardActions>
-      {/* </CardActionArea> */}
     </Card>
   );
 };

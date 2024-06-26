@@ -3,19 +3,19 @@ import { AxiosBaseError } from "@/types/axios";
 import { extractErrorMessage } from "@/utils/errorHandling";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { getTrendingDestinationsAPI } from "../API";
-import { GetTrendingDestinationsResponse } from "../API/types";
+import { getHotelRoomsAPI } from "../API";
+import { GetHotelRoomsResponse } from "../API/types";
 
-const useGetTrendingDestinationsAPI = () => {
+const useGetHotelRoomsAPI = (hotelId: string) => {
   const { showErrorSnackbar } = useSnackBar();
 
   const {
-    data: trendingDestinations,
-    error,
+    data: rooms,
     isFetching,
-  } = useQuery<GetTrendingDestinationsResponse>({
-    queryKey: ["trending-destinations"],
-    queryFn: getTrendingDestinationsAPI,
+    error,
+  } = useQuery<GetHotelRoomsResponse>({
+    queryKey: ["hotel-rooms", hotelId],
+    queryFn: () => getHotelRoomsAPI(hotelId),
   });
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const useGetTrendingDestinationsAPI = () => {
     });
   }, [error]);
 
-  return { trendingDestinations, isFetching };
+  return { rooms, isFetchingRooms: isFetching };
 };
 
-export default useGetTrendingDestinationsAPI;
+export default useGetHotelRoomsAPI;

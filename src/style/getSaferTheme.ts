@@ -332,6 +332,10 @@ const getSaferTheme = (mode: PaletteMode): ThemeOptions => {
                 },
               }),
             }),
+            "&.Mui-disabled": {
+              backgroundColor: brand[100],
+              color: brand[200],
+            },
           }),
         },
       },
