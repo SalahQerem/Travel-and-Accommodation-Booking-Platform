@@ -1,7 +1,6 @@
 import AppLayout from "@/containers/Layout/AppLayout";
 import { RouteObject } from "react-router-dom";
 import AuthRoute from "./AuthRoute";
-import { LandingPage } from "./imports";
 
 const privateRoutes: RouteObject = {
   path: "/me",
@@ -9,12 +8,7 @@ const privateRoutes: RouteObject = {
   children: [
     {
       element: <AuthRoute />,
-      children: [
-        {
-          index: true,
-          element: <LandingPage />,
-        },
-      ],
+      children: [],
     },
   ],
 };
