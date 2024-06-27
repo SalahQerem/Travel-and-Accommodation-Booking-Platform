@@ -14,12 +14,14 @@ const cartSlice = createSlice({
     },
     addToCart: (state, action: PayloadAction<AddToCartPayload>) => {
       state = [...state, action.payload];
+      localStorage.setItem("safer-cart", JSON.stringify(state));
       return state;
     },
     removeFromCart: (state, action: PayloadAction<RemoveFromCartItem>) => {
       state = state.filter(
         (cartItem) => cartItem.roomNumber !== action.payload.roomNumber
       );
+      localStorage.setItem("safer-cart", JSON.stringify(state));
       return state;
     },
   },

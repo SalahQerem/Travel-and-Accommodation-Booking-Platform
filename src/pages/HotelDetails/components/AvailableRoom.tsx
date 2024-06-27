@@ -1,4 +1,6 @@
 import Amenity from "@/components/Amenity";
+import { addToCart, selectIsItemInCart } from "@/features/Cart";
+import { useAppDispatch, useAppSelector } from "@/store";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import {
   Button,
@@ -22,7 +24,18 @@ const AvailableRoom: FC<AvailableRoomProps> = ({ room }) => {
     roomAmenities,
     roomType,
     roomId,
+    roomNumber,
   } = room;
+
+  const dispatch = useAppDispatch();
+
+  const isItemInCart = useAppSelector((state) =>
+    selectIsItemInCart(state, roomNumber)
+  );
+
+  const handleAddToCart = () => {
+    dispatch(addToCart({ roomNumber, roomType, price }));
+  };
 
   const renderAmenities = roomAmenities.map((amenity) => (
     <Amenity key={roomId + amenity.name} name={amenity.name} />
@@ -82,9 +95,11 @@ const AvailableRoom: FC<AvailableRoomProps> = ({ room }) => {
           variant="contained"
           color="primary"
           sx={{ m: "auto" }}
-          endIcon={<AddShoppingCartIcon />}
+          endIcon={!isItemInCart && <AddShoppingCartIcon />}
+          onClick={handleAddToCart}
+          disabled={isItemInCart}
         >
-          Add to Cart
+          {isItemInCart ? "Already Added" : "Add to Cart"}
         </Button>
       </CardActions>
     </Card>
