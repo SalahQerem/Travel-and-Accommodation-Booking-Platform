@@ -11,3 +11,4 @@ export const SearchForReservations = lazy(
   () => import("@/pages/SearchForReservations")
 );
 export const HotelDetails = lazy(() => import("@/pages/HotelDetails"));
+export const Checkout = lazy(() => import("@/pages/Checkout"));
