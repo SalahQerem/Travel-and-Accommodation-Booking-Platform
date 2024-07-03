@@ -1,16 +1,30 @@
+import AutoCompleteField from "@/components/Fields/AutoCompleteField";
 import TextField from "@/components/Fields/TextField";
+import { LoadingButton } from "@mui/lab";
 import { Card, Stack, Typography } from "@mui/material";
 import { Form, FormikProvider, useFormik } from "formik";
 import { FC } from "react";
+import { InferType } from "yup";
 import { initialValues, paymentMethods } from "../constants";
 import { validationSchema } from "../formSchema";
-import AutoCompleteField from "@/components/Fields/AutoCompleteField";
 import { PaymentMethod } from "../types";
-import { LoadingButton } from "@mui/lab";
+import useAddBookingAPI from "../hooks/useAddBookingAPI";
+import { useAppSelector } from "@/store";
+import { selectCartItems } from "@/features/Cart";
+
+type FormValues = InferType<typeof validationSchema>;
 
 const CheckoutForm: FC = () => {
-  const onSubmit = (values) => {
-    console.log(values);
+  const cart = useAppSelector(selectCartItems);
+  const { addBooking, isPending } = useAddBookingAPI();
+  const onSubmit = (values: FormValues) => {
+    addBooking({
+      roomNumber: cart[0].roomNumber,
+      roomType: cart[0].roomType,
+      totalCost: cart[0].price,
+      customerName: values.customerName,
+      paymentMethod: values.paymentMethod.value,
+    });
   };
 
   const formikProps = useFormik({
@@ -19,7 +33,7 @@ const CheckoutForm: FC = () => {
     validationSchema,
   });
 
-  const { setFieldValue } = formikProps;
+  const { setFieldValue, values } = formikProps;
 
   return (
     <Card>
@@ -37,7 +51,7 @@ const CheckoutForm: FC = () => {
               name="paymentMethod"
               placeholder="Payment Method"
               disablePortal
-              id="roles-autocomplete"
+              id="paymentMethod-autocomplete"
               defaultValue={null}
               options={paymentMethods}
               getOptionLabel={(option) => (option as PaymentMethod).name}
@@ -45,11 +59,27 @@ const CheckoutForm: FC = () => {
                 setFieldValue("paymentMethod", value);
               }}
             />
-            <TextField name="cardNumber" placeholder="Card Number" />
-            <TextField name="expDate" placeholder="Expiration Date MM/YY" />
-            <TextField name="CVV" placeholder="CVV" />
+            <TextField
+              name="cardNumber"
+              placeholder="Card Number"
+              disabled={values.paymentMethod.value === "Cash"}
+            />
+            <TextField
+              name="expDate"
+              placeholder="Expiration Date MM/YY"
+              disabled={values.paymentMethod?.value === "Cash"}
+            />
+            <TextField
+              name="CVV"
+              placeholder="CVV"
+              disabled={values.paymentMethod.value === "Cash"}
+            />
             <TextField name="notes" placeholder="Notes" />
-            <LoadingButton variant="contained" type="submit">
+            <LoadingButton
+              variant="contained"
+              type="submit"
+              loading={isPending}
+            >
               Book now
             </LoadingButton>
           </Stack>

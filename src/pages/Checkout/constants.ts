@@ -5,7 +5,10 @@ export const initialValues = {
   email: "",
   state: "",
   city: "",
-  paymentMethod: null,
+  paymentMethod: {
+    name: "",
+    value: "",
+  },
   cardNumber: "",
   expDate: "",
   CVV: "",
