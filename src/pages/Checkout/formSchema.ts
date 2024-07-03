@@ -28,7 +28,12 @@ export const validationSchema = yup.object().shape({
       (value: Array<string>, schema: yup.StringSchema) => {
         return value.includes("Cash")
           ? schema.optional()
-          : schema.required("Please enter the card expiration date");
+          : schema
+              .required("Please enter the card expiration date")
+              .matches(
+                /^(0?[1-9]|1[0-2])\/?(2[4-9]|3[0-9]|4[0-9]|50)$/,
+                "Invalid expiration date format"
+              );
       }
     ),
   CVV: yup
