@@ -10,6 +10,7 @@ const cartSlice = createSlice({
   reducers: {
     clearCart: (state) => {
       state = [];
+      localStorage.removeItem(import.meta.env.VITE_CART_ACCESS_KEY);
       return state;
     },
     addToCart: (state, action: PayloadAction<AddToCartPayload>) => {

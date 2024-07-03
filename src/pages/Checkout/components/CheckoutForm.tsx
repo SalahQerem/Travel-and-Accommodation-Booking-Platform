@@ -10,12 +10,13 @@ import { validationSchema } from "../formSchema";
 import { PaymentMethod } from "../types";
 import useAddBookingAPI from "../hooks/useAddBookingAPI";
 import { useAppSelector } from "@/store";
-import { selectCartItems } from "@/features/Cart";
+import { selectCartItems, selectCartItemsCount } from "@/features/Cart";
 
 type FormValues = InferType<typeof validationSchema>;
 
 const CheckoutForm: FC = () => {
   const cart = useAppSelector(selectCartItems);
+  const cartItemCount = useAppSelector(selectCartItemsCount);
   const { addBooking, isPending } = useAddBookingAPI();
   const onSubmit = (values: FormValues) => {
     addBooking({
@@ -79,6 +80,7 @@ const CheckoutForm: FC = () => {
               variant="contained"
               type="submit"
               loading={isPending}
+              disabled={cartItemCount < 1}
             >
               Book now
             </LoadingButton>
