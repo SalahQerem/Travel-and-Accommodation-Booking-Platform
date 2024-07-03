@@ -9,7 +9,7 @@ const Checkout = () => {
   const cart = useAppSelector(selectCartItems);
 
   const renderCart = cart.map((cartItem) => (
-    <Grid item key={cartItem.roomId} xs={12}>
+    <Grid item key={cartItem.roomId} xs={12} md={6}>
       <CartItem room={cartItem} />
     </Grid>
   ));
@@ -18,10 +18,10 @@ const Checkout = () => {
     <StyledContainer>
       <Container sx={{ py: 14 }}>
         <Grid container spacing={2}>
-          <Grid item container xs={5} spacing={2}>
+          <Grid item container xs={12} sm={6} md={8} spacing={2}>
             {renderCart}
           </Grid>
-          <Grid item xs={7}>
+          <Grid item xs={12} sm={6} md={4}>
             <CheckoutForm />
           </Grid>
         </Grid>

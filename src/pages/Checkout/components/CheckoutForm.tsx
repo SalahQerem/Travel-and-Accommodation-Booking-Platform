@@ -3,7 +3,7 @@ import TextField from "@/components/Fields/TextField";
 import { LoadingButton } from "@mui/lab";
 import { Card, Stack, Typography } from "@mui/material";
 import { Form, FormikProvider, useFormik } from "formik";
-import { FC } from "react";
+import { ChangeEvent, FC } from "react";
 import { InferType } from "yup";
 import { initialValues, paymentMethods } from "../constants";
 import { validationSchema } from "../formSchema";
@@ -18,6 +18,7 @@ const CheckoutForm: FC = () => {
   const cart = useAppSelector(selectCartItems);
   const cartItemCount = useAppSelector(selectCartItemsCount);
   const { addBooking, isPending } = useAddBookingAPI();
+
   const onSubmit = (values: FormValues) => {
     addBooking({
       roomNumber: cart[0].roomNumber,
@@ -35,6 +36,11 @@ const CheckoutForm: FC = () => {
   });
 
   const { setFieldValue, values } = formikProps;
+
+  const handleFormatCardNumber = (value: string) => {
+    const noSpacesValue = value.replace(/\s/g, "");
+    return noSpacesValue && noSpacesValue.match(/.{1,4}/g)!.join(" ");
+  };
 
   return (
     <Card>
@@ -64,6 +70,14 @@ const CheckoutForm: FC = () => {
               name="cardNumber"
               placeholder="Card Number"
               disabled={values.paymentMethod.value === "Cash"}
+              inputProps={{
+                maxLength: 19,
+                onChange: (e: ChangeEvent<HTMLInputElement>) => {
+                  const noSpacesValue = e.target.value.replace(/\s/g, "");
+                  const formattedValue = handleFormatCardNumber(noSpacesValue);
+                  e.target.value = formattedValue;
+                },
+              }}
             />
             <TextField
               name="expDate"
@@ -82,7 +96,9 @@ const CheckoutForm: FC = () => {
               loading={isPending}
               disabled={cartItemCount < 1}
             >
-              Book now
+              {cartItemCount < 1
+                ? "Add new bookings to confirm it"
+                : "Book now"}
             </LoadingButton>
           </Stack>
         </Form>
