@@ -34,7 +34,7 @@ export interface GetHotelReviewsResponse extends Array<Review> {}
 
 export interface Room {
   roomId: number;
-  roomNumber: number;
+  roomNumber: string;
   roomPhotoUrl: string;
   roomType: string;
   capacityOfAdults: number;

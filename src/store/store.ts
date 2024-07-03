@@ -5,6 +5,7 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import userReducer from "../features/User/userSlice";
 import snackbarReducer from "../features/Snackbar/snackbarSlice";
+import cartReducer from "../features/Cart/cartSlice";
 
 const persistedAppSettings = {
   key: "appSettings",
@@ -18,6 +19,7 @@ const persistedAppSettingsReducer = persistReducer(
 
 const saferStore = configureStore({
   reducer: {
+    cart: cartReducer,
     user: userReducer,
     snackbar: snackbarReducer,
     appSettings: persistedAppSettingsReducer,

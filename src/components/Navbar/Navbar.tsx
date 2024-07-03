@@ -1,10 +1,13 @@
 import fullLogo from "@/assets/images/full-logo.png";
 import { toggleThemeMode } from "@/features/AppSettings";
 import { selectThemeMode } from "@/features/AppSettings/selectors";
+import { selectCartItemsCount } from "@/features/Cart";
 import { logout, selectIsLoggedIn } from "@/features/User";
 import { useAppDispatch, useAppSelector } from "@/store";
+import { ShoppingCart } from "@mui/icons-material";
 import {
   AppBar,
+  Badge,
   Box,
   Button,
   Container,
@@ -23,9 +26,11 @@ import ToggleColorMode from "./ToggleColorMode";
 
 const Navbar: FC = () => {
   const themeMode = useSelector(selectThemeMode);
-  const dispatch = useAppDispatch();
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
+  const cartItemsCount = useAppSelector(selectCartItemsCount);
+
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
@@ -103,15 +108,27 @@ const Navbar: FC = () => {
             />
 
             {isLoggedIn ? (
-              <Button
-                color="primary"
-                variant="contained"
-                size="small"
-                onClick={Logout}
-                endIcon={<LogOut size={20} />}
-              >
-                Logout
-              </Button>
+              <>
+                <Button
+                  size="small"
+                  sx={{ minWidth: "32px", height: "32px", p: "4px" }}
+                  component={Link}
+                  to={"/me/checkout"}
+                >
+                  <Badge badgeContent={cartItemsCount} color="primary">
+                    <ShoppingCart color="primary" />
+                  </Badge>
+                </Button>
+                <Button
+                  color="primary"
+                  variant="contained"
+                  size="small"
+                  onClick={Logout}
+                  endIcon={<LogOut size={20} />}
+                >
+                  Logout
+                </Button>
+              </>
             ) : (
               <Button
                 color="primary"
@@ -148,11 +165,28 @@ const Navbar: FC = () => {
                   backgroundColor: "background.paper",
                 }}
               >
-                <Stack alignItems="end" flexGrow={1}>
+                <Stack
+                  direction="row"
+                  justifyContent="end"
+                  flexGrow={1}
+                  gap={2}
+                >
                   <ToggleColorMode
                     mode={themeMode}
                     toggleColorMode={() => dispatch(toggleThemeMode())}
                   />
+                  {isLoggedIn && (
+                    <Badge badgeContent={4} color="primary">
+                      <Button
+                        size="small"
+                        sx={{ minWidth: "32px", height: "32px", p: "4px" }}
+                        component={Link}
+                        to={"/me/checkout"}
+                      >
+                        <ShoppingCart color="primary" />
+                      </Button>
+                    </Badge>
+                  )}
                 </Stack>
                 <MenuItem onClick={() => scrollToSection("features deals")}>
                   Featured Deals
@@ -162,34 +196,33 @@ const Navbar: FC = () => {
                 >
                   Trending Destinations
                 </MenuItem>
-                <MenuItem onClick={() => scrollToSection("premium choices")}>
-                  Premium Choices
-                </MenuItem>
                 <Divider />
-                <MenuItem>
-                  <Button
-                    color="primary"
-                    variant="contained"
-                    component="a"
-                    href="/material-ui/getting-started/templates/sign-up/"
-                    target="_blank"
-                    fullWidth
-                  >
-                    Sign up
-                  </Button>
-                </MenuItem>
-                <MenuItem>
-                  <Button
-                    color="primary"
-                    variant="outlined"
-                    component="a"
-                    href="/material-ui/getting-started/templates/sign-in/"
-                    target="_blank"
-                    fullWidth
-                  >
-                    Sign in
-                  </Button>
-                </MenuItem>
+                {isLoggedIn ? (
+                  <MenuItem>
+                    <Button
+                      color="primary"
+                      variant="contained"
+                      size="small"
+                      onClick={Logout}
+                      endIcon={<LogOut size={20} />}
+                    >
+                      Logout
+                    </Button>
+                  </MenuItem>
+                ) : (
+                  <MenuItem>
+                    <Button
+                      color="primary"
+                      variant="contained"
+                      component={Link}
+                      to={"/auth/login"}
+                      endIcon={<LogIn size={20} />}
+                      fullWidth
+                    >
+                      Login
+                    </Button>
+                  </MenuItem>
+                )}
               </Box>
             </Drawer>
           </Box>
