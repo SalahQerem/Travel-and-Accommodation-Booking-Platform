@@ -1,8 +1,4 @@
-export interface CartItem {
-  roomNumber: string;
-  roomType: string;
-  price: number;
-}
+import { Room as CartItem } from "@/pages/HotelDetails/API/types";
 
 export interface CartState extends Array<CartItem> {}
 

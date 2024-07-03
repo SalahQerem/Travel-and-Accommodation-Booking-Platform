@@ -1,16 +1,30 @@
 import StyledContainer from "@/containers/StyledContainer";
 import { selectCartItems } from "@/features/Cart";
 import { useAppSelector } from "@/store";
-import { Container, Typography } from "@mui/material";
+import { Container, Grid } from "@mui/material";
+import CartItem from "./components/CartItem";
+import CheckoutForm from "./components/CheckoutForm";
 
 const Checkout = () => {
   const cart = useAppSelector(selectCartItems);
 
-  console.log(cart);
+  const renderCart = cart.map((cartItem) => (
+    <Grid item key={cartItem.roomId} xs={12}>
+      <CartItem room={cartItem} />
+    </Grid>
+  ));
+
   return (
     <StyledContainer>
       <Container sx={{ py: 14 }}>
-        <Typography variant="h5">Checkout page</Typography>
+        <Grid container spacing={2}>
+          <Grid item container xs={5} spacing={2}>
+            {renderCart}
+          </Grid>
+          <Grid item xs={7}>
+            <CheckoutForm />
+          </Grid>
+        </Grid>
       </Container>
     </StyledContainer>
   );

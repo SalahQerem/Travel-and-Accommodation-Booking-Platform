@@ -1,7 +1,4 @@
 import Amenity from "@/components/Amenity";
-import { addToCart, selectIsItemInCart } from "@/features/Cart";
-import { useAppDispatch, useAppSelector } from "@/store";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import {
   Button,
   Card,
@@ -11,11 +8,13 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { Baby, UsersRound } from "lucide-react";
+import { Baby, UsersRound, X } from "lucide-react";
 import { FC } from "react";
-import { AvailableRoomProps } from "../types";
+import { CartItemProps } from "../types";
+import { useAppDispatch } from "@/store";
+import { removeFromCart } from "@/features/Cart";
 
-const AvailableRoom: FC<AvailableRoomProps> = ({ room }) => {
+const CartItem: FC<CartItemProps> = ({ room }) => {
   const {
     roomPhotoUrl,
     capacityOfAdults,
@@ -24,17 +23,12 @@ const AvailableRoom: FC<AvailableRoomProps> = ({ room }) => {
     roomAmenities,
     roomType,
     roomId,
-    roomNumber,
   } = room;
 
   const dispatch = useAppDispatch();
 
-  const isItemInCart = useAppSelector((state) =>
-    selectIsItemInCart(state, roomNumber)
-  );
-
-  const handleAddToCart = () => {
-    dispatch(addToCart(room));
+  const handleRemove = () => {
+    dispatch(removeFromCart(room));
   };
 
   const renderAmenities = roomAmenities.map((amenity) => (
@@ -95,15 +89,14 @@ const AvailableRoom: FC<AvailableRoomProps> = ({ room }) => {
           variant="contained"
           color="primary"
           sx={{ m: "auto" }}
-          endIcon={!isItemInCart && <AddShoppingCartIcon />}
-          onClick={handleAddToCart}
-          disabled={isItemInCart}
+          endIcon={<X />}
+          onClick={handleRemove}
         >
-          {isItemInCart ? "Already Added" : "Add to Cart"}
+          Remove
         </Button>
       </CardActions>
     </Card>
   );
 };
 
-export default AvailableRoom;
+export default CartItem;
