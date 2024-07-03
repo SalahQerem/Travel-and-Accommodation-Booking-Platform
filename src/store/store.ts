@@ -1,11 +1,12 @@
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import appSettingsReducer from "@/features/AppSettings/appSettingsSlice";
 import { configureStore } from "@reduxjs/toolkit";
-import { persistStore, persistReducer } from "redux-persist";
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import userReducer from "../features/User/userSlice";
-import snackbarReducer from "../features/Snackbar/snackbarSlice";
 import cartReducer from "../features/Cart/cartSlice";
+import searchQueryReducer from "../features/SearchQuery/searchQuerySlice";
+import snackbarReducer from "../features/Snackbar/snackbarSlice";
+import userReducer from "../features/User/userSlice";
 
 const persistedAppSettings = {
   key: "appSettings",
@@ -22,6 +23,7 @@ const saferStore = configureStore({
     cart: cartReducer,
     user: userReducer,
     snackbar: snackbarReducer,
+    searchQuery: searchQueryReducer,
     appSettings: persistedAppSettingsReducer,
   },
   //combine the reducers in the features file
