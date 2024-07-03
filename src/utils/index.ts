@@ -11,3 +11,11 @@ export const textSlicer = (text: string) => {
 
   return slicedText + "...";
 };
+
+export const formatCamelCaseText = (text: string): string => {
+  const capitalized = text.charAt(0).toUpperCase() + text.slice(1);
+
+  const formatted = capitalized.replace(/([A-Z])/g, " $1").trim();
+
+  return formatted;
+};

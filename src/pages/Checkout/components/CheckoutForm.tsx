@@ -1,5 +1,7 @@
 import AutoCompleteField from "@/components/Fields/AutoCompleteField";
 import TextField from "@/components/Fields/TextField";
+import { selectCartItems, selectCartItemsCount } from "@/features/Cart";
+import { useAppSelector } from "@/store";
 import { LoadingButton } from "@mui/lab";
 import { Card, Stack, Typography } from "@mui/material";
 import { Form, FormikProvider, useFormik } from "formik";
@@ -7,10 +9,8 @@ import { ChangeEvent, FC } from "react";
 import { InferType } from "yup";
 import { initialValues, paymentMethods } from "../constants";
 import { validationSchema } from "../formSchema";
-import { PaymentMethod } from "../types";
 import useAddBookingAPI from "../hooks/useAddBookingAPI";
-import { useAppSelector } from "@/store";
-import { selectCartItems, selectCartItemsCount } from "@/features/Cart";
+import { PaymentMethod } from "../types";
 
 type FormValues = InferType<typeof validationSchema>;
 
