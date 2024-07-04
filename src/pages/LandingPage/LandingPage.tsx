@@ -1,8 +1,8 @@
+import SearchForm from "@/components/SearchForm";
 import StyledContainer from "@/containers/StyledContainer";
 import { selectIsLoggedIn } from "@/features/User";
 import { useAppSelector } from "@/store";
 import { Container, Link, Stack, Typography } from "@mui/material";
-import SearchForm from "../SearchForReservations/components/SearchForm";
 import FeaturedDeals from "./components/FeaturedDeals";
 import RecentlyVisitedHotels from "./components/RecentlyVisitedHotels";
 import TrendingDestinations from "./components/TrendingDestinations";

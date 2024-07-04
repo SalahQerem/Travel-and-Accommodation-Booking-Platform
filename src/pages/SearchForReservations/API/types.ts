@@ -1,13 +1,6 @@
-export interface SearchForReservationsRequest {
-  checkInDate?: string;
-  checkOutDate?: string;
-  city?: string;
-  numberOfRooms?: number;
-  adults?: number;
-  children?: number;
-  sort?: string;
-  starRate?: number;
-}
+import { SearchState } from "@/features/SearchQuery/types";
+
+export interface SearchForReservationsRequest extends SearchState {}
 
 export interface Amenity {
   id: number;
