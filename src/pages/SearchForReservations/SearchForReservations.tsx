@@ -3,6 +3,7 @@ import StyledContainer from "@/containers/StyledContainer";
 import { Container, Grid } from "@mui/material";
 import Reservation from "./components/Reservation";
 import useSearchForReservationsAPI from "./hooks/useSearchForReservationsAPI";
+import routeHOC from "@/routes/HOCs/routeHOC";
 
 const SearchForReservations = () => {
   const { reservations, isFetching } = useSearchForReservationsAPI();
@@ -25,4 +26,9 @@ const SearchForReservations = () => {
   );
 };
 
-export default SearchForReservations;
+const withRouteHoC = routeHOC({
+  title: "Search",
+  pageAccessName: "SearchForReservations",
+});
+
+export default withRouteHoC(SearchForReservations);

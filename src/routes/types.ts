@@ -5,35 +5,14 @@ export interface PageAccessRight {
 }
 
 export type PageAccessName =
-  | "Dashboard"
-  | "MonitoringTools"
-  | "AddPayment"
   | "Home"
-  | "OrderList"
-  | "CustomerRegistration"
-  | "EmployeeRegistration"
-  | "Orders"
-  | "EmployeeList"
-  | "CustomersList"
-  | "AddAddress"
-  | "PaymentsList"
-  | "CustomerProfile"
-  | "Bottles"
-  | "ChangePersonalDetails"
-  | "EmployeeProfile"
-  | "ConfigurableConstants"
-  | "AddBottles"
-  | "ChangePassword"
-  | "ForgotPassword"
-  | "OrdersHistory"
-  | "PaymentsHistory"
-  | "ResetPassword"
-  | "ReturnBottles"
-  | "SuspendedCustomersList"
-  | "Coolers"
-  | "CoolerLog"
-  | "AddCooler"
-  | "Customer Coolers";
+  | "BookingConfirmation"
+  | "Checkout"
+  | "HotelDetails"
+  | "SearchForReservations"
+  | "Cities"
+  | "Hotels"
+  | "Rooms";
 
 export interface RouteConfigs {
   title: string;
