@@ -1,17 +1,13 @@
 import SearchForm from "@/components/SearchForm";
 import StyledContainer from "@/containers/StyledContainer";
-import { selectIsLoggedIn } from "@/features/User";
-import { useAppSelector } from "@/store";
+import routeHOC from "@/routes/HOCs/routeHOC";
 import { Container, Link, Stack, Typography } from "@mui/material";
 import FeaturedDeals from "./components/FeaturedDeals";
 import RecentlyVisitedHotels from "./components/RecentlyVisitedHotels";
 import TrendingDestinations from "./components/TrendingDestinations";
 import styles from "./style.module.css";
-import routeHOC from "@/routes/HOCs/routeHOC";
 
 const LandingPage = () => {
-  const isLoggedIn = useAppSelector(selectIsLoggedIn);
-
   return (
     <StyledContainer id="header" minHeight="auto">
       <Container sx={{ pt: 20 }}>
@@ -62,7 +58,7 @@ const LandingPage = () => {
       </Container>
       <FeaturedDeals />
       <TrendingDestinations />
-      {isLoggedIn && <RecentlyVisitedHotels />}
+      <RecentlyVisitedHotels />
     </StyledContainer>
   );
 };
