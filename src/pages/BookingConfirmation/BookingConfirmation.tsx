@@ -1,4 +1,5 @@
 import StyledContainer from "@/containers/StyledContainer";
+import routeHOC from "@/routes/HOCs/routeHOC";
 import { formatCamelCaseText } from "@/utils";
 import { getUrlQueryObj } from "@/utils/urlQueryParams";
 import {
@@ -63,4 +64,9 @@ const BookingConfirmation = () => {
   );
 };
 
-export default BookingConfirmation;
+const withRouteHoC = routeHOC({
+  title: "Booking Confirmation",
+  pageAccessName: "BookingConfirmation",
+});
+
+export default withRouteHoC(BookingConfirmation);

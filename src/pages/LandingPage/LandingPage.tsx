@@ -7,6 +7,7 @@ import FeaturedDeals from "./components/FeaturedDeals";
 import RecentlyVisitedHotels from "./components/RecentlyVisitedHotels";
 import TrendingDestinations from "./components/TrendingDestinations";
 import styles from "./style.module.css";
+import routeHOC from "@/routes/HOCs/routeHOC";
 
 const LandingPage = () => {
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
@@ -66,4 +67,9 @@ const LandingPage = () => {
   );
 };
 
-export default LandingPage;
+const withRouteHoC = routeHOC({
+  title: "Home",
+  pageAccessName: "Home",
+});
+
+export default withRouteHoC(LandingPage);

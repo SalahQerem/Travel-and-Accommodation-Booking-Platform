@@ -1,5 +1,6 @@
 import StyledContainer from "@/containers/StyledContainer";
 import { selectCartItems } from "@/features/Cart";
+import routeHOC from "@/routes/HOCs/routeHOC";
 import { useAppSelector } from "@/store";
 import { Container, Grid } from "@mui/material";
 import CartItem from "./components/CartItem";
@@ -30,4 +31,9 @@ const Checkout = () => {
   );
 };
 
-export default Checkout;
+const withRouteHoC = routeHOC({
+  title: "Checkout",
+  pageAccessName: "Checkout",
+});
+
+export default withRouteHoC(Checkout);

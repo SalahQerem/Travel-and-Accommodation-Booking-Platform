@@ -21,6 +21,7 @@ import useGetHotelGalaryAPI from "./hooks/useGetHotelGalaryAPI";
 import useGetHotelReviewsAPI from "./hooks/useGetHotelReviewsAPI";
 import useGetHotelRoomsAPI from "./hooks/useGetHotelRoomsAPI";
 import styles from "./styles.module.css";
+import routeHOC from "@/routes/HOCs/routeHOC";
 
 const HotelDetails = () => {
   const { hotelId } = useParams();
@@ -178,4 +179,9 @@ const HotelDetails = () => {
   );
 };
 
-export default HotelDetails;
+const withRouteHoC = routeHOC({
+  title: "Hotel Details",
+  pageAccessName: "HotelDetails",
+});
+
+export default withRouteHoC(HotelDetails);
