@@ -1,8 +1,11 @@
 import DateRangeField from "@/components/Fields/DateRangeField";
 import TextField from "@/components/Fields/TextField";
 import UpDownCounter from "@/components/Fields/UpDownCounter";
+import { setSearchQuery } from "@/features/SearchQuery/searchQuerySlice";
+import { selectSearchQuery } from "@/features/SearchQuery/selectors";
+import { SearchState } from "@/features/SearchQuery/types";
 import useMediaQuery from "@/hooks/useMediaQuery";
-import { getUrlQueryObj, getUrlQueryString } from "@/utils/urlQueryParams";
+import { useAppDispatch, useAppSelector } from "@/store";
 import { LoadingButton } from "@mui/lab";
 import {
   Autocomplete,
@@ -16,33 +19,32 @@ import {
 } from "@mui/material";
 import { Form, FormikProvider, useFormik } from "formik";
 import { Filter, Search, UsersRound } from "lucide-react";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { SearchForReservationsRequest } from "../API/types";
-import { counters, initialValues, sortOptions } from "../constants";
-import { validationSchema } from "../formSchema";
-import styles from "../styles.module.css";
-import { SearchFormProps } from "../types";
+import { counters, sortOptions } from "./constants";
+import { validationSchema } from "./formSchema";
+import styles from "./styles.module.css";
+import { SearchFormProps } from "./types";
 
-const SearchForm: FC<SearchFormProps> = ({ setSearchQuery, isFetching }) => {
-  const queryObj = getUrlQueryObj(new URL(location.href));
-
+const SearchForm: FC<SearchFormProps> = ({
+  isInSearchPage = false,
+  isFetching = false,
+}) => {
   const [isCountersBarOpen, setIsCountersBarOpen] = useState(false);
   const [isFiltersBarOpen, setIsFiltersBarOpen] = useState(false);
 
   const { isTabletOrLess } = useMediaQuery();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const searchQuery = useAppSelector(selectSearchQuery);
 
-  const onSubmit = (values: SearchForReservationsRequest) => {
-    if (setSearchQuery) setSearchQuery({ ...values });
-    else {
-      const urlPath = getUrlQueryString("/search", formikProps.values);
-      navigate(urlPath);
-    }
+  const onSubmit = (values: SearchState) => {
+    dispatch(setSearchQuery({ ...values }));
+    if (!isInSearchPage) navigate("/search");
   };
 
   const formikProps = useFormik({
-    initialValues: Object.keys(queryObj).length > 0 ? queryObj : initialValues,
+    initialValues: searchQuery,
     onSubmit,
     validationSchema,
   });
@@ -83,12 +85,6 @@ const SearchForm: FC<SearchFormProps> = ({ setSearchQuery, isFetching }) => {
       />
     </Stack>
   ));
-
-  useEffect(() => {
-    if (Object.keys(queryObj).length > 0 && setSearchQuery) {
-      setSearchQuery({ ...queryObj });
-    }
-  }, []);
 
   return (
     <Card sx={{ p: 3, maxWidth: "100%", overflow: "visible" }}>
