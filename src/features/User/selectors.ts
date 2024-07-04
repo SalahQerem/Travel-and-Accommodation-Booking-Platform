@@ -3,7 +3,7 @@ import { createSelector } from "@reduxjs/toolkit";
 
 export const selectUser = ({ user }: RootState) => user;
 
-export const selectUserType = ({ user }: RootState) => user.userType;
+export const selectUserRole = ({ user }: RootState) => user.userType;
 
 export const selectIsLoggedIn = createSelector(
   selectUser,
@@ -11,11 +11,11 @@ export const selectIsLoggedIn = createSelector(
 );
 
 export const selectIsAdmin = createSelector(
-  selectUserType,
+  selectUserRole,
   (role) => role === "Admin"
 );
 
 export const selectIsUser = createSelector(
-  selectUserType,
+  selectUserRole,
   (role) => role === "User"
 );
