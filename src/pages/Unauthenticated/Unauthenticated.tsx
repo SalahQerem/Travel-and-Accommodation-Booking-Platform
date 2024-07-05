@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 const Unauthenticated: FC = () => {
   const navigate = useNavigate();
 
-  const goToLoginPage = () => navigate("/auth/login");
+  const goToLoginPage = () => navigate("/");
 
   return (
     <Grid

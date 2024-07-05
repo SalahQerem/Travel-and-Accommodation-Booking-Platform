@@ -40,7 +40,7 @@ const SearchForm: FC<SearchFormProps> = ({
 
   const onSubmit = (values: SearchState) => {
     dispatch(setSearchQuery({ ...values }));
-    if (!isInSearchPage) navigate("/search");
+    if (!isInSearchPage) navigate("/me/search");
   };
 
   const formikProps = useFormik({
@@ -105,7 +105,7 @@ const SearchForm: FC<SearchFormProps> = ({
                 <TextField
                   name="city"
                   aria-label="Enter your Destination"
-                  placeholder="Where are you going?"
+                  placeholder="Where are you going ?"
                 />
               </Grid>
               <Grid item xs={12} md={6} lg={3.2}>

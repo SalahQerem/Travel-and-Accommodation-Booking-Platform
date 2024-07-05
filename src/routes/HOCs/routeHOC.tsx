@@ -22,8 +22,7 @@ const routeHOC =
 
       const hasAccess = pageAccessRight.role === userRole;
 
-      if (!hasAccess)
-        return <Navigate to="/auth/access-denied" replace={true} />;
+      if (!hasAccess) return <Navigate to="/access-denied" replace={true} />;
 
       return <Component {...props} />;
     };
