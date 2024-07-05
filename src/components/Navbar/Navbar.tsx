@@ -2,7 +2,8 @@ import fullLogo from "@/assets/images/full-logo.png";
 import { toggleThemeMode } from "@/features/AppSettings";
 import { selectThemeMode } from "@/features/AppSettings/selectors";
 import { selectCartItemsCount } from "@/features/Cart";
-import { logout, selectIsLoggedIn } from "@/features/User";
+import { logout } from "@/features/User";
+import useNavbarNavigationItems from "@/hooks/useNavbarNavigationItems";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { ShoppingCart } from "@mui/icons-material";
 import {
@@ -13,11 +14,10 @@ import {
   Container,
   Divider,
   Drawer,
-  MenuItem,
   Stack,
   Typography,
 } from "@mui/material";
-import { LogIn, LogOut, Menu } from "lucide-react";
+import { LogOut, Menu } from "lucide-react";
 import { FC, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -26,13 +26,13 @@ import ToggleColorMode from "./ToggleColorMode";
 
 const Navbar: FC = () => {
   const themeMode = useSelector(selectThemeMode);
-  const isLoggedIn = useAppSelector(selectIsLoggedIn);
   const cartItemsCount = useAppSelector(selectCartItemsCount);
+
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const { navigationItems } = useNavbarNavigationItems();
 
   const toggleDrawer = (newIsOpen: boolean) => () => {
     setIsDrawerOpen(newIsOpen);
@@ -44,6 +44,7 @@ const Navbar: FC = () => {
   };
 
   const scrollToSection = (sectionId: string) => {
+    navigate("/me");
     const sectionElement = document.getElementById(sectionId);
     const offset = 128;
     if (sectionElement) {
@@ -55,6 +56,16 @@ const Navbar: FC = () => {
       });
     }
   };
+
+  const renderNavigationsItems = navigationItems
+    .filter((item) => item.isVisible)
+    .map((item) => (
+      <StyledMenuItem onClick={() => scrollToSection(item.id)}>
+        <Typography variant="body2" color="text.primary">
+          {item.label}
+        </Typography>
+      </StyledMenuItem>
+    ));
 
   return (
     <AppBar
@@ -72,27 +83,7 @@ const Navbar: FC = () => {
               <img src={fullLogo} width="100px" alt="logo of safer" />
             </Link>
             <Box sx={{ display: { xs: "none", md: "flex" }, gap: 1, px: 3 }}>
-              <StyledMenuItem onClick={() => scrollToSection("features deals")}>
-                <Typography variant="body2" color="text.primary">
-                  Featured Deals
-                </Typography>
-              </StyledMenuItem>
-              <StyledMenuItem
-                onClick={() => scrollToSection("trending destinations")}
-              >
-                <Typography variant="body2" color="text.primary">
-                  Trending Destinations
-                </Typography>
-              </StyledMenuItem>
-              {isLoggedIn && (
-                <StyledMenuItem
-                  onClick={() => scrollToSection("recently visited hotels")}
-                >
-                  <Typography variant="body2" color="text.primary">
-                    Recently visited Hotels
-                  </Typography>
-                </StyledMenuItem>
-              )}
+              {renderNavigationsItems}
             </Box>
           </Stack>
           <Box
@@ -106,41 +97,25 @@ const Navbar: FC = () => {
               mode={themeMode}
               toggleColorMode={() => dispatch(toggleThemeMode())}
             />
-
-            {isLoggedIn ? (
-              <>
-                <Button
-                  size="small"
-                  sx={{ minWidth: "32px", height: "32px", p: "4px" }}
-                  component={Link}
-                  to={"/me/checkout"}
-                >
-                  <Badge badgeContent={cartItemsCount} color="primary">
-                    <ShoppingCart color="primary" />
-                  </Badge>
-                </Button>
-                <Button
-                  color="primary"
-                  variant="contained"
-                  size="small"
-                  onClick={Logout}
-                  endIcon={<LogOut size={20} />}
-                >
-                  Logout
-                </Button>
-              </>
-            ) : (
-              <Button
-                color="primary"
-                variant="contained"
-                size="small"
-                component={Link}
-                to={"/auth/login"}
-                endIcon={<LogIn size={20} />}
-              >
-                Login
-              </Button>
-            )}
+            <Button
+              size="small"
+              sx={{ minWidth: "32px", height: "32px", p: "4px" }}
+              component={Link}
+              to={"/me/checkout"}
+            >
+              <Badge badgeContent={cartItemsCount} color="primary">
+                <ShoppingCart color="primary" />
+              </Badge>
+            </Button>
+            <Button
+              color="primary"
+              variant="contained"
+              size="small"
+              onClick={Logout}
+              endIcon={<LogOut size={20} />}
+            >
+              Logout
+            </Button>
           </Box>
           <Box sx={{ display: { sm: "", md: "none" } }}>
             <Button
@@ -169,60 +144,37 @@ const Navbar: FC = () => {
                   direction="row"
                   justifyContent="end"
                   flexGrow={1}
-                  gap={2}
+                  gap={3}
+                  mb={2}
                 >
                   <ToggleColorMode
                     mode={themeMode}
                     toggleColorMode={() => dispatch(toggleThemeMode())}
                   />
-                  {isLoggedIn && (
-                    <Badge badgeContent={4} color="primary">
-                      <Button
-                        size="small"
-                        sx={{ minWidth: "32px", height: "32px", p: "4px" }}
-                        component={Link}
-                        to={"/me/checkout"}
-                      >
-                        <ShoppingCart color="primary" />
-                      </Button>
-                    </Badge>
-                  )}
-                </Stack>
-                <MenuItem onClick={() => scrollToSection("features deals")}>
-                  Featured Deals
-                </MenuItem>
-                <MenuItem
-                  onClick={() => scrollToSection("trending destinations")}
-                >
-                  Trending Destinations
-                </MenuItem>
-                <Divider />
-                {isLoggedIn ? (
-                  <MenuItem>
+
+                  <Badge badgeContent={4} color="primary">
                     <Button
-                      color="primary"
-                      variant="contained"
                       size="small"
-                      onClick={Logout}
-                      endIcon={<LogOut size={20} />}
-                    >
-                      Logout
-                    </Button>
-                  </MenuItem>
-                ) : (
-                  <MenuItem>
-                    <Button
-                      color="primary"
-                      variant="contained"
+                      sx={{ minWidth: "32px", height: "32px", p: "4px" }}
                       component={Link}
-                      to={"/auth/login"}
-                      endIcon={<LogIn size={20} />}
-                      fullWidth
+                      to={"/me/checkout"}
                     >
-                      Login
+                      <ShoppingCart color="primary" />
                     </Button>
-                  </MenuItem>
-                )}
+                  </Badge>
+                  <Button
+                    color="primary"
+                    variant="contained"
+                    size="small"
+                    onClick={Logout}
+                    endIcon={<LogOut size={20} />}
+                  >
+                    Logout
+                  </Button>
+                </Stack>
+                <Divider />
+                {renderNavigationsItems}
+                <Divider />
               </Box>
             </Drawer>
           </Box>

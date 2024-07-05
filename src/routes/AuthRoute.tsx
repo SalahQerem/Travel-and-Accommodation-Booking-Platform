@@ -13,7 +13,7 @@ const AuthRoute: FC<PropsWithChildren> = () => {
   if (!isLoggedIn)
     return (
       <Navigate
-        to="/auth/unauthenticated"
+        to="/unauthenticated"
         replace
         state={{ from: location.pathname }}
       />

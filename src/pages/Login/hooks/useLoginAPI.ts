@@ -29,7 +29,7 @@ const useLoginAPI = () => {
         "Authorization"
       ] = `Bearer ${authentication}`;
 
-      navigate("/");
+      navigate("/me");
     },
     onError: () => {
       showErrorSnackbar({ message: "Invalid Credentials" });

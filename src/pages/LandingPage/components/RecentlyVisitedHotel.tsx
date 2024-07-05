@@ -12,6 +12,7 @@ import dayjs from "dayjs";
 import { MapPin, University } from "lucide-react";
 import { FC } from "react";
 import { RecentlyVisitedHotelProps } from "../types";
+import { Link } from "react-router-dom";
 
 const RecentlyVisitedHotel: FC<RecentlyVisitedHotelProps> = ({ hotel }) => {
   const {
@@ -22,6 +23,7 @@ const RecentlyVisitedHotel: FC<RecentlyVisitedHotelProps> = ({ hotel }) => {
     visitDate,
     priceLowerBound,
     priceUpperBound,
+    hotelId,
   } = hotel;
 
   const visitedDay = dayjs(visitDate).format("YYYY-MM-DD");
@@ -88,6 +90,8 @@ const RecentlyVisitedHotel: FC<RecentlyVisitedHotelProps> = ({ hotel }) => {
           size="small"
           variant="contained"
           color="primary"
+          component={Link}
+          to={`hotel/${hotelId}`}
           sx={{ m: "auto" }}
         >
           Show more details
