@@ -39,7 +39,7 @@ const useNavbarNavigationItems = () => {
     },
   ];
 
-  return { navigationItems };
+  return { navigationItems: navigationItems.filter((item) => item.isVisible) };
 };
 
 export default useNavbarNavigationItems;

@@ -57,15 +57,13 @@ const Navbar: FC = () => {
     }
   };
 
-  const renderNavigationsItems = navigationItems
-    .filter((item) => item.isVisible)
-    .map((item) => (
-      <StyledMenuItem onClick={() => scrollToSection(item.id)}>
-        <Typography variant="body2" color="text.primary">
-          {item.label}
-        </Typography>
-      </StyledMenuItem>
-    ));
+  const renderNavigationsItems = navigationItems.map((item) => (
+    <StyledMenuItem onClick={() => scrollToSection(item.id)}>
+      <Typography variant="body2" color="text.primary">
+        {item.label}
+      </Typography>
+    </StyledMenuItem>
+  ));
 
   return (
     <AppBar
