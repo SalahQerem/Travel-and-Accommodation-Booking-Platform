@@ -20,3 +20,9 @@
   justify-content: center;
   border: 0;
 }
+
+.locationContainer {
+  height: 350px;
+  width: 100%;
+  padding: 0.5rem;
+}

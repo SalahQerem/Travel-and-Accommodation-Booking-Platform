@@ -112,6 +112,7 @@ const HotelDetails = () => {
                   popupLabel={hotel?.hotelName!}
                   longitude={hotel?.longitude!}
                   latitude={hotel?.latitude!}
+                  className={styles.locationContainer}
                 />
                 <Stack gap={1}>
                   <Typography component="h2" variant="h6">

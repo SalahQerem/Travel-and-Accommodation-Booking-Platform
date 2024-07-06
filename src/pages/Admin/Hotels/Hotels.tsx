@@ -5,7 +5,7 @@ import { useState } from "react";
 import { GetHotelsRequestQuery } from "./API/types";
 import useGetHotelsAPI from "./hooks/useGetHotelsAPI";
 import Hotel from "./components/Hotel";
-import { Container, Stack, Typography } from "@mui/material";
+import { Container, Grid, Stack, Typography } from "@mui/material";
 import { defaultRequestQuery } from "./constants";
 
 const Hotels = () => {
@@ -15,7 +15,9 @@ const Hotels = () => {
   const { hotels, isFetching } = useGetHotelsAPI(requestQuery);
 
   const renderHotels = hotels?.map((hotel) => (
-    <Hotel key={hotel.id} hotel={hotel} />
+    <Grid item xs={12} md={6} key={hotel.id}>
+      <Hotel hotel={hotel} />
+    </Grid>
   ));
 
   if (isFetching) return <BlockUI />;
@@ -27,7 +29,10 @@ const Hotels = () => {
           <Typography variant="h4" component="h1">
             Hotels
           </Typography>
-          {renderHotels}
+          <Grid container spacing={2}>
+            {" "}
+            {renderHotels}
+          </Grid>
         </Stack>
       </Container>
     </StyledContainer>

@@ -1,0 +1,11 @@
+.locationContainer {
+  height: 228px;
+  width: 228px;
+  padding: 0.5rem;
+}
+
+.hotelInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
