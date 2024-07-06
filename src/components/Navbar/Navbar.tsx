@@ -62,7 +62,10 @@ const Navbar: FC = () => {
   };
 
   const renderNavigationsItems = navigationItems.map((item) => (
-    <StyledMenuItem onClick={() => scrollToSection(item.id, !!item.to)}>
+    <StyledMenuItem
+      key={item.id}
+      onClick={() => scrollToSection(item.id, !!item.to)}
+    >
       {item.to ? (
         <NavLink to={item.to} className={styles.navLink}>
           <Typography variant="body2" color="text.primary">
