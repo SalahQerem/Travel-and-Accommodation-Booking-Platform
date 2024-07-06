@@ -1,7 +1,15 @@
+import PaginationPageSizeSelectMenu from "@/components/PaginationPageSizeSelectMenu";
 import BlockUI from "@/containers/BlockUI";
 import StyledContainer from "@/containers/StyledContainer";
 import routeHOC from "@/routes/HOCs/routeHOC";
-import { Container, Grid, Pagination, Stack, Typography } from "@mui/material";
+import {
+  Container,
+  Grid,
+  Pagination,
+  SelectChangeEvent,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { ChangeEvent, useState } from "react";
 import { GetHotelsRequestQuery } from "./API/types";
 import Hotel from "./components/Hotel";
@@ -18,6 +26,13 @@ const Hotels = () => {
     setRequestQuery({ ...requestQuery, pageNumber: value });
   };
 
+  const handleLimitChange = (event: SelectChangeEvent) => {
+    setRequestQuery({
+      ...requestQuery,
+      pageSize: parseInt(event.target.value),
+    });
+  };
+
   const renderHotels = hotels?.map((hotel) => (
     <Grid item xs={12} md={6} key={hotel.id}>
       <Hotel hotel={hotel} />
@@ -30,9 +45,21 @@ const Hotels = () => {
     <StyledContainer>
       <Container sx={{ pt: 14 }}>
         <Stack gap={2}>
-          <Typography variant="h4" component="h1">
-            Hotels
-          </Typography>
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Typography variant="h4" component="h1">
+              Hotels
+            </Typography>
+            <Stack>
+              <PaginationPageSizeSelectMenu
+                value={requestQuery.pageSize as any as string}
+                onChange={handleLimitChange}
+              />
+            </Stack>
+          </Stack>
           <Grid container spacing={2}>
             {renderHotels}
           </Grid>
