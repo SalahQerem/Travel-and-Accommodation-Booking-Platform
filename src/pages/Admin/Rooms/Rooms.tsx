@@ -1,7 +1,8 @@
+import StyledContainer from "@/containers/StyledContainer";
 import routeHOC from "@/routes/HOCs/routeHOC";
 
 const Rooms = () => {
-  return <div></div>;
+  return <StyledContainer></StyledContainer>;
 };
 
 const withRouteHoC = routeHOC({

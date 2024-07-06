@@ -2,7 +2,7 @@ import fullLogo from "@/assets/images/full-logo.png";
 import { toggleThemeMode } from "@/features/AppSettings";
 import { selectThemeMode } from "@/features/AppSettings/selectors";
 import { selectCartItemsCount } from "@/features/Cart";
-import { logout } from "@/features/User";
+import { logout, selectIsUser } from "@/features/User";
 import useNavbarNavigationItems from "@/hooks/useNavbarNavigationItems";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { ShoppingCart } from "@mui/icons-material";
@@ -20,13 +20,15 @@ import {
 import { LogOut, Menu } from "lucide-react";
 import { FC, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { StyledMenuItem, StyledToolbar } from "./StyledElements";
 import ToggleColorMode from "./ToggleColorMode";
+import styles from "./styles.module.css";
 
 const Navbar: FC = () => {
   const themeMode = useSelector(selectThemeMode);
   const cartItemsCount = useAppSelector(selectCartItemsCount);
+  const isUser = useAppSelector(selectIsUser);
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
@@ -43,8 +45,8 @@ const Navbar: FC = () => {
     navigate("/");
   };
 
-  const scrollToSection = (sectionId: string) => {
-    navigate("/me");
+  const scrollToSection = (sectionId: string, hasTo: boolean) => {
+    if (hasTo) return;
     const sectionElement = document.getElementById(sectionId);
     const offset = 128;
     if (sectionElement) {
@@ -54,14 +56,24 @@ const Navbar: FC = () => {
         top: targetScroll,
         behavior: "smooth",
       });
+    } else {
+      navigate("/me");
     }
   };
 
   const renderNavigationsItems = navigationItems.map((item) => (
-    <StyledMenuItem onClick={() => scrollToSection(item.id)}>
-      <Typography variant="body2" color="text.primary">
-        {item.label}
-      </Typography>
+    <StyledMenuItem onClick={() => scrollToSection(item.id, !!item.to)}>
+      {item.to ? (
+        <NavLink to={item.to} className={styles.navLink}>
+          <Typography variant="body2" color="text.primary">
+            {item.label}
+          </Typography>
+        </NavLink>
+      ) : (
+        <Typography variant="body2" color="text.primary">
+          {item.label}
+        </Typography>
+      )}
     </StyledMenuItem>
   ));
 
@@ -77,7 +89,7 @@ const Navbar: FC = () => {
       <Container>
         <StyledToolbar variant="regular">
           <Stack direction="row" flexGrow={1} ml={-1}>
-            <Link to={"/"}>
+            <Link to={isUser ? "/me" : "/me/hotels"}>
               <img src={fullLogo} width="100px" alt="logo of safer" />
             </Link>
             <Box sx={{ display: { xs: "none", md: "flex" }, gap: 1, px: 3 }}>
@@ -95,16 +107,18 @@ const Navbar: FC = () => {
               mode={themeMode}
               toggleColorMode={() => dispatch(toggleThemeMode())}
             />
-            <Button
-              size="small"
-              sx={{ minWidth: "32px", height: "32px", p: "4px" }}
-              component={Link}
-              to={"/me/checkout"}
-            >
-              <Badge badgeContent={cartItemsCount} color="primary">
-                <ShoppingCart color="primary" />
-              </Badge>
-            </Button>
+            {isUser && (
+              <Button
+                size="small"
+                component={Link}
+                to={"/me/checkout"}
+                className={styles.cartBtn}
+              >
+                <Badge badgeContent={cartItemsCount} color="primary">
+                  <ShoppingCart color="primary" />
+                </Badge>
+              </Button>
+            )}
             <Button
               color="primary"
               variant="contained"
@@ -121,7 +135,7 @@ const Navbar: FC = () => {
               color="primary"
               aria-label="menu"
               onClick={toggleDrawer(true)}
-              sx={{ minWidth: "30px", p: "4px" }}
+              className={styles.menuBtn}
             >
               <Menu />
             </Button>
@@ -153,7 +167,7 @@ const Navbar: FC = () => {
                   <Badge badgeContent={4} color="primary">
                     <Button
                       size="small"
-                      sx={{ minWidth: "32px", height: "32px", p: "4px" }}
+                      className={styles.cartBtn}
                       component={Link}
                       to={"/me/checkout"}
                     >

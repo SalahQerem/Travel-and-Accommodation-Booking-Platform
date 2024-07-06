@@ -1,0 +1,14 @@
+.cartBtn {
+  min-width: 32px;
+  height: 32px;
+  padding: 4px;
+}
+
+.menuBtn {
+  min-width: 30px;
+  padding: 10px;
+}
+
+.navLink {
+  text-decoration: none;
+}
