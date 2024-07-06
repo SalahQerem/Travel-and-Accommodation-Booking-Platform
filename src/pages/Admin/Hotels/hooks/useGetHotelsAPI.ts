@@ -3,20 +3,20 @@ import { AxiosBaseError } from "@/types/axios";
 import { extractErrorMessage } from "@/utils/errorHandling";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { GetHotelsRequestQuery, GetHotelsResponse } from "../API/types";
 import { getHotelsAPI } from "../API";
+import {
+  GetHotelsRequestQuery,
+  GetHotelsResponseWithTotalPagesCount,
+} from "../API/types";
 
 const useGetHotelsAPI = (requestQuery: GetHotelsRequestQuery) => {
   const { showErrorSnackbar } = useSnackBar();
 
-  const {
-    data: hotels,
-    error,
-    isFetching,
-  } = useQuery<GetHotelsResponse>({
-    queryKey: ["hotels", requestQuery],
-    queryFn: () => getHotelsAPI(requestQuery),
-  });
+  const { data, error, isFetching } =
+    useQuery<GetHotelsResponseWithTotalPagesCount>({
+      queryKey: ["hotels", requestQuery],
+      queryFn: () => getHotelsAPI(requestQuery),
+    });
 
   useEffect(() => {
     if (!error) return;
@@ -27,7 +27,11 @@ const useGetHotelsAPI = (requestQuery: GetHotelsRequestQuery) => {
     });
   }, [error]);
 
-  return { hotels, isFetching };
+  return {
+    hotels: data?.hotels,
+    TotalPageCount: data?.TotalPageCount,
+    isFetching,
+  };
 };
 
 export default useGetHotelsAPI;

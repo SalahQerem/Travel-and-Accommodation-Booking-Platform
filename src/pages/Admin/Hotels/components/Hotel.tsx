@@ -23,19 +23,19 @@ const Hotel: FC<HotelProps> = ({ hotel }) => {
           <Typography variant="h5" component="h2">
             {name}
           </Typography>
-          <Typography variant="h6" className={styles.hotelInfo}>
+          <Typography className={styles.hotelInfo}>
             <Typography variant="body2" component="span">
               Type:
             </Typography>
             {hotelType}
           </Typography>
-          <Typography variant="h6" className={styles.hotelInfo}>
+          <Rating value={starRating} />
+          <Typography>
             <Typography variant="body2" component="span">
-              Description:
+              Description:{" "}
             </Typography>
             {description}
           </Typography>
-          <Rating value={starRating} />
           <CardActions>
             <IconButton>
               <Trash color="#ee6b6e" />

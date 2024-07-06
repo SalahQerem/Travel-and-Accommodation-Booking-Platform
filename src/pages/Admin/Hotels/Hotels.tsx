@@ -1,18 +1,22 @@
 import BlockUI from "@/containers/BlockUI";
 import StyledContainer from "@/containers/StyledContainer";
 import routeHOC from "@/routes/HOCs/routeHOC";
-import { useState } from "react";
+import { Container, Grid, Pagination, Stack, Typography } from "@mui/material";
+import { ChangeEvent, useState } from "react";
 import { GetHotelsRequestQuery } from "./API/types";
-import useGetHotelsAPI from "./hooks/useGetHotelsAPI";
 import Hotel from "./components/Hotel";
-import { Container, Grid, Stack, Typography } from "@mui/material";
 import { defaultRequestQuery } from "./constants";
+import useGetHotelsAPI from "./hooks/useGetHotelsAPI";
 
 const Hotels = () => {
   const [requestQuery, setRequestQuery] =
     useState<GetHotelsRequestQuery>(defaultRequestQuery);
 
-  const { hotels, isFetching } = useGetHotelsAPI(requestQuery);
+  const { hotels, TotalPageCount, isFetching } = useGetHotelsAPI(requestQuery);
+
+  const handlePageChange = (_: ChangeEvent<unknown>, value: number) => {
+    setRequestQuery({ ...requestQuery, pageNumber: value });
+  };
 
   const renderHotels = hotels?.map((hotel) => (
     <Grid item xs={12} md={6} key={hotel.id}>
@@ -24,15 +28,21 @@ const Hotels = () => {
 
   return (
     <StyledContainer>
-      <Container sx={{ py: 14 }}>
+      <Container sx={{ pt: 14 }}>
         <Stack gap={2}>
           <Typography variant="h4" component="h1">
             Hotels
           </Typography>
           <Grid container spacing={2}>
-            {" "}
             {renderHotels}
           </Grid>
+        </Stack>
+        <Stack justifyContent="center" alignItems="center" my={5}>
+          <Pagination
+            count={TotalPageCount}
+            page={requestQuery.pageNumber}
+            onChange={handlePageChange}
+          />
         </Stack>
       </Container>
     </StyledContainer>

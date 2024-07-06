@@ -1,6 +1,6 @@
 .locationContainer {
   height: 228px;
-  width: 228px;
+  min-width: 228px;
   padding: 0.5rem;
 }
 

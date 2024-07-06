@@ -8,3 +8,10 @@ export interface NavigationItem {
   isVisible: boolean;
   to?: string;
 }
+
+export interface PaginationProps {
+  CurrentPage: number;
+  TotalPageCount: number;
+  TotalItemCount: number;
+  PageSize: number;
+}

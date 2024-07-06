@@ -10,6 +10,11 @@ export interface Hotel {
 
 export interface GetHotelsResponse extends Array<Hotel> {}
 
+export interface GetHotelsResponseWithTotalPagesCount {
+  hotels: Array<Hotel>;
+  TotalPageCount: number;
+}
+
 export interface GetHotelsRequestQuery {
   [index: string]: string | number;
   name: string;
