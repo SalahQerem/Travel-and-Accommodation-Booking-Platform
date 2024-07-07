@@ -1,8 +1,8 @@
-import { GetHotelsRequestQuery } from "./API/types";
-
-export const defaultRequestQuery: GetHotelsRequestQuery = {
+export const initialValues = {
   name: "",
-  searchQuery: "",
-  pageSize: 10,
-  pageNumber: 1,
+  description: "",
+  hotelType: 0,
+  starRating: 0,
+  latitude: 0,
+  longitude: 0,
 };

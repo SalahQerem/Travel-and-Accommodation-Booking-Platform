@@ -1,8 +1,11 @@
 import PaginationPageSizeSelectMenu from "@/components/PaginationPageSizeSelectMenu";
+import { defaultRequestQuery } from "@/constants";
 import BlockUI from "@/containers/BlockUI";
 import StyledContainer from "@/containers/StyledContainer";
 import routeHOC from "@/routes/HOCs/routeHOC";
+import { RequestQuery } from "@/types";
 import {
+  Button,
   Container,
   Grid,
   Pagination,
@@ -11,14 +14,15 @@ import {
   Typography,
 } from "@mui/material";
 import { ChangeEvent, useState } from "react";
-import { GetHotelsRequestQuery } from "./API/types";
+import AddHotelDialog from "./components/AddHotelDialog";
 import Hotel from "./components/Hotel";
-import { defaultRequestQuery } from "./constants";
 import useGetHotelsAPI from "./hooks/useGetHotelsAPI";
 
 const Hotels = () => {
+  const [isAddHotelDialogOpen, setIsAddHotelDialogOpen] =
+    useState<boolean>(false);
   const [requestQuery, setRequestQuery] =
-    useState<GetHotelsRequestQuery>(defaultRequestQuery);
+    useState<RequestQuery>(defaultRequestQuery);
 
   const { hotels, TotalPageCount, isFetching } = useGetHotelsAPI(requestQuery);
 
@@ -31,6 +35,13 @@ const Hotels = () => {
       ...requestQuery,
       pageSize: parseInt(event.target.value),
     });
+  };
+
+  const handleOpenAddHotelDialog = () => {
+    setIsAddHotelDialogOpen(true);
+  };
+  const handleCloseAddHotelDialog = () => {
+    setIsAddHotelDialogOpen(false);
   };
 
   const renderHotels = hotels?.map((hotel) => (
@@ -53,7 +64,14 @@ const Hotels = () => {
             <Typography variant="h4" component="h1">
               Hotels
             </Typography>
-            <Stack>
+            <Stack direction="row" gap={2}>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleOpenAddHotelDialog}
+              >
+                Add Hotel
+              </Button>
               <PaginationPageSizeSelectMenu
                 value={requestQuery.pageSize as any as string}
                 onChange={handleLimitChange}
@@ -71,6 +89,10 @@ const Hotels = () => {
             onChange={handlePageChange}
           />
         </Stack>
+        <AddHotelDialog
+          isOpen={isAddHotelDialogOpen}
+          onClose={handleCloseAddHotelDialog}
+        />
       </Container>
     </StyledContainer>
   );

@@ -15,10 +15,4 @@ export interface GetHotelsResponseWithTotalPagesCount {
   TotalPageCount: number;
 }
 
-export interface GetHotelsRequestQuery {
-  [index: string]: string | number;
-  name: string;
-  searchQuery: string;
-  pageNumber: number;
-  pageSize: number;
-}
+export interface AddHotelRequest {}

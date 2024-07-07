@@ -8,9 +8,9 @@ const PaginationPageSizeSelectMenu: FC<SelectProps> = ({ value, onChange }) => {
       value={value}
       onChange={onChange}
       sx={{
-        height: "56px",
+        height: "40px",
         textAlign: "center",
-        width: "100px",
+        width: "80px",
       }}
       MenuProps={{
         anchorOrigin: {

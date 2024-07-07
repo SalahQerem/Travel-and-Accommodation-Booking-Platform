@@ -15,3 +15,11 @@ export interface PaginationProps {
   TotalItemCount: number;
   PageSize: number;
 }
+
+export interface RequestQuery {
+  [index: string]: string | number;
+  name: string;
+  searchQuery: string;
+  pageNumber: number;
+  pageSize: number;
+}
