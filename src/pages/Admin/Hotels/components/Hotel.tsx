@@ -29,7 +29,7 @@ const Hotel: FC<HotelProps> = ({ hotel }) => {
             </Typography>
             {hotelType}
           </Typography>
-          <Rating value={starRating} />
+          <Rating value={starRating} readOnly />
           <Typography>
             <Typography variant="body2" component="span">
               Description:{" "}

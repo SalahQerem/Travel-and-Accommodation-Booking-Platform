@@ -1,16 +1,16 @@
-import PaginationPageSizeSelectMenu from "@/components/PaginationPageSizeSelectMenu";
-import { defaultRequestQuery } from "@/constants";
+import { defaultRequestQuery, paginationOptions } from "@/constants";
 import BlockUI from "@/containers/BlockUI";
 import StyledContainer from "@/containers/StyledContainer";
 import routeHOC from "@/routes/HOCs/routeHOC";
-import { RequestQuery } from "@/types";
+import { PaginationLimitOption, RequestQuery } from "@/types";
 import {
+  Autocomplete,
   Button,
   Container,
   Grid,
   Pagination,
-  SelectChangeEvent,
   Stack,
+  TextField,
   Typography,
 } from "@mui/material";
 import { ChangeEvent, useState } from "react";
@@ -30,11 +30,18 @@ const Hotels = () => {
     setRequestQuery({ ...requestQuery, pageNumber: value });
   };
 
-  const handleLimitChange = (event: SelectChangeEvent) => {
-    setRequestQuery({
-      ...requestQuery,
-      pageSize: parseInt(event.target.value),
-    });
+  const handleLimitChange = (
+    _: unknown,
+    newOption:
+      | NonNullable<string | PaginationLimitOption>
+      | (string | PaginationLimitOption)[]
+      | null
+  ) => {
+    if (newOption && typeof newOption !== "string" && !Array.isArray(newOption))
+      setRequestQuery({
+        ...requestQuery,
+        pageSize: newOption.value,
+      });
   };
 
   const handleOpenAddHotelDialog = () => {
@@ -72,9 +79,27 @@ const Hotels = () => {
               >
                 Add Hotel
               </Button>
-              <PaginationPageSizeSelectMenu
-                value={requestQuery.pageSize as any as string}
+              <Autocomplete
+                disablePortal
+                id="combo-box-demo"
+                options={paginationOptions}
                 onChange={handleLimitChange}
+                defaultValue={paginationOptions[1]}
+                value={{
+                  name: requestQuery.pageSize,
+                  value: requestQuery.pageSize,
+                }}
+                sx={{ width: 105 }}
+                getOptionLabel={(option) =>
+                  (option as PaginationLimitOption).name + ""
+                }
+                renderInput={(params) => (
+                  <TextField
+                    name="paginationLimit"
+                    placeholder="Limit"
+                    {...params}
+                  />
+                )}
               />
             </Stack>
           </Stack>

@@ -13,7 +13,7 @@ const Review: FC<ReviewProps> = ({ review }) => {
           justifyContent="space-between"
         >
           <Typography variant="h6">{customerName}</Typography>
-          <Rating value={rating} />
+          <Rating value={rating} readOnly />
         </Stack>
         <Typography variant="body1">{description}</Typography>
       </Stack>

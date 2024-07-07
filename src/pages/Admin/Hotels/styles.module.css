@@ -9,3 +9,9 @@
   align-items: center;
   gap: 10px;
 }
+
+.ratingPaper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

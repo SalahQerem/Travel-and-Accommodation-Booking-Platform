@@ -1,8 +1,13 @@
 export const initialValues = {
   name: "",
   description: "",
-  hotelType: 0,
+  hotelType: -1,
   starRating: 0,
-  latitude: 0,
-  longitude: 0,
+  latitude: 200,
+  longitude: 200,
+  city: {
+    id: "",
+    name: "",
+    description: "",
+  },
 };

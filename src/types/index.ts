@@ -23,3 +23,14 @@ export interface RequestQuery {
   pageNumber: number;
   pageSize: number;
 }
+
+export interface PaginationLimitOption {
+  name: number;
+  value: number;
+}
+
+export interface City {
+  id: number;
+  name: string;
+  description: string;
+}

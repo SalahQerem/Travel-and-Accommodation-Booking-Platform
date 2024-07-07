@@ -99,7 +99,7 @@ const HotelDetails = () => {
                   <Typography component="h1" variant="h5">
                     {hotel?.hotelName}
                   </Typography>
-                  <Rating value={hotel?.starRating} />
+                  <Rating value={hotel?.starRating} readOnly />
                 </Stack>
                 <Typography variant="body1">{hotel?.description}</Typography>
                 <Stack gap={1}>
