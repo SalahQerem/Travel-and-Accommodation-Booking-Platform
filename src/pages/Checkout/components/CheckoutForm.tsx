@@ -25,7 +25,7 @@ const CheckoutForm: FC = () => {
       roomType: cart[0].roomType,
       totalCost: cart[0].price,
       customerName: values.customerName,
-      paymentMethod: values.paymentMethod.value,
+      paymentMethod: values.paymentMethod.value!,
     });
   };
 
@@ -55,21 +55,23 @@ const CheckoutForm: FC = () => {
             <TextField name="state" placeholder="State" />
             <TextField name="city" placeholder="City" />
             <AutoCompleteField
-              name="paymentMethod"
+              name="payment"
               placeholder="Payment Method"
-              disablePortal
-              id="paymentMethod-autocomplete"
-              defaultValue={null}
               options={paymentMethods}
-              getOptionLabel={(option) => (option as PaymentMethod).name}
-              onChange={(_, value) => {
-                setFieldValue("paymentMethod", value);
+              value={values.paymentMethod ?? ""}
+              getOptionLabel={(option) => (option as PaymentMethod).name || ""}
+              onChange={(_, newValue) => {
+                setFieldValue("paymentMethod", newValue as PaymentMethod);
+                setFieldValue(
+                  "payment",
+                  (newValue as PaymentMethod)?.name ?? ""
+                );
               }}
             />
             <TextField
               name="cardNumber"
               placeholder="Card Number"
-              disabled={values.paymentMethod.value === "Cash"}
+              disabled={values.paymentMethod?.value === "Cash"}
               inputProps={{
                 maxLength: 19,
                 onChange: (e: ChangeEvent<HTMLInputElement>) => {
@@ -87,7 +89,7 @@ const CheckoutForm: FC = () => {
             <TextField
               name="CVV"
               placeholder="CVV"
-              disabled={values.paymentMethod.value === "Cash"}
+              disabled={values.paymentMethod?.value === "Cash"}
             />
             <TextField name="notes" placeholder="Notes" />
             <LoadingButton
