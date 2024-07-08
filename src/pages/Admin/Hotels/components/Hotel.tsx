@@ -15,7 +15,7 @@ import useDeleteHotelAPI from "../hooks/useDeleteHotelAPI";
 import styles from "../styles.module.css";
 import { HotelProps } from "../types";
 
-const Hotel: FC<HotelProps> = ({ hotel }) => {
+const Hotel: FC<HotelProps> = ({ hotel, handleUpdateHotel }) => {
   const { name, starRating, description, hotelType, latitude, longitude, id } =
     hotel;
 
@@ -24,6 +24,10 @@ const Hotel: FC<HotelProps> = ({ hotel }) => {
 
   const handleDelete = () => {
     deleteHotel({ hotelId: id, cityId: hotelDetails?.cityId! });
+  };
+
+  const handleUpdate = () => {
+    handleUpdateHotel(hotel);
   };
 
   return (
@@ -56,7 +60,7 @@ const Hotel: FC<HotelProps> = ({ hotel }) => {
             >
               <Trash color={isPending ? "transparent" : "#ee6b6e"} />
             </LoadingButton>
-            <IconButton>
+            <IconButton onClick={handleUpdate}>
               <FilePenLine color="black" />
             </IconButton>
           </CardActions>

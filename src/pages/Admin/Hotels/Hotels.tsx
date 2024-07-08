@@ -14,13 +14,19 @@ import {
   Typography,
 } from "@mui/material";
 import { ChangeEvent, useState } from "react";
+import { Hotel as HotelType } from "./API/types";
 import AddHotelDialog from "./components/AddHotelDialog";
 import Hotel from "./components/Hotel";
+import UpdateHotelDialog from "./components/UpdateHotelDialog";
+import { defaultHotel } from "./constants";
 import useGetHotelsAPI from "./hooks/useGetHotelsAPI";
 
 const Hotels = () => {
   const [isAddHotelDialogOpen, setIsAddHotelDialogOpen] =
     useState<boolean>(false);
+  const [isUpdateHotelDialogOpen, setIsUpdateHotelDialogOpen] =
+    useState<boolean>(false);
+  const [hotelToUpdate, setHotelToUpdate] = useState<HotelType>(defaultHotel);
   const [requestQuery, setRequestQuery] =
     useState<RequestQuery>(defaultRequestQuery);
 
@@ -52,9 +58,17 @@ const Hotels = () => {
     setIsAddHotelDialogOpen(false);
   };
 
+  const handleUpdateHotel = (hotel: HotelType) => {
+    setIsUpdateHotelDialogOpen(true);
+    setHotelToUpdate(hotel);
+  };
+  const handleCloseUpdateHotelDialog = () => {
+    setIsUpdateHotelDialogOpen(false);
+  };
+
   const renderHotels = hotels?.map((hotel) => (
     <Grid item xs={12} md={6} key={hotel.id}>
-      <Hotel hotel={hotel} />
+      <Hotel hotel={hotel} handleUpdateHotel={handleUpdateHotel} />
     </Grid>
   ));
 
@@ -119,6 +133,12 @@ const Hotels = () => {
           isOpen={isAddHotelDialogOpen}
           handleCloseAddHotelDialog={handleCloseAddHotelDialog}
           refetchHotels={refetchHotels}
+        />
+        <UpdateHotelDialog
+          isOpen={isUpdateHotelDialogOpen}
+          hotelToUpdate={hotelToUpdate}
+          refetchHotels={refetchHotels}
+          handleCloseUpdateHotelDialog={handleCloseUpdateHotelDialog}
         />
       </Container>
     </StyledContainer>

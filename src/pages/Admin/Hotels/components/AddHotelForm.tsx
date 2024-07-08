@@ -9,12 +9,12 @@ import { Plus } from "lucide-react";
 import { FC } from "react";
 import { InferType } from "yup";
 import useGetCitiesAPI from "../../Cities/hooks/useGetCitiesAPI";
-import { initialValues } from "../constants";
-import { validationSchema } from "../formSchema";
+import { addHotelInitialValues } from "../constants";
+import { addHotelValidationSchema } from "../formSchema";
 import useAddHotelAPI from "../hooks/useAddHotelAPI";
 import { AddHotelFormProps } from "../types";
 
-export type FormValuesTypes = InferType<typeof validationSchema>;
+type FormValuesTypes = InferType<typeof addHotelValidationSchema>;
 
 const AddHotelForm: FC<AddHotelFormProps> = ({
   refetchHotels,
@@ -30,10 +30,10 @@ const AddHotelForm: FC<AddHotelFormProps> = ({
     addHotel({ ...values, cityId: values.city.id! });
   };
 
-  const formikProps = useFormik<FormValuesTypes>({
-    initialValues,
+  const formikProps = useFormik({
+    initialValues: addHotelInitialValues,
     onSubmit,
-    validationSchema,
+    validationSchema: addHotelValidationSchema,
   });
 
   const { setFieldValue, values } = formikProps;
