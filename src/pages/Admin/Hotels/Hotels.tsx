@@ -13,7 +13,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { Plus } from "lucide-react";
+import { Plus, Search } from "lucide-react";
 import { ChangeEvent, useState } from "react";
 import { Hotel as HotelType } from "./API/types";
 import AddHotelDialog from "./components/AddHotelDialog";
@@ -28,6 +28,7 @@ const Hotels = () => {
   const [isUpdateHotelDialogOpen, setIsUpdateHotelDialogOpen] =
     useState<boolean>(false);
   const [hotelToUpdate, setHotelToUpdate] = useState<HotelType>(defaultHotel);
+  const [nameToSearch, setNameToSearch] = useState<string>("");
   const [requestQuery, setRequestQuery] =
     useState<RequestQuery>(defaultRequestQuery);
 
@@ -50,6 +51,10 @@ const Hotels = () => {
         ...requestQuery,
         pageSize: newOption.value,
       });
+  };
+
+  const handleSearchForHotel = () => {
+    setRequestQuery({ ...requestQuery, name: nameToSearch });
   };
 
   const handleOpenAddHotelDialog = () => {
@@ -88,6 +93,23 @@ const Hotels = () => {
               Hotels
             </Typography>
             <Stack direction="row" gap={2}>
+              <TextField
+                placeholder="Search by name"
+                value={nameToSearch}
+                onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                  if (event.target.value) setNameToSearch(event.target.value);
+                  else setRequestQuery({ ...requestQuery, name: "" });
+                }}
+              />
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleSearchForHotel}
+                disabled={requestQuery.name === nameToSearch}
+                endIcon={<Search />}
+              >
+                Search
+              </Button>
               <Button
                 variant="contained"
                 color="primary"

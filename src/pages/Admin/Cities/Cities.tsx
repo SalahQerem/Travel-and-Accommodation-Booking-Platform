@@ -72,9 +72,10 @@ const Cities = () => {
               <TextField
                 placeholder="Search by name"
                 value={nameToSearch}
-                onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                  setNameToSearch(event.target.value)
-                }
+                onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                  if (event.target.value) setNameToSearch(event.target.value);
+                  else setRequestQuery({ ...requestQuery, name: "" });
+                }}
               />
               <Button
                 variant="contained"
