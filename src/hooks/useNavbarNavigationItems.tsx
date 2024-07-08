@@ -23,15 +23,15 @@ const useNavbarNavigationItems = () => {
       isVisible: isUser,
     },
     {
-      id: "hotels",
-      label: "Manage Hotels",
-      to: "/me/hotels",
-      isVisible: isAdmin,
-    },
-    {
       id: "cities",
       label: "Manage Cities",
       to: "/me/cities",
+      isVisible: isAdmin,
+    },
+    {
+      id: "hotels",
+      label: "Manage Hotels",
+      to: "/me/hotels",
       isVisible: isAdmin,
     },
     {
