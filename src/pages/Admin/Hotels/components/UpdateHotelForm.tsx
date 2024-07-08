@@ -41,13 +41,19 @@ const UpdateHotelForm: FC<UpdateHotelFormProps> = ({
             </Typography>
             <Grid container spacing={2}>
               <Grid item xs={12} md={7}>
-                <TextField name="name" placeholder="Hotel name" fullWidth />
+                <TextField
+                  name="name"
+                  placeholder="Hotel name"
+                  label="Hotel name"
+                  fullWidth
+                />
               </Grid>
               <Grid item xs={12} sm={5}>
                 <TextField
                   name="hotelType"
                   type="string"
-                  placeholder="Hotel Type"
+                  placeholder="Hotel type"
+                  label="Hotel type"
                 />
               </Grid>
               <Grid item xs={12} sm={4}>
@@ -55,6 +61,7 @@ const UpdateHotelForm: FC<UpdateHotelFormProps> = ({
                   name="latitude"
                   type="number"
                   placeholder="Latitude"
+                  label="Latitude"
                 />
               </Grid>
               <Grid item xs={12} sm={4}>
@@ -62,6 +69,7 @@ const UpdateHotelForm: FC<UpdateHotelFormProps> = ({
                   name="longitude"
                   type="number"
                   placeholder="Longitude"
+                  label="Longitude"
                 />
               </Grid>
               <Grid item xs={12} sm={4}>
@@ -69,12 +77,14 @@ const UpdateHotelForm: FC<UpdateHotelFormProps> = ({
                   name="starRating"
                   type="number"
                   placeholder="Rating"
+                  label="Rating"
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   name="description"
                   placeholder="Description"
+                  label="Description"
                   fullWidth
                 />
               </Grid>
