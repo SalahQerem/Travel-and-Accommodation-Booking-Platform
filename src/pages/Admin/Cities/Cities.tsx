@@ -2,29 +2,41 @@ import { defaultRequestQuery } from "@/constants";
 import BlockUI from "@/containers/BlockUI";
 import StyledContainer from "@/containers/StyledContainer";
 import routeHOC from "@/routes/HOCs/routeHOC";
+import { City as CityType } from "@/types";
 import { Button, Container, Grid, Stack, Typography } from "@mui/material";
-import City from "./components/City";
-import useGetCitiesAPI from "./hooks/useGetCitiesAPI";
-import AddCityDialog from "./components/AddCityDialog";
 import { useState } from "react";
+import AddCityDialog from "./components/AddCityDialog";
+import City from "./components/City";
+import { defaultCity } from "./constants";
+import useGetCitiesAPI from "./hooks/useGetCitiesAPI";
 
 const Cities = () => {
-  const [isAddCityDialogOpen, setIsAddCityDialogOpen] =
+  const [isCityFormDialogOpen, setIsCityFormDialogOpen] =
     useState<boolean>(false);
+  const [cityToUpdate, setCityToUpdate] = useState<CityType>(defaultCity);
 
   const { cities, refetchCities, isFetching } =
     useGetCitiesAPI(defaultRequestQuery);
 
-  const handleOpenAddCityDialog = () => {
-    setIsAddCityDialogOpen(true);
+  const handleOpenCityFormDialog = () => {
+    setIsCityFormDialogOpen(true);
   };
-  const handleCloseAddCityDialog = () => {
-    setIsAddCityDialogOpen(false);
+  const handleCloseCityFormDialog = () => {
+    setIsCityFormDialogOpen(false);
+  };
+
+  const handleUpdateCity = (city: CityType) => {
+    setIsCityFormDialogOpen(true);
+    setCityToUpdate(city);
   };
 
   const renderCities = cities?.map((city) => (
     <Grid item xs={12} md={6} key={city.id}>
-      <City city={city} refetchCities={refetchCities} />
+      <City
+        city={city}
+        refetchCities={refetchCities}
+        handleUpdateCity={handleUpdateCity}
+      />
     </Grid>
   ));
 
@@ -45,7 +57,7 @@ const Cities = () => {
             <Button
               variant="contained"
               color="primary"
-              onClick={handleOpenAddCityDialog}
+              onClick={handleOpenCityFormDialog}
             >
               Add City
             </Button>
@@ -57,9 +69,10 @@ const Cities = () => {
         <Stack justifyContent="center" alignItems="center" my={5}></Stack>
       </Container>
       <AddCityDialog
-        isOpen={isAddCityDialogOpen}
+        isOpen={isCityFormDialogOpen}
+        cityToUpdate={cityToUpdate}
         refetchCities={refetchCities}
-        handleCloseAddCityDialog={handleCloseAddCityDialog}
+        handleCloseCityFormDialog={handleCloseCityFormDialog}
       />
     </StyledContainer>
   );

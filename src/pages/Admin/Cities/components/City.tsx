@@ -12,12 +12,16 @@ import { LoadingButton } from "@mui/lab";
 import useDeleteCityAPI from "../hooks/useDeleteCityAPI";
 import { FilePenLine, Trash } from "lucide-react";
 
-const City: FC<CityProps> = ({ city, refetchCities }) => {
+const City: FC<CityProps> = ({ city, refetchCities, handleUpdateCity }) => {
   const { deleteCity, isPending } = useDeleteCityAPI(refetchCities);
   const { id, name, description } = city;
 
   const handleDelete = () => {
     deleteCity({ id });
+  };
+
+  const handleUpdate = () => {
+    handleUpdateCity(city);
   };
 
   return (
@@ -38,7 +42,7 @@ const City: FC<CityProps> = ({ city, refetchCities }) => {
         >
           <Trash color={isPending ? "transparent" : "#ee6b6e"} />
         </LoadingButton>
-        <IconButton>
+        <IconButton onClick={handleUpdate}>
           <FilePenLine color="black" />
         </IconButton>
       </CardActions>

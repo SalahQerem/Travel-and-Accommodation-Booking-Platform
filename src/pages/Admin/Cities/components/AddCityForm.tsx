@@ -6,26 +6,36 @@ import { Button, Grid, Paper, Stack, Typography } from "@mui/material";
 import TextField from "@/components/Fields/TextField";
 import useAddCityAPI from "../hooks/useAddCityAPI";
 import { LoadingButton } from "@mui/lab";
-import { Plus } from "lucide-react";
+import { Check, Plus } from "lucide-react";
 import { FC } from "react";
 import { AddCityFormProps } from "../types";
+import useUpdateCityAPI from "../hooks/useUpdateCityAPI";
 
 type FormValuesTypes = InferType<typeof validationSchema>;
 
 const AddCityForm: FC<AddCityFormProps> = ({
+  cityToUpdate,
   refetchCities,
-  handleCloseAddCityDialog,
+  handleCloseCityFormDialog,
 }) => {
+  const isUpdateAction: boolean = !!cityToUpdate.id;
+
   const { addCity, isPending } = useAddCityAPI(
     refetchCities,
-    handleCloseAddCityDialog
+    handleCloseCityFormDialog
   );
+  const { updateCity, isUpdating } = useUpdateCityAPI(
+    refetchCities,
+    handleCloseCityFormDialog
+  );
+
   const onSubmit = (values: FormValuesTypes) => {
-    addCity({ ...values });
+    if (isUpdateAction) updateCity({ id: cityToUpdate.id, ...values });
+    else addCity({ ...values });
   };
 
   const formikProps = useFormik({
-    initialValues,
+    initialValues: isUpdateAction ? cityToUpdate : initialValues,
     onSubmit,
     validationSchema,
   });
@@ -53,15 +63,15 @@ const AddCityForm: FC<AddCityFormProps> = ({
               variant="contained"
               color="primary"
               type="submit"
-              endIcon={<Plus />}
-              loading={isPending}
+              endIcon={isUpdateAction ? <Check /> : <Plus />}
+              loading={isPending || isUpdating}
             >
-              Add
+              {isUpdateAction ? "Save" : "Add"}
             </LoadingButton>
             <Button
               variant="contained"
               color="warning"
-              onClick={handleCloseAddCityDialog}
+              onClick={handleCloseCityFormDialog}
             >
               Cancel
             </Button>

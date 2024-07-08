@@ -4,12 +4,10 @@ import {
   RefetchOptions,
   useMutation,
 } from "@tanstack/react-query";
-import { addCityAPI } from "../API";
-import { extractErrorMessage } from "@/utils/errorHandling";
-import { AxiosBaseError } from "@/types/axios";
 import { GetCitiesResponse } from "../API/types";
+import { updateCityAPI } from "../API";
 
-const useAddCityAPI = (
+const useUpdateCityAPI = (
   refetchCities: (
     options?: RefetchOptions
   ) => Promise<QueryObserverResult<GetCitiesResponse, Error>>,
@@ -17,23 +15,22 @@ const useAddCityAPI = (
 ) => {
   const { showSuccessSnackbar, showErrorSnackbar } = useSnackBar();
 
-  const { mutate: addCity, isPending } = useMutation({
-    mutationFn: addCityAPI,
+  const { mutate: updateCity, isPending } = useMutation({
+    mutationFn: updateCityAPI,
     onSuccess: () => {
-      showSuccessSnackbar({ message: "City Added Successfully" });
+      showSuccessSnackbar({ message: "City Updated Successfully" });
       handleCloseCityFormDialog();
       setTimeout(() => refetchCities(), 500);
     },
-    onError: (error) => {
-      const errorMessage = extractErrorMessage(error as AxiosBaseError);
-      showErrorSnackbar({ message: errorMessage });
+    onError: () => {
+      showErrorSnackbar({ message: "Can't update this City" });
     },
   });
 
   return {
-    addCity,
-    isPending,
+    updateCity,
+    isUpdating: isPending,
   };
 };
 
-export default useAddCityAPI;
+export default useUpdateCityAPI;

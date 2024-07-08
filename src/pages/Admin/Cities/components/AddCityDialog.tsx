@@ -5,21 +5,23 @@ import AddCityForm from "./AddCityForm";
 
 const AddCityDialog: FC<AddCityDialogProps> = ({
   isOpen,
+  cityToUpdate,
   refetchCities,
-  handleCloseAddCityDialog,
+  handleCloseCityFormDialog,
 }) => {
   return (
     <Dialog
       open={isOpen}
-      onClose={handleCloseAddCityDialog}
+      onClose={handleCloseCityFormDialog}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
       <DialogTitle>Add New City</DialogTitle>
       <DialogContent dividers>
         <AddCityForm
+          cityToUpdate={cityToUpdate}
           refetchCities={refetchCities}
-          handleCloseAddCityDialog={handleCloseAddCityDialog}
+          handleCloseCityFormDialog={handleCloseCityFormDialog}
         />
       </DialogContent>
     </Dialog>
