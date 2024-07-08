@@ -13,6 +13,7 @@ const useGetCitiesAPI = (requestQuery: RequestQuery) => {
   const {
     data: cities,
     error,
+    refetch,
     isFetching,
   } = useQuery<GetCitiesResponse>({
     queryKey: ["cities", requestQuery],
@@ -30,6 +31,7 @@ const useGetCitiesAPI = (requestQuery: RequestQuery) => {
 
   return {
     cities,
+    refetchCities: refetch,
     isFetching,
   };
 };

@@ -29,7 +29,7 @@ const useLoginAPI = () => {
         "Authorization"
       ] = `Bearer ${authentication}`;
 
-      if (payload.userType == "Admin") navigate("/me/hotels");
+      if (payload.userType == "Admin") navigate("/me/cities");
       else navigate("/me");
     },
     onError: () => {

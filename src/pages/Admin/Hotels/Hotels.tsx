@@ -13,6 +13,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { Plus } from "lucide-react";
 import { ChangeEvent, useState } from "react";
 import { Hotel as HotelType } from "./API/types";
 import AddHotelDialog from "./components/AddHotelDialog";
@@ -91,6 +92,7 @@ const Hotels = () => {
                 variant="contained"
                 color="primary"
                 onClick={handleOpenAddHotelDialog}
+                endIcon={<Plus />}
               >
                 Add Hotel
               </Button>
