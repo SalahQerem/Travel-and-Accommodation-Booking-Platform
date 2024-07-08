@@ -3,6 +3,7 @@ import {
   AddHotelRequest,
   DeleteHotelRequest,
   GetHotelsResponse,
+  UpdateHotelRequest,
 } from "./types";
 import { PaginationProps, QueryObj } from "@/types";
 import { getUrlQueryString } from "@/utils/urlQueryParams";
@@ -30,5 +31,10 @@ export const deleteHotelAPI = async (payload: DeleteHotelRequest) => {
   const res = await axiosInstance.delete(
     `/cities/${payload.cityId}/hotels/${payload.hotelId}`
   );
+  return res.data;
+};
+
+export const updateHotelAPI = async (payload: UpdateHotelRequest) => {
+  const res = await axiosInstance.put(`/hotels/${payload.id}`, payload);
   return res.data;
 };

@@ -23,3 +23,5 @@ export interface DeleteHotelRequest {
   cityId: string;
   hotelId: string;
 }
+
+export interface UpdateHotelRequest extends Hotel {}

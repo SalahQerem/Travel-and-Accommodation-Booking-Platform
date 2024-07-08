@@ -10,7 +10,7 @@ const useDeleteHotelAPI = () => {
     onSuccess: () => {
       showSuccessSnackbar({ message: "Hotel Deleted Successfully" });
     },
-    onError: (error) => {
+    onError: () => {
       showErrorSnackbar({ message: "Can't delete this Hotel" });
     },
   });

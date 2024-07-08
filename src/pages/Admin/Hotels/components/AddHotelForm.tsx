@@ -68,7 +68,7 @@ const AddHotelForm: FC<AddHotelFormProps> = ({
               <Grid item xs={12} sm={6} md={3}>
                 <TextField
                   name="hotelType"
-                  type="number"
+                  type="string"
                   placeholder="Hotel Type"
                 />
               </Grid>
