@@ -1,4 +1,6 @@
 import InteractiveMap from "@/components/InteractiveMap";
+import useGetHotelDetailsAPI from "@/pages/HotelDetails/hooks/useGetHotelDetailsAPI";
+import { LoadingButton } from "@mui/lab";
 import {
   Card,
   CardActions,
@@ -9,12 +11,20 @@ import {
 } from "@mui/material";
 import { FilePenLine, Trash } from "lucide-react";
 import { FC } from "react";
+import useDeleteHotelAPI from "../hooks/useDeleteHotelAPI";
 import styles from "../styles.module.css";
 import { HotelProps } from "../types";
 
 const Hotel: FC<HotelProps> = ({ hotel }) => {
-  const { name, starRating, description, hotelType, latitude, longitude } =
+  const { name, starRating, description, hotelType, latitude, longitude, id } =
     hotel;
+
+  const { deleteHotel, isPending } = useDeleteHotelAPI();
+  const { hotel: hotelDetails } = useGetHotelDetailsAPI(id);
+
+  const handleDelete = () => {
+    deleteHotel({ hotelId: id, cityId: hotelDetails?.cityId! });
+  };
 
   return (
     <Card sx={{ p: 2 }}>
@@ -32,14 +42,20 @@ const Hotel: FC<HotelProps> = ({ hotel }) => {
           <Rating value={starRating} readOnly />
           <Typography>
             <Typography variant="body2" component="span">
-              Description:{" "}
+              Description:
             </Typography>
             {description}
           </Typography>
           <CardActions>
-            <IconButton>
-              <Trash color="#ee6b6e" />
-            </IconButton>
+            <LoadingButton
+              variant="text"
+              color="error"
+              loading={isPending}
+              onClick={handleDelete}
+              sx={{ minWidth: 20 }}
+            >
+              <Trash color={isPending ? "transparent" : "#ee6b6e"} />
+            </LoadingButton>
             <IconButton>
               <FilePenLine color="black" />
             </IconButton>

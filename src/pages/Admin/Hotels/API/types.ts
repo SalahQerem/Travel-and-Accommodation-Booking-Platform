@@ -1,5 +1,5 @@
 export interface Hotel {
-  id: number;
+  id: string;
   name: string;
   description: string;
   hotelType: string;
@@ -17,4 +17,9 @@ export interface GetHotelsResponseWithTotalPagesCount {
 
 export interface AddHotelRequest extends Omit<Hotel, "id"> {
   cityId: string;
+}
+
+export interface DeleteHotelRequest {
+  cityId: string;
+  hotelId: string;
 }
