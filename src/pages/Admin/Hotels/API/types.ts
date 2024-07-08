@@ -2,7 +2,7 @@ export interface Hotel {
   id: number;
   name: string;
   description: string;
-  hotelType: number;
+  hotelType: string;
   starRating: number;
   latitude: number;
   longitude: number;
@@ -15,4 +15,6 @@ export interface GetHotelsResponseWithTotalPagesCount {
   TotalPageCount: number;
 }
 
-export interface AddHotelRequest {}
+export interface AddHotelRequest extends Omit<Hotel, "id"> {
+  cityId: string;
+}

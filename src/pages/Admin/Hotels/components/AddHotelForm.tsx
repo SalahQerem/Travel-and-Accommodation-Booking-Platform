@@ -6,21 +6,31 @@ import { LoadingButton } from "@mui/lab";
 import { Button, Grid, Paper, Stack, Typography } from "@mui/material";
 import { Form, FormikProvider, useFormik } from "formik";
 import { Plus } from "lucide-react";
+import { FC } from "react";
 import { InferType } from "yup";
 import useGetCitiesAPI from "../../Cities/hooks/useGetCitiesAPI";
 import { initialValues } from "../constants";
 import { validationSchema } from "../formSchema";
+import useAddHotelAPI from "../hooks/useAddHotelAPI";
+import { AddHotelFormProps } from "../types";
 
-type FormValues = InferType<typeof validationSchema>;
+export type FormValuesTypes = InferType<typeof validationSchema>;
 
-const AddHotelForm = () => {
+const AddHotelForm: FC<AddHotelFormProps> = ({
+  refetchHotels,
+  handleCloseAddHotelDialog,
+}) => {
   const { cities, isFetching } = useGetCitiesAPI(defaultRequestQuery);
+  const { addHotel, isPending } = useAddHotelAPI(
+    refetchHotels,
+    handleCloseAddHotelDialog
+  );
 
-  const onSubmit = (values: FormValues) => {
-    console.log(values);
+  const onSubmit = (values: FormValuesTypes) => {
+    addHotel({ ...values, cityId: values.city.id! });
   };
 
-  const formikProps = useFormik({
+  const formikProps = useFormik<FormValuesTypes>({
     initialValues,
     onSubmit,
     validationSchema,
@@ -37,17 +47,21 @@ const AddHotelForm = () => {
               Hotel Details
             </Typography>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={8}>
+              <Grid item xs={12} sm={7}>
                 <TextField name="name" placeholder="Hotel name" />
               </Grid>
-              <Grid item xs={12} sm={4}>
+              <Grid item xs={12} sm={5}>
                 <AutoCompleteField
-                  name="city"
+                  name="cityname"
                   placeholder="City"
                   options={cities ?? []}
                   getOptionLabel={(option) => (option as City).name || ""}
                   loading={isFetching}
-                  onChange={(_, newValue) => setFieldValue("city", newValue)}
+                  value={values.city}
+                  onChange={(_, newValue) => {
+                    setFieldValue("city", newValue);
+                    setFieldValue("cityname", (newValue as City)?.name ?? "");
+                  }}
                   sx={{ minWidth: "100%" }}
                 />
               </Grid>
@@ -56,7 +70,6 @@ const AddHotelForm = () => {
                   name="hotelType"
                   type="number"
                   placeholder="Hotel Type"
-                  value={values.hotelType === -1 ? "" : values.hotelType}
                 />
               </Grid>
               <Grid item xs={12} sm={6} md={3}>
@@ -80,7 +93,7 @@ const AddHotelForm = () => {
                   name="starRating"
                   type="number"
                   placeholder="Rating"
-                  value={values.starRating === 0 ? "" : values.starRating}
+                  value={values.starRating === -1 ? "" : values.starRating}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -94,10 +107,15 @@ const AddHotelForm = () => {
               color="primary"
               type="submit"
               endIcon={<Plus />}
+              loading={isPending}
             >
               Add
             </LoadingButton>
-            <Button variant="contained" color="warning">
+            <Button
+              variant="contained"
+              color="warning"
+              onClick={handleCloseAddHotelDialog}
+            >
               Cancel
             </Button>
           </Stack>

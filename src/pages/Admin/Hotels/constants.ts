@@ -1,8 +1,8 @@
 export const initialValues = {
   name: "",
   description: "",
-  hotelType: -1,
-  starRating: 0,
+  hotelType: "",
+  starRating: -1,
   latitude: 200,
   longitude: 200,
   city: {
@@ -10,4 +10,5 @@ export const initialValues = {
     name: "",
     description: "",
   },
+  cityname: "",
 };

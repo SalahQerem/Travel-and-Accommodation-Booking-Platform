@@ -10,7 +10,7 @@ import { GetHotelsResponseWithTotalPagesCount } from "../API/types";
 const useGetHotelsAPI = (requestQuery: RequestQuery) => {
   const { showErrorSnackbar } = useSnackBar();
 
-  const { data, error, isFetching } =
+  const { data, error, refetch, isFetching } =
     useQuery<GetHotelsResponseWithTotalPagesCount>({
       queryKey: ["hotels", requestQuery],
       queryFn: () => getHotelsAPI(requestQuery),
@@ -28,6 +28,7 @@ const useGetHotelsAPI = (requestQuery: RequestQuery) => {
   return {
     hotels: data?.hotels,
     TotalPageCount: data?.TotalPageCount,
+    refetchHotels: refetch,
     isFetching,
   };
 };

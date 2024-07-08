@@ -1,4 +1,5 @@
-import { Hotel } from "./API/types";
+import { QueryObserverResult, RefetchOptions } from "@tanstack/react-query";
+import { GetHotelsResponseWithTotalPagesCount, Hotel } from "./API/types";
 
 export interface HotelProps {
   hotel: Hotel;
@@ -6,5 +7,19 @@ export interface HotelProps {
 
 export interface AddHotelDialogProps {
   isOpen: boolean;
-  onClose: () => void;
+  handleCloseAddHotelDialog: () => void;
+  refetchHotels: (
+    options?: RefetchOptions
+  ) => Promise<
+    QueryObserverResult<GetHotelsResponseWithTotalPagesCount, Error>
+  >;
+}
+
+export interface AddHotelFormProps {
+  refetchHotels: (
+    options?: RefetchOptions
+  ) => Promise<
+    QueryObserverResult<GetHotelsResponseWithTotalPagesCount, Error>
+  >;
+  handleCloseAddHotelDialog: () => void;
 }

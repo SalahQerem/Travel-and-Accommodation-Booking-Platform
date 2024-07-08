@@ -24,7 +24,8 @@ const Hotels = () => {
   const [requestQuery, setRequestQuery] =
     useState<RequestQuery>(defaultRequestQuery);
 
-  const { hotels, TotalPageCount, isFetching } = useGetHotelsAPI(requestQuery);
+  const { hotels, TotalPageCount, refetchHotels, isFetching } =
+    useGetHotelsAPI(requestQuery);
 
   const handlePageChange = (_: ChangeEvent<unknown>, value: number) => {
     setRequestQuery({ ...requestQuery, pageNumber: value });
@@ -116,7 +117,8 @@ const Hotels = () => {
         </Stack>
         <AddHotelDialog
           isOpen={isAddHotelDialogOpen}
-          onClose={handleCloseAddHotelDialog}
+          handleCloseAddHotelDialog={handleCloseAddHotelDialog}
+          refetchHotels={refetchHotels}
         />
       </Container>
     </StyledContainer>

@@ -3,17 +3,24 @@ import { FC } from "react";
 import { AddHotelDialogProps } from "../types";
 import AddHotelForm from "./AddHotelForm";
 
-const AddHotelDialog: FC<AddHotelDialogProps> = ({ isOpen, onClose }) => {
+const AddHotelDialog: FC<AddHotelDialogProps> = ({
+  isOpen,
+  handleCloseAddHotelDialog,
+  refetchHotels,
+}) => {
   return (
     <Dialog
       open={isOpen}
-      onClose={onClose}
+      onClose={handleCloseAddHotelDialog}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
       <DialogTitle>Add New Hotel</DialogTitle>
       <DialogContent dividers>
-        <AddHotelForm />
+        <AddHotelForm
+          refetchHotels={refetchHotels}
+          handleCloseAddHotelDialog={handleCloseAddHotelDialog}
+        />
       </DialogContent>
     </Dialog>
   );

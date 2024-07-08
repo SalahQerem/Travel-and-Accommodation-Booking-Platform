@@ -30,7 +30,7 @@ export interface PaginationLimitOption {
 }
 
 export interface City {
-  id: number;
+  id: string;
   name: string;
   description: string;
 }
