@@ -1,21 +1,26 @@
 import { FC } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
-import { LocationProps } from "../types";
+import { LocationProps } from "./types";
 
-const Location: FC<LocationProps> = ({ latitude, longitude, hotelName }) => {
+const InteractiveMap: FC<LocationProps> = ({
+  latitude,
+  longitude,
+  popupLabel,
+  ...rest
+}) => {
   return (
     <MapContainer
       center={[latitude, longitude]}
       zoom={13}
       scrollWheelZoom={false}
-      style={{ height: "350px", width: "100%", padding: ".5rem" }}
+      {...rest}
     >
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       <Marker position={[latitude, longitude]}>
-        <Popup>{hotelName}</Popup>
+        <Popup>{popupLabel}</Popup>
       </Marker>
     </MapContainer>
   );
 };
 
-export default Location;
+export default InteractiveMap;

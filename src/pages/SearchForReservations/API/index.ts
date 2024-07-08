@@ -8,8 +8,10 @@ import { getUrlQueryString } from "@/utils/urlQueryParams";
 export const searchForReservationsAPI = async (
   searchPayload: SearchForReservationsRequest
 ) => {
-  const urlPath = getUrlQueryString("/home/search", searchPayload);
+  const requestUrl = getUrlQueryString("/home/search", searchPayload);
 
-  const res = await axiosInstance.get<SearchForReservationsResponse>(urlPath);
+  const res = await axiosInstance.get<SearchForReservationsResponse>(
+    requestUrl
+  );
   return res.data;
 };

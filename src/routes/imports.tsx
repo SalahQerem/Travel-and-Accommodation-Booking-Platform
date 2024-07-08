@@ -15,3 +15,6 @@ export const Checkout = lazy(() => import("@/pages/Checkout"));
 export const BookingConfirmation = lazy(
   () => import("@/pages/BookingConfirmation")
 );
+export const Hotels = lazy(() => import("@/pages/Admin/Hotels"));
+export const Cities = lazy(() => import("@/pages/Admin/Cities"));
+export const Rooms = lazy(() => import("@/pages/Admin/Rooms"));

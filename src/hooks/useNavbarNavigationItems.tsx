@@ -25,21 +25,24 @@ const useNavbarNavigationItems = () => {
     {
       id: "hotels",
       label: "Manage Hotels",
+      to: "/me/hotels",
       isVisible: isAdmin,
     },
     {
       id: "cities",
       label: "Manage Cities",
+      to: "/me/cities",
       isVisible: isAdmin,
     },
     {
       id: "rooms",
       label: "Manage Rooms",
+      to: "/me/rooms",
       isVisible: isAdmin,
     },
   ];
 
-  return { navigationItems };
+  return { navigationItems: navigationItems.filter((item) => item.isVisible) };
 };
 
 export default useNavbarNavigationItems;

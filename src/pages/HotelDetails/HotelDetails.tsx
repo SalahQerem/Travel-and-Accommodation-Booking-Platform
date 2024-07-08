@@ -1,6 +1,8 @@
 import Amenity from "@/components/Amenity";
+import InteractiveMap from "@/components/InteractiveMap";
 import BlockUI from "@/containers/BlockUI";
 import StyledContainer from "@/containers/StyledContainer";
+import routeHOC from "@/routes/HOCs/routeHOC";
 import {
   Button,
   Card,
@@ -14,14 +16,12 @@ import {
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import AvailableRoom from "./components/AvailableRoom";
-import Location from "./components/Location";
 import Review from "./components/Review";
 import useGetHotelDetailsAPI from "./hooks/useGetHotelDetailsAPI";
 import useGetHotelGalaryAPI from "./hooks/useGetHotelGalaryAPI";
 import useGetHotelReviewsAPI from "./hooks/useGetHotelReviewsAPI";
 import useGetHotelRoomsAPI from "./hooks/useGetHotelRoomsAPI";
 import styles from "./styles.module.css";
-import routeHOC from "@/routes/HOCs/routeHOC";
 
 const HotelDetails = () => {
   const { hotelId } = useParams();
@@ -99,7 +99,7 @@ const HotelDetails = () => {
                   <Typography component="h1" variant="h5">
                     {hotel?.hotelName}
                   </Typography>
-                  <Rating value={hotel?.starRating} />
+                  <Rating value={hotel?.starRating} readOnly />
                 </Stack>
                 <Typography variant="body1">{hotel?.description}</Typography>
                 <Stack gap={1}>
@@ -108,10 +108,11 @@ const HotelDetails = () => {
                   </Typography>
                   {renderAmenities}
                 </Stack>
-                <Location
-                  hotelName={hotel?.hotelName!}
+                <InteractiveMap
+                  popupLabel={hotel?.hotelName!}
                   longitude={hotel?.longitude!}
                   latitude={hotel?.latitude!}
+                  className={styles.locationContainer}
                 />
                 <Stack gap={1}>
                   <Typography component="h2" variant="h6">

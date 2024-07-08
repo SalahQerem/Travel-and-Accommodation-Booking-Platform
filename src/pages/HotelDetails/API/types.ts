@@ -13,7 +13,7 @@ export interface GetHotelDetailsResponse {
   starRating: number;
   availableRooms: number;
   imageUrl: string;
-  cityId: number;
+  cityId: string;
 }
 
 export interface GalaryItem {

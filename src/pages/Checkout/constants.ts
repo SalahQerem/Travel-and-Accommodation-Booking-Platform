@@ -13,6 +13,7 @@ export const initialValues = {
   expDate: "",
   CVV: "",
   notes: "",
+  payment: "",
 };
 
 export const paymentMethods: Array<PaymentMethod> = [

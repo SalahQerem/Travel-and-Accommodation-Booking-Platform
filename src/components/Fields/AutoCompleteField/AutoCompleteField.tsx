@@ -3,13 +3,12 @@ import TextField from "@mui/material/TextField";
 import { useField } from "formik";
 import { AutocompleteFieldProps, BaseAutoCompleteItem } from "./types";
 
-const AutocompleteField = <T extends BaseAutoCompleteItem>({
+const AutoCompleteField = <T extends BaseAutoCompleteItem>({
   name,
   placeholder,
   ...rest
 }: AutocompleteFieldProps<T>) => {
   const [field, meta] = useField<string>(name);
-
   const config: Omit<
     AutocompleteFieldProps<T>,
     "renderInput" | "placeholder"
@@ -46,4 +45,4 @@ const AutocompleteField = <T extends BaseAutoCompleteItem>({
   );
 };
 
-export default AutocompleteField;
+export default AutoCompleteField;
