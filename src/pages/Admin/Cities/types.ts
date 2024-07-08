@@ -4,6 +4,9 @@ import { GetCitiesResponse } from "./API/types";
 
 export interface CityProps {
   city: City;
+  refetchCities: (
+    options?: RefetchOptions
+  ) => Promise<QueryObserverResult<GetCitiesResponse, Error>>;
 }
 
 export interface AddCityDialogProps {

@@ -1,4 +1,4 @@
-export const addCityInitialValues = {
+export const initialValues = {
   name: "",
   description: "",
 };

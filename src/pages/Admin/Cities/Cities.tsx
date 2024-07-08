@@ -24,7 +24,7 @@ const Cities = () => {
 
   const renderCities = cities?.map((city) => (
     <Grid item xs={12} md={6} key={city.id}>
-      <City city={city} />
+      <City city={city} refetchCities={refetchCities} />
     </Grid>
   ));
 
@@ -42,15 +42,13 @@ const Cities = () => {
             <Typography variant="h4" component="h1">
               Cities
             </Typography>
-            <Stack direction="row" gap={2}>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleOpenAddCityDialog}
-              >
-                Add City
-              </Button>
-            </Stack>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleOpenAddCityDialog}
+            >
+              Add City
+            </Button>
           </Stack>
           <Grid container spacing={2}>
             {renderCities}

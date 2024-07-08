@@ -1,7 +1,7 @@
 import { axiosInstance } from "@/config/axios.config";
 import { QueryObj } from "@/types";
 import { getUrlQueryString } from "@/utils/urlQueryParams";
-import { AddCityRequest, GetCitiesResponse } from "./types";
+import { AddCityRequest, DeleteCityRequest, GetCitiesResponse } from "./types";
 
 export const getCitiesAPI = async (query: QueryObj) => {
   const requestUrl = getUrlQueryString("/cities", query);
@@ -12,5 +12,10 @@ export const getCitiesAPI = async (query: QueryObj) => {
 
 export const addCityAPI = async (payload: AddCityRequest) => {
   const res = await axiosInstance.post(`/cities`, payload);
+  return res.data;
+};
+
+export const deleteCityAPI = async (payload: DeleteCityRequest) => {
+  const res = await axiosInstance.delete(`/cities/${payload.id}`);
   return res.data;
 };

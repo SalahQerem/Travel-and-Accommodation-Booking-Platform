@@ -6,3 +6,7 @@ export interface AddCityRequest {
   name: string;
   description: string;
 }
+
+export interface DeleteCityRequest {
+  id: string;
+}

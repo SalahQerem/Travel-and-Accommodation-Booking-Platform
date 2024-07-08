@@ -1,7 +1,7 @@
 import { InferType } from "yup";
-import { addCityValidationSchema } from "../formSchema";
+import { validationSchema } from "../formSchema";
 import { Form, FormikProvider, useFormik } from "formik";
-import { addCityInitialValues } from "../constants";
+import { initialValues } from "../constants";
 import { Button, Grid, Paper, Stack, Typography } from "@mui/material";
 import TextField from "@/components/Fields/TextField";
 import useAddCityAPI from "../hooks/useAddCityAPI";
@@ -10,7 +10,7 @@ import { Plus } from "lucide-react";
 import { FC } from "react";
 import { AddCityFormProps } from "../types";
 
-type FormValuesTypes = InferType<typeof addCityValidationSchema>;
+type FormValuesTypes = InferType<typeof validationSchema>;
 
 const AddCityForm: FC<AddCityFormProps> = ({
   refetchCities,
@@ -25,9 +25,9 @@ const AddCityForm: FC<AddCityFormProps> = ({
   };
 
   const formikProps = useFormik({
-    initialValues: addCityInitialValues,
+    initialValues,
     onSubmit,
-    validationSchema: addCityValidationSchema,
+    validationSchema,
   });
 
   return (
