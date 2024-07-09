@@ -26,7 +26,7 @@ const useGetHotelsAPI = (requestQuery: RequestQuery) => {
   }, [error]);
 
   return {
-    hotels: data?.hotels,
+    hotels: data?.hotels ?? [],
     TotalPageCount: data?.TotalPageCount,
     refetchHotels: refetch,
     isFetching,

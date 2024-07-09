@@ -11,6 +11,7 @@ const useGetHotelRoomsAPI = (hotelId: string) => {
 
   const {
     data: rooms,
+    refetch: refetchRooms,
     isFetching,
     error,
   } = useQuery<GetHotelRoomsResponse>({
@@ -27,7 +28,7 @@ const useGetHotelRoomsAPI = (hotelId: string) => {
     });
   }, [error]);
 
-  return { rooms, isFetchingRooms: isFetching };
+  return { rooms, refetchRooms, isFetchingRooms: isFetching };
 };
 
 export default useGetHotelRoomsAPI;

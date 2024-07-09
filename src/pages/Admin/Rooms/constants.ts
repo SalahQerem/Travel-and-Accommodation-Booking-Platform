@@ -1,4 +1,5 @@
 import { Hotel } from "../Hotels/API/types";
+
 export const defaultSelectedHotel: Hotel = {
   id: "1",
   name: "Plaza",
@@ -7,4 +8,11 @@ export const defaultSelectedHotel: Hotel = {
   starRating: 0,
   latitude: 0,
   longitude: 0,
+};
+
+export const initialValues = {
+  hotelId: "",
+  hotel: { ...defaultSelectedHotel, id: "", name: "" },
+  roomNumber: "",
+  cost: 0,
 };

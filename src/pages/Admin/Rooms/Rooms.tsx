@@ -18,17 +18,31 @@ import useGetHotelsAPI from "../Hotels/hooks/useGetHotelsAPI";
 import { defaultSelectedHotel } from "./constants";
 import useGetHotelRoomsAPI from "./hooks/useGetHotelRoomsAPI";
 import Room from "./components/Room";
+import AddRoomDialog from "./components/AddRoomDialog";
 
 const Rooms = () => {
+  const [isAddRoomDialogOpen, setIsAddRoomDialogOpen] =
+    useState<boolean>(false);
+
   const { hotels, isFetching } = useGetHotelsAPI({
     ...defaultRequestQuery,
     pageSize: 200,
   });
+
   const [selectedHotel, setSelectedHotel] = useState<Hotel>(
     hotels?.at(0) ?? defaultSelectedHotel
   );
 
-  const { rooms, isFetchingRooms } = useGetHotelRoomsAPI(selectedHotel.id);
+  const { rooms, refetchRooms, isFetchingRooms } = useGetHotelRoomsAPI(
+    selectedHotel.id
+  );
+
+  const handleOpenAddRoomDialog = () => {
+    setIsAddRoomDialogOpen(true);
+  };
+  const handleCloseAddRoomDialog = () => {
+    setIsAddRoomDialogOpen(false);
+  };
 
   const handleSelectHotel = (
     _: unknown,
@@ -78,7 +92,7 @@ const Rooms = () => {
             <Button
               variant="contained"
               color="primary"
-              // onClick={handleOpenAddHotelDialog}
+              onClick={handleOpenAddRoomDialog}
               endIcon={<Plus />}
             >
               Add Room
@@ -89,6 +103,12 @@ const Rooms = () => {
           </Grid>
         </Stack>
       </Container>
+      <AddRoomDialog
+        isOpen={isAddRoomDialogOpen}
+        hotels={hotels}
+        refetchRooms={refetchRooms}
+        handleCloseAddRoomDialog={handleCloseAddRoomDialog}
+      />
     </StyledContainer>
   );
 };
