@@ -1,7 +1,4 @@
-export interface Amenity {
-  name: string;
-  description: string;
-}
+import { Amenity, Room } from "@/types";
 
 export interface GetHotelDetailsResponse {
   hotelName: string;
@@ -31,17 +28,5 @@ export interface Review {
 }
 
 export interface GetHotelReviewsResponse extends Array<Review> {}
-
-export interface Room {
-  roomId: number;
-  roomNumber: string;
-  roomPhotoUrl: string;
-  roomType: string;
-  capacityOfAdults: number;
-  capacityOfChildren: number;
-  roomAmenities: Array<Amenity>;
-  price: number;
-  availability: boolean;
-}
 
 export interface GetHotelRoomsResponse extends Array<Room> {}

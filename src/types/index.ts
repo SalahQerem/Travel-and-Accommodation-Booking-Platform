@@ -34,3 +34,20 @@ export interface City {
   name: string;
   description: string;
 }
+
+export interface Amenity {
+  name: string;
+  description: string;
+}
+
+export interface Room {
+  roomId: number;
+  roomNumber: string;
+  roomPhotoUrl: string;
+  roomType: string;
+  capacityOfAdults: number;
+  capacityOfChildren: number;
+  roomAmenities: Array<Amenity>;
+  price: number;
+  availability: boolean;
+}
