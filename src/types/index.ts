@@ -41,7 +41,7 @@ export interface Amenity {
 }
 
 export interface Room {
-  roomId: number;
+  roomId: string;
   roomNumber: string;
   roomPhotoUrl: string;
   roomType: string;

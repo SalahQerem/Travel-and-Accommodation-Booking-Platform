@@ -30,7 +30,7 @@ const Rooms = () => {
   });
 
   const [selectedHotel, setSelectedHotel] = useState<Hotel>(
-    hotels?.at(0) ?? defaultSelectedHotel
+    hotels[0] ?? defaultSelectedHotel
   );
 
   const { rooms, refetchRooms, isFetchingRooms } = useGetHotelRoomsAPI(
@@ -54,7 +54,7 @@ const Rooms = () => {
 
   const renderRooms = rooms?.map((room) => (
     <Grid item key={room.roomId} xs={12} sm={6} md={4}>
-      <Room room={room} />
+      <Room room={room} selectedHotelId={selectedHotel.id} />
     </Grid>
   ));
 

@@ -7,3 +7,8 @@ export interface AddRoomRequest {
   roomNumber: string;
   cost: number;
 }
+
+export interface DeleteRoomRequest {
+  hotelId: string;
+  roomId: string;
+}

@@ -5,6 +5,7 @@ import { Hotel } from "../Hotels/API/types";
 
 export interface RoomProps {
   room: Room;
+  selectedHotelId: string;
 }
 
 export interface AddRoomDialogProps {
