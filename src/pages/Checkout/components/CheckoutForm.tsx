@@ -57,6 +57,7 @@ const CheckoutForm: FC = () => {
             <AutoCompleteField
               name="payment"
               placeholder="Payment Method"
+              size="small"
               options={paymentMethods}
               value={values.paymentMethod ?? ""}
               getOptionLabel={(option) => (option as PaymentMethod).name || ""}

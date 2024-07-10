@@ -618,6 +618,7 @@ const getSaferTheme = (mode: PaletteMode): ThemeOptions => {
             },
             "& .MuiInputBase-input": {
               boxSizing: "border-box",
+              height: "100%",
               "&::placeholder": {
                 opacity: 0.7,
               },

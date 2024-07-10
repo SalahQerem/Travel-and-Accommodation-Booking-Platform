@@ -125,6 +125,7 @@ const Hotels = () => {
             <Stack direction="row" gap={2}>
               <TextField
                 placeholder="Search by name"
+                size="small"
                 value={nameToSearch}
                 onChange={(event: ChangeEvent<HTMLInputElement>) => {
                   if (event.target.value) setNameToSearch(event.target.value);
@@ -150,10 +151,10 @@ const Hotels = () => {
               </Button>
               <Autocomplete
                 disablePortal
-                id="combo-box-demo"
                 options={paginationOptions}
                 onChange={handleLimitChange}
                 defaultValue={paginationOptions[1]}
+                size="small"
                 value={{
                   name: requestQuery.pageSize,
                   value: requestQuery.pageSize,
@@ -166,6 +167,7 @@ const Hotels = () => {
                   <TextField
                     name="paginationLimit"
                     placeholder="Limit"
+                    label="Limit"
                     {...params}
                   />
                 )}
