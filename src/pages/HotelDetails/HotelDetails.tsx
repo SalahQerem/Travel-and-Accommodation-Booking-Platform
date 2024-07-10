@@ -3,6 +3,7 @@ import InteractiveMap from "@/components/InteractiveMap";
 import BlockUI from "@/containers/BlockUI";
 import StyledContainer from "@/containers/StyledContainer";
 import routeHOC from "@/routes/HOCs/routeHOC";
+import useGetHotelDetailsAPI from "@/services/useGetHotelDetailsAPI";
 import {
   Button,
   Card,
@@ -17,7 +18,6 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import AvailableRoom from "./components/AvailableRoom";
 import Review from "./components/Review";
-import useGetHotelDetailsAPI from "./hooks/useGetHotelDetailsAPI";
 import useGetHotelGalaryAPI from "./hooks/useGetHotelGalaryAPI";
 import useGetHotelReviewsAPI from "./hooks/useGetHotelReviewsAPI";
 import useGetHotelRoomsAPI from "./hooks/useGetHotelRoomsAPI";

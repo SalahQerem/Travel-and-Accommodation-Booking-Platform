@@ -1,12 +1,12 @@
 import AutoCompleteField from "@/components/Fields/AutoCompleteField";
 import TextField from "@/components/Fields/TextField";
+import { Hotel } from "@/types";
 import { LoadingButton } from "@mui/lab";
 import { Button, Grid, Paper, Stack, Typography } from "@mui/material";
 import { Form, FormikProvider, useFormik } from "formik";
 import { Plus } from "lucide-react";
 import { FC } from "react";
 import { InferType } from "yup";
-import { Hotel } from "../../Hotels/API/types";
 import { initialValues } from "../constants";
 import { validationSchema } from "../formSchema";
 import useAddRoomAPI from "../hooks/useAddRoomAPI";

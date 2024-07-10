@@ -1,17 +1,4 @@
-import { Amenity, Room } from "@/types";
-
-export interface GetHotelDetailsResponse {
-  hotelName: string;
-  location: string;
-  description: string;
-  latitude: number;
-  longitude: number;
-  amenities: Array<Amenity>;
-  starRating: number;
-  availableRooms: number;
-  imageUrl: string;
-  cityId: string;
-}
+import { Room } from "@/types";
 
 export interface GalaryItem {
   id: string;

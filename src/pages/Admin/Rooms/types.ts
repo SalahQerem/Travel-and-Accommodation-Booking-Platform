@@ -1,8 +1,7 @@
-import { Room } from "@/types";
+import { Hotel, Room } from "@/types";
 import { QueryObserverResult, RefetchOptions } from "@tanstack/react-query";
-import { GetHotelRoomsResponse } from "./API/types";
-import { Hotel } from "../Hotels/API/types";
 import { Dispatch, SetStateAction } from "react";
+import { GetHotelRoomsResponse } from "./API/types";
 
 export interface RoomProps {
   room: Room;

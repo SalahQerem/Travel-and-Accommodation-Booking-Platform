@@ -1,18 +1,10 @@
 import { axiosInstance } from "@/config/axios.config";
 import dayjs from "dayjs";
 import {
-  GetHotelDetailsResponse,
   GetHotelGalaryResponse,
   GetHotelReviewsResponse,
   GetHotelRoomsResponse,
 } from "./types";
-
-export const getHotelDetailsAPI = async (hotelId: string) => {
-  const res = await axiosInstance.get<GetHotelDetailsResponse>(
-    `/hotels/${hotelId}`
-  );
-  return res.data;
-};
 
 export const getHotelGalaryAPI = async (hotelId: string) => {
   const res = await axiosInstance.get<GetHotelGalaryResponse>(

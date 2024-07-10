@@ -1,6 +1,6 @@
+import { GetCitiesResponse } from "@/services/API/types";
 import { City } from "@/types";
 import { QueryObserverResult, RefetchOptions } from "@tanstack/react-query";
-import { GetCitiesResponse } from "./API/types";
 
 export interface CityProps {
   city: City;

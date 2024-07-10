@@ -1,7 +1,10 @@
+import ConfirmActionDialog from "@/components/ConfirmActionDialog";
 import { defaultRequestQuery } from "@/constants";
 import BlockUI from "@/containers/BlockUI";
 import StyledContainer from "@/containers/StyledContainer";
 import routeHOC from "@/routes/HOCs/routeHOC";
+import useGetHotelsAPI from "@/services/useGetHotelsAPI";
+import { Hotel } from "@/types";
 import {
   Autocomplete,
   Button,
@@ -13,14 +16,11 @@ import {
 } from "@mui/material";
 import { Plus } from "lucide-react";
 import { useState } from "react";
-import { Hotel } from "../Hotels/API/types";
-import useGetHotelsAPI from "../Hotels/hooks/useGetHotelsAPI";
-import { defaultRoom, defaultSelectedHotel } from "./constants";
-import useGetHotelRoomsAPI from "./hooks/useGetHotelRoomsAPI";
-import Room from "./components/Room";
 import AddRoomDialog from "./components/AddRoomDialog";
-import ConfirmActionDialog from "@/components/ConfirmActionDialog";
+import Room from "./components/Room";
+import { defaultRoom, defaultSelectedHotel } from "./constants";
 import useDeleteRoomAPI from "./hooks/useDeleteRoomAPI";
+import useGetHotelRoomsAPI from "./hooks/useGetHotelRoomsAPI";
 
 const Rooms = () => {
   const [isAddRoomDialogOpen, setIsAddRoomDialogOpen] =

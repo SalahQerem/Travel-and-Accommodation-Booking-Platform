@@ -1,4 +1,4 @@
-import { Hotel } from "../Hotels/API/types";
+import { Hotel } from "@/types";
 
 export const defaultSelectedHotel: Hotel = {
   id: "1",
