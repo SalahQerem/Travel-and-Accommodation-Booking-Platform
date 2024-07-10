@@ -85,7 +85,10 @@ const Hotels = () => {
 
   const { hotels, TotalPageCount, refetchHotels, isFetching } =
     useGetHotelsAPI(requestQuery);
-  const { deleteHotel, isPending } = useDeleteHotelAPI(refetchHotels);
+  const { deleteHotel, isPending } = useDeleteHotelAPI(
+    refetchHotels,
+    handleCloseConfirmDeleteDialog
+  );
   const { hotel: hotelDetails } = useGetHotelDetailsAPI(hotelToDelete.id);
 
   const handleDelete = () => {
