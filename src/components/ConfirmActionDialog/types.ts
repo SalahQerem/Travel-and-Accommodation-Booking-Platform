@@ -6,8 +6,8 @@ export interface DialogAction extends LoadingButtonProps {
 
 export interface ConfirmDialogProps {
   isOpen: boolean;
-  handleClose: () => void;
   title: string;
   description: string;
   actions: DialogAction[];
+  handleClose: () => void;
 }

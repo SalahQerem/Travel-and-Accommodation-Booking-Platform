@@ -1,6 +1,5 @@
-import { IconButton, Stack } from "@mui/material";
+import { IconButton, Stack, TextField } from "@mui/material";
 import { Minus, Plus } from "lucide-react";
-import NumericInput from "../NumericField";
 import { FC } from "react";
 import { UpDownCounterProps } from "./types";
 
@@ -19,12 +18,19 @@ const UpDownCounter: FC<UpDownCounterProps> = ({
       >
         <Minus />
       </IconButton>
-      <NumericInput
-        max={max}
-        min={min}
-        onChange={(e) => onChange(parseInt(e.target.value, 10))}
+      <TextField
+        name="latitude"
+        type="number"
+        placeholder="Latitude"
         value={value}
+        onChange={(e) => onChange(parseInt(e.target.value, 10))}
         sx={{ width: 50 }}
+        inputProps={{
+          inputMode: "numeric",
+          pattern: "[0-9]*",
+          "aria-valuemax": max,
+          "aria-valuemin": min,
+        }}
       />
       <IconButton
         color="primary"
