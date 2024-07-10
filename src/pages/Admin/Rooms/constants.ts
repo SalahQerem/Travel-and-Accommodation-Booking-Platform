@@ -16,3 +16,8 @@ export const initialValues = {
   roomNumber: "",
   cost: 0,
 };
+
+export const defaultRoom = {
+  id: "",
+  name: "",
+};

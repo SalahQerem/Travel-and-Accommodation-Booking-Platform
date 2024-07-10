@@ -1,6 +1,6 @@
 import Amenity from "@/components/Amenity";
-import { LoadingButton } from "@mui/lab";
 import {
+  Button,
   Card,
   CardActions,
   CardContent,
@@ -10,10 +10,13 @@ import {
 } from "@mui/material";
 import { Baby, Trash, UsersRound } from "lucide-react";
 import { FC } from "react";
-import useDeleteRoomAPI from "../hooks/useDeleteRoomAPI";
 import { RoomProps } from "../types";
 
-const Room: FC<RoomProps> = ({ room, selectedHotelId }) => {
+const Room: FC<RoomProps> = ({
+  room,
+  setRoomToDelete,
+  handleOpenConfirmDeleteDialog,
+}) => {
   const {
     roomPhotoUrl,
     capacityOfAdults,
@@ -24,10 +27,9 @@ const Room: FC<RoomProps> = ({ room, selectedHotelId }) => {
     roomId,
   } = room;
 
-  const { deleteRoom, isPending } = useDeleteRoomAPI();
-
   const handleDelete = () => {
-    deleteRoom({ hotelId: selectedHotelId, roomId });
+    setRoomToDelete({ id: roomId, name: roomType });
+    handleOpenConfirmDeleteDialog();
   };
 
   const renderAmenities = roomAmenities.map((amenity) => (
@@ -81,17 +83,16 @@ const Room: FC<RoomProps> = ({ room, selectedHotelId }) => {
         <Stack gap={2}>{renderAmenities}</Stack>
       </CardContent>
       <CardActions>
-        <LoadingButton
+        <Button
           size="small"
           variant="contained"
           color="primary"
           sx={{ m: "auto" }}
-          loading={isPending}
           onClick={handleDelete}
           endIcon={<Trash size={20} />}
         >
           Delete
-        </LoadingButton>
+        </Button>
       </CardActions>
     </Card>
   );
