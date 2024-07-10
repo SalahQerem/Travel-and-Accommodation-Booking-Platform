@@ -1,7 +1,9 @@
+import ConfirmActionDialog from "@/components/ConfirmActionDialog";
 import { defaultRequestQuery } from "@/constants";
 import BlockUI from "@/containers/BlockUI";
 import StyledContainer from "@/containers/StyledContainer";
 import routeHOC from "@/routes/HOCs/routeHOC";
+import useGetCitiesAPI from "@/services/useGetCitiesAPI";
 import { City as CityType, RequestQuery } from "@/types";
 import {
   Button,
@@ -11,14 +13,12 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { Plus, Search } from "lucide-react";
 import { ChangeEvent, useState } from "react";
 import AddCityDialog from "./components/AddCityDialog";
 import City from "./components/City";
 import { defaultCity } from "./constants";
-import { Plus, Search } from "lucide-react";
 import useDeleteCityAPI from "./hooks/useDeleteCityAPI";
-import ConfirmActionDialog from "@/components/ConfirmActionDialog";
-import useGetCitiesAPI from "../hooks/useGetCitiesAPI";
 
 const Cities = () => {
   const [isCityFormDialogOpen, setIsCityFormDialogOpen] =

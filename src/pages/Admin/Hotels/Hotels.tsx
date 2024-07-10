@@ -2,9 +2,14 @@ import ConfirmActionDialog from "@/components/ConfirmActionDialog";
 import { defaultRequestQuery, paginationOptions } from "@/constants";
 import BlockUI from "@/containers/BlockUI";
 import StyledContainer from "@/containers/StyledContainer";
-import useGetHotelDetailsAPI from "@/pages/HotelDetails/hooks/useGetHotelDetailsAPI";
+import useGetHotelDetailsAPI from "@/services/useGetHotelDetailsAPI";
 import routeHOC from "@/routes/HOCs/routeHOC";
-import { PaginationLimitOption, RequestQuery } from "@/types";
+import useGetHotelsAPI from "@/services/useGetHotelsAPI";
+import {
+  Hotel as HotelType,
+  PaginationLimitOption,
+  RequestQuery,
+} from "@/types";
 import {
   Autocomplete,
   Button,
@@ -17,8 +22,6 @@ import {
 } from "@mui/material";
 import { Plus, Search } from "lucide-react";
 import { ChangeEvent, useState } from "react";
-import useGetHotelsAPI from "../hooks/useGetHotelsAPI";
-import { Hotel as HotelType } from "@/types";
 import AddHotelDialog from "./components/AddHotelDialog";
 import Hotel from "./components/Hotel";
 import UpdateHotelDialog from "./components/UpdateHotelDialog";

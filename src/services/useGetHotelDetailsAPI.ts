@@ -1,10 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
-import { GetHotelDetailsResponse } from "../API/types";
-import { getHotelDetailsAPI } from "../API";
 import { useSnackBar } from "@/hooks/useSnackbar";
-import { useEffect } from "react";
-import { extractErrorMessage } from "@/utils/errorHandling";
 import { AxiosBaseError } from "@/types/axios";
+import { extractErrorMessage } from "@/utils/errorHandling";
+import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
+import { getHotelDetailsAPI } from "./API";
+import { GetHotelDetailsResponse } from "./API/types";
 
 const useGetHotelDetailsAPI = (hotelId: string) => {
   const { showErrorSnackbar } = useSnackBar();

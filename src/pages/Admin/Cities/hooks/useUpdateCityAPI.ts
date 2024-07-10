@@ -1,10 +1,10 @@
 import { useSnackBar } from "@/hooks/useSnackbar";
+import { GetCitiesResponse } from "@/services/API/types";
 import {
   QueryObserverResult,
   RefetchOptions,
   useMutation,
 } from "@tanstack/react-query";
-import { GetCitiesResponse } from "../API/types";
 import { updateCityAPI } from "../API";
 
 const useUpdateCityAPI = (

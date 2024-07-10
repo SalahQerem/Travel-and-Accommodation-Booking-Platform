@@ -3,6 +3,7 @@ import { defaultRequestQuery } from "@/constants";
 import BlockUI from "@/containers/BlockUI";
 import StyledContainer from "@/containers/StyledContainer";
 import routeHOC from "@/routes/HOCs/routeHOC";
+import useGetHotelsAPI from "@/services/useGetHotelsAPI";
 import { Hotel } from "@/types";
 import {
   Autocomplete,
@@ -15,7 +16,6 @@ import {
 } from "@mui/material";
 import { Plus } from "lucide-react";
 import { useState } from "react";
-import useGetHotelsAPI from "../hooks/useGetHotelsAPI";
 import AddRoomDialog from "./components/AddRoomDialog";
 import Room from "./components/Room";
 import { defaultRoom, defaultSelectedHotel } from "./constants";

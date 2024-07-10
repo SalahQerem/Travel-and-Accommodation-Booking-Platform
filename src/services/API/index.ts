@@ -1,7 +1,11 @@
 import { axiosInstance } from "@/config/axios.config";
 import { PaginationProps, QueryObj } from "@/types";
 import { getUrlQueryString } from "@/utils/urlQueryParams";
-import { GetCitiesResponse, GetHotelsResponse } from "./types";
+import {
+  GetCitiesResponse,
+  GetHotelDetailsResponse,
+  GetHotelsResponse,
+} from "./types";
 
 export const getCitiesAPI = async (query: QueryObj) => {
   const requestUrl = getUrlQueryString("/cities", query);
@@ -19,4 +23,11 @@ export const getHotelsAPI = async (query: QueryObj) => {
   const { TotalPageCount }: PaginationProps = JSON.parse(paginationJson);
 
   return { hotels: res.data, TotalPageCount };
+};
+
+export const getHotelDetailsAPI = async (hotelId: string) => {
+  const res = await axiosInstance.get<GetHotelDetailsResponse>(
+    `/hotels/${hotelId}`
+  );
+  return res.data;
 };

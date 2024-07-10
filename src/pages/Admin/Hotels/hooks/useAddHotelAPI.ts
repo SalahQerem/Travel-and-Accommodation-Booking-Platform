@@ -1,13 +1,13 @@
 import { useSnackBar } from "@/hooks/useSnackbar";
+import { GetHotelsResponseWithTotalPagesCount } from "@/services/API/types";
+import { AxiosBaseError } from "@/types/axios";
+import { extractErrorMessage } from "@/utils/errorHandling";
 import {
   QueryObserverResult,
   RefetchOptions,
   useMutation,
 } from "@tanstack/react-query";
 import { addHotelAPI } from "../API";
-import { GetHotelsResponseWithTotalPagesCount } from "../API/types";
-import { extractErrorMessage } from "@/utils/errorHandling";
-import { AxiosBaseError } from "@/types/axios";
 
 const useAddHotelAPI = (
   refetchHotels: (

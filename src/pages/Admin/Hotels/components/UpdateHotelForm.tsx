@@ -6,8 +6,8 @@ import { Check } from "lucide-react";
 import { FC } from "react";
 import { InferType } from "yup";
 import { updateHotelValidationSchema } from "../formSchema";
-import { UpdateHotelFormProps } from "../types";
 import useUpdateHotelAPI from "../hooks/useUpdateHotelAPI";
+import { UpdateHotelFormProps } from "../types";
 
 type FormValuesTypes = InferType<typeof updateHotelValidationSchema>;
 

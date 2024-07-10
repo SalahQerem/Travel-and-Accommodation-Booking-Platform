@@ -1,5 +1,6 @@
+import { GetHotelsResponseWithTotalPagesCount } from "@/services/API/types";
+import { Hotel } from "@/types";
 import { QueryObserverResult, RefetchOptions } from "@tanstack/react-query";
-import { GetHotelsResponseWithTotalPagesCount, Hotel } from "./API/types";
 
 export interface HotelProps {
   hotel: Hotel;

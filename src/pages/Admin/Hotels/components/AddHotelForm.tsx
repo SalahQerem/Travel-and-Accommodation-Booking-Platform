@@ -1,6 +1,7 @@
 import AutoCompleteField from "@/components/Fields/AutoCompleteField";
 import TextField from "@/components/Fields/TextField";
 import { defaultRequestQuery } from "@/constants";
+import useGetCitiesAPI from "@/services/useGetCitiesAPI";
 import { City } from "@/types";
 import { LoadingButton } from "@mui/lab";
 import { Button, Grid, Paper, Stack, Typography } from "@mui/material";
@@ -8,7 +9,6 @@ import { Form, FormikProvider, useFormik } from "formik";
 import { Plus } from "lucide-react";
 import { FC } from "react";
 import { InferType } from "yup";
-import useGetCitiesAPI from "../../hooks/useGetCitiesAPI";
 import { addHotelInitialValues } from "../constants";
 import { addHotelValidationSchema } from "../formSchema";
 import useAddHotelAPI from "../hooks/useAddHotelAPI";

@@ -1,11 +1,11 @@
 import { useSnackBar } from "@/hooks/useSnackbar";
+import { GetHotelsResponseWithTotalPagesCount } from "@/services/API/types";
 import {
   QueryObserverResult,
   RefetchOptions,
   useMutation,
 } from "@tanstack/react-query";
 import { updateHotelAPI } from "../API";
-import { GetHotelsResponseWithTotalPagesCount } from "../API/types";
 
 const useUpdateHotelAPI = (
   refetchHotels: (

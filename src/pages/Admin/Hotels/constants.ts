@@ -1,4 +1,4 @@
-import { Hotel } from "./API/types";
+import { Hotel } from "@/types";
 
 export const addHotelInitialValues = {
   name: "",
