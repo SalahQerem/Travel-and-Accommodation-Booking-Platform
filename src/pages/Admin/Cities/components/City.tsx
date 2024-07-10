@@ -1,23 +1,25 @@
+import { textSlicer } from "@/utils";
 import {
+  Button,
   Card,
   CardActions,
   CardContent,
-  IconButton,
+  Stack,
   Typography,
 } from "@mui/material";
+import { FilePenLine, Trash } from "lucide-react";
 import { FC } from "react";
 import { CityProps } from "../types";
-import { textSlicer } from "@/utils";
-import { LoadingButton } from "@mui/lab";
-import useDeleteCityAPI from "../hooks/useDeleteCityAPI";
-import { FilePenLine, Trash } from "lucide-react";
 
-const City: FC<CityProps> = ({ city, refetchCities, handleUpdateCity }) => {
-  const { deleteCity, isPending } = useDeleteCityAPI(refetchCities);
-  const { id, name, description } = city;
+const City: FC<CityProps> = ({
+  city,
+  handleUpdateCity,
+  handleOpenConfirmDeleteDialog,
+}) => {
+  const { name, description } = city;
 
   const handleDelete = () => {
-    deleteCity({ id });
+    handleOpenConfirmDeleteDialog(city);
   };
 
   const handleUpdate = () => {
@@ -33,18 +35,26 @@ const City: FC<CityProps> = ({ city, refetchCities, handleUpdateCity }) => {
         <Typography>{textSlicer(description)}</Typography>
       </CardContent>
       <CardActions>
-        <LoadingButton
-          variant="text"
-          color="error"
-          loading={isPending}
-          onClick={handleDelete}
-          sx={{ minWidth: 20 }}
-        >
-          <Trash color={isPending ? "transparent" : "#ee6b6e"} />
-        </LoadingButton>
-        <IconButton onClick={handleUpdate}>
-          <FilePenLine color="black" />
-        </IconButton>
+        <Stack direction="row" gap={2} justifyContent="flex-end" width="100%">
+          <Button
+            size="small"
+            variant="contained"
+            color="primary"
+            onClick={handleDelete}
+            endIcon={<Trash size={20} />}
+          >
+            Delete
+          </Button>
+          <Button
+            size="small"
+            variant="contained"
+            color="primary"
+            onClick={handleUpdate}
+            endIcon={<FilePenLine size={20} />}
+          >
+            Edit
+          </Button>
+        </Stack>
       </CardActions>
     </Card>
   );

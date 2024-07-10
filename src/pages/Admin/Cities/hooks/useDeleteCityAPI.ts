@@ -10,7 +10,8 @@ import { GetCitiesResponse } from "../API/types";
 const useDeleteCityAPI = (
   refetchCities: (
     options?: RefetchOptions
-  ) => Promise<QueryObserverResult<GetCitiesResponse, Error>>
+  ) => Promise<QueryObserverResult<GetCitiesResponse, Error>>,
+  handleCloseConfirmDeleteDialog: () => void
 ) => {
   const { showSuccessSnackbar, showErrorSnackbar } = useSnackBar();
 
@@ -18,6 +19,7 @@ const useDeleteCityAPI = (
     mutationFn: deleteCityAPI,
     onSuccess: () => {
       showSuccessSnackbar({ message: "City Deleted Successfully" });
+      handleCloseConfirmDeleteDialog();
       setTimeout(() => refetchCities(), 500);
     },
     onError: () => {
