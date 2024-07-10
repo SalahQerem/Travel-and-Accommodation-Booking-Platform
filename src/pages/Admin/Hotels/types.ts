@@ -4,6 +4,7 @@ import { GetHotelsResponseWithTotalPagesCount, Hotel } from "./API/types";
 export interface HotelProps {
   hotel: Hotel;
   handleUpdateHotel: (hotel: Hotel) => void;
+  handleOpenConfirmDeleteDialog: (hotel: Hotel) => void;
 }
 
 export interface AddHotelDialogProps {

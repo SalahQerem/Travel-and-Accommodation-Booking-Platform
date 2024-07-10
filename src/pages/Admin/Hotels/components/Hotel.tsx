@@ -1,33 +1,31 @@
 import InteractiveMap from "@/components/InteractiveMap";
-import useGetHotelDetailsAPI from "@/pages/HotelDetails/hooks/useGetHotelDetailsAPI";
-import { LoadingButton } from "@mui/lab";
 import {
+  Button,
   Card,
   CardActions,
-  IconButton,
   Rating,
   Stack,
   Typography,
 } from "@mui/material";
 import { FilePenLine, Trash } from "lucide-react";
 import { FC } from "react";
-import useDeleteHotelAPI from "../hooks/useDeleteHotelAPI";
 import styles from "../styles.module.css";
 import { HotelProps } from "../types";
 
-const Hotel: FC<HotelProps> = ({ hotel, handleUpdateHotel }) => {
-  const { name, starRating, description, hotelType, latitude, longitude, id } =
+const Hotel: FC<HotelProps> = ({
+  hotel,
+  handleUpdateHotel,
+  handleOpenConfirmDeleteDialog,
+}) => {
+  const { name, starRating, description, hotelType, latitude, longitude } =
     hotel;
-
-  const { deleteHotel, isPending } = useDeleteHotelAPI();
-  const { hotel: hotelDetails } = useGetHotelDetailsAPI(id);
-
-  const handleDelete = () => {
-    deleteHotel({ hotelId: id, cityId: hotelDetails?.cityId! });
-  };
 
   const handleUpdate = () => {
     handleUpdateHotel(hotel);
+  };
+
+  const handleDelete = () => {
+    handleOpenConfirmDeleteDialog(hotel);
   };
 
   return (
@@ -51,18 +49,31 @@ const Hotel: FC<HotelProps> = ({ hotel, handleUpdateHotel }) => {
             {description}
           </Typography>
           <CardActions>
-            <LoadingButton
-              variant="text"
-              color="error"
-              loading={isPending}
-              onClick={handleDelete}
-              sx={{ minWidth: 20 }}
+            <Stack
+              direction="row"
+              gap={2}
+              justifyContent="flex-end"
+              width="100%"
             >
-              <Trash color={isPending ? "transparent" : "#ee6b6e"} />
-            </LoadingButton>
-            <IconButton onClick={handleUpdate}>
-              <FilePenLine color="black" />
-            </IconButton>
+              <Button
+                size="small"
+                variant="contained"
+                color="primary"
+                onClick={handleDelete}
+                endIcon={<Trash size={20} />}
+              >
+                Delete
+              </Button>
+              <Button
+                size="small"
+                variant="contained"
+                color="primary"
+                onClick={handleUpdate}
+                endIcon={<FilePenLine size={20} />}
+              >
+                Edit
+              </Button>
+            </Stack>
           </CardActions>
         </Stack>
         <InteractiveMap
