@@ -2,7 +2,7 @@ import * as yup from "yup";
 
 export const addHotelValidationSchema = yup.object().shape({
   name: yup.string().required("Please specify the hotel name"),
-  cityname: yup.string().required("Please select the City"),
+  cityname: yup.string().required("Please select the city"),
   description: yup.string().required("Please add the hotel description"),
   hotelType: yup.string().required("Please enter the hotel type"),
   starRating: yup
