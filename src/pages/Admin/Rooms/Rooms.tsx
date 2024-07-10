@@ -33,15 +33,10 @@ const Rooms = () => {
     ...defaultRequestQuery,
     pageSize: 200,
   });
-  const { deleteRoom, isPending } = useDeleteRoomAPI();
 
   const [selectedHotel, setSelectedHotel] = useState<Hotel>(
     hotels[0] ?? defaultSelectedHotel
   );
-
-  const handleDelete = () => {
-    deleteRoom({ hotelId: selectedHotel.id, roomId: roomToDelete.id });
-  };
 
   const { rooms, refetchRooms, isFetchingRooms } = useGetHotelRoomsAPI(
     selectedHotel.id
@@ -59,6 +54,15 @@ const Rooms = () => {
   };
   const handleCloseConfirmDeleteDialog = () => {
     setIsConfirmDeleteDialogOpen(false);
+  };
+
+  const { deleteRoom, isPending } = useDeleteRoomAPI(
+    refetchRooms,
+    handleCloseConfirmDeleteDialog
+  );
+
+  const handleDelete = () => {
+    deleteRoom({ hotelId: selectedHotel.id, roomId: roomToDelete.id });
   };
 
   const handleSelectHotel = (

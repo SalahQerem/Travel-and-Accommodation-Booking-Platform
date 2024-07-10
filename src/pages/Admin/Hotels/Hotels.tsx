@@ -1,6 +1,8 @@
+import ConfirmActionDialog from "@/components/ConfirmActionDialog";
 import { defaultRequestQuery, paginationOptions } from "@/constants";
 import BlockUI from "@/containers/BlockUI";
 import StyledContainer from "@/containers/StyledContainer";
+import useGetHotelDetailsAPI from "@/pages/HotelDetails/hooks/useGetHotelDetailsAPI";
 import routeHOC from "@/routes/HOCs/routeHOC";
 import { PaginationLimitOption, RequestQuery } from "@/types";
 import {
@@ -20,6 +22,7 @@ import AddHotelDialog from "./components/AddHotelDialog";
 import Hotel from "./components/Hotel";
 import UpdateHotelDialog from "./components/UpdateHotelDialog";
 import { defaultHotel } from "./constants";
+import useDeleteHotelAPI from "./hooks/useDeleteHotelAPI";
 import useGetHotelsAPI from "./hooks/useGetHotelsAPI";
 
 const Hotels = () => {
@@ -31,9 +34,9 @@ const Hotels = () => {
   const [nameToSearch, setNameToSearch] = useState<string>("");
   const [requestQuery, setRequestQuery] =
     useState<RequestQuery>(defaultRequestQuery);
-
-  const { hotels, TotalPageCount, refetchHotels, isFetching } =
-    useGetHotelsAPI(requestQuery);
+  const [hotelToDelete, setHotelToDelete] = useState(defaultHotel);
+  const [isConfirmDeleteDialogOpen, setIsConfirmDeleteDialogOpen] =
+    useState<boolean>(false);
 
   const handlePageChange = (_: ChangeEvent<unknown>, value: number) => {
     setRequestQuery({ ...requestQuery, pageNumber: value });
@@ -72,9 +75,30 @@ const Hotels = () => {
     setIsUpdateHotelDialogOpen(false);
   };
 
+  const handleOpenConfirmDeleteDialog = (hotel: HotelType) => {
+    setHotelToDelete(hotel);
+    setIsConfirmDeleteDialogOpen(true);
+  };
+  const handleCloseConfirmDeleteDialog = () => {
+    setIsConfirmDeleteDialogOpen(false);
+  };
+
+  const { hotels, TotalPageCount, refetchHotels, isFetching } =
+    useGetHotelsAPI(requestQuery);
+  const { deleteHotel, isPending } = useDeleteHotelAPI(refetchHotels);
+  const { hotel: hotelDetails } = useGetHotelDetailsAPI(hotelToDelete.id);
+
+  const handleDelete = () => {
+    deleteHotel({ hotelId: hotelToDelete.id, cityId: hotelDetails?.cityId! });
+  };
+
   const renderHotels = hotels?.map((hotel) => (
     <Grid item xs={12} md={6} key={hotel.id}>
-      <Hotel hotel={hotel} handleUpdateHotel={handleUpdateHotel} />
+      <Hotel
+        hotel={hotel}
+        handleUpdateHotel={handleUpdateHotel}
+        handleOpenConfirmDeleteDialog={handleOpenConfirmDeleteDialog}
+      />
     </Grid>
   ));
 
@@ -163,6 +187,27 @@ const Hotels = () => {
           hotelToUpdate={hotelToUpdate}
           refetchHotels={refetchHotels}
           handleCloseUpdateHotelDialog={handleCloseUpdateHotelDialog}
+        />
+        <ConfirmActionDialog
+          isOpen={isConfirmDeleteDialogOpen}
+          title="Delete Hotel Room"
+          description={`Are you sure you want to delete a ${hotelToDelete.name} hotel`}
+          handleClose={handleCloseConfirmDeleteDialog}
+          actions={[
+            {
+              text: "Yes, Sure!",
+              onClick: handleDelete,
+              variant: "contained",
+              loading: isPending,
+              size: "small",
+            },
+            {
+              text: "Cancel",
+              onClick: handleCloseConfirmDeleteDialog,
+              variant: "outlined",
+              size: "small",
+            },
+          ]}
         />
       </Container>
     </StyledContainer>
