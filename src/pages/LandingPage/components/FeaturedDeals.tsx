@@ -10,7 +10,7 @@ const FeaturedDeals = () => {
   const { isTabletOrLess, isDesktopOrLess } = useMediaQuery();
   const { featuredDeals, isFetching } = useGetFeaturedDealsAPI();
 
-  const renderFeaturedDeals = featuredDeals?.map((deal) => (
+  const renderFeaturedDeals = featuredDeals.map((deal) => (
     <Deal key={deal.hotelId} deal={deal} />
   ));
 

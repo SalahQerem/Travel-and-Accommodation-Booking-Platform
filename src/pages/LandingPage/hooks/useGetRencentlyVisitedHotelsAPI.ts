@@ -30,7 +30,7 @@ const useGetRencentlyVisitedHotelsAPI = () => {
     });
   }, [error]);
 
-  return { rencentlyVisitedHotels, isFetching };
+  return { rencentlyVisitedHotels: rencentlyVisitedHotels ?? [], isFetching };
 };
 
 export default useGetRencentlyVisitedHotelsAPI;

@@ -77,9 +77,9 @@ const Hotel: FC<HotelProps> = ({
           </CardActions>
         </Stack>
         <InteractiveMap
-          popupLabel={name!}
-          longitude={longitude!}
-          latitude={latitude!}
+          popupLabel={name}
+          longitude={longitude}
+          latitude={latitude}
           className={styles.locationContainer}
         />
       </Stack>

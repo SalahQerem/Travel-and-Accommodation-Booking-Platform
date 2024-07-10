@@ -73,7 +73,7 @@ const Rooms = () => {
       setSelectedHotel(newOption);
   };
 
-  const renderRooms = rooms?.map((room) => (
+  const renderRooms = rooms.map((room) => (
     <Grid item key={room.roomId} xs={12} sm={6} md={4}>
       <Room
         room={room}

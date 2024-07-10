@@ -27,7 +27,7 @@ const useGetHotelReviewsAPI = (hotelId: string) => {
     });
   }, [error]);
 
-  return { reviews, isFetchingReviews: isFetching };
+  return { reviews: reviews ?? [], isFetchingReviews: isFetching };
 };
 
 export default useGetHotelReviewsAPI;

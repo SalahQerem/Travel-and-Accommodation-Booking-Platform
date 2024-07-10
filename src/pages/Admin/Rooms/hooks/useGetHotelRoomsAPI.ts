@@ -28,7 +28,7 @@ const useGetHotelRoomsAPI = (hotelId: string) => {
     });
   }, [error]);
 
-  return { rooms, refetchRooms, isFetchingRooms: isFetching };
+  return { rooms: rooms ?? [], refetchRooms, isFetchingRooms: isFetching };
 };
 
 export default useGetHotelRoomsAPI;

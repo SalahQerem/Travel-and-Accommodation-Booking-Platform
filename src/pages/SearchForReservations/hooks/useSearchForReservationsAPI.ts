@@ -30,7 +30,7 @@ const useSearchForReservationsAPI = () => {
     });
   }, [error]);
 
-  return { reservations, isFetching };
+  return { reservations: reservations ?? [], isFetching };
 };
 
 export default useSearchForReservationsAPI;

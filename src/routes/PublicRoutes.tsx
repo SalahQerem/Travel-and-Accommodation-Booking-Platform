@@ -1,11 +1,5 @@
 import { RouteObject } from "react-router-dom";
-import {
-  AccessDenied,
-  Login,
-  MockedUI,
-  NotFound,
-  Unauthenticated,
-} from "./imports";
+import { AccessDenied, Login, NotFound, Unauthenticated } from "./imports";
 
 const publicRoutes: RouteObject = {
   path: "",
@@ -21,10 +15,6 @@ const publicRoutes: RouteObject = {
     {
       path: "unauthenticated",
       element: <Unauthenticated />,
-    },
-    {
-      path: "mocked-ui",
-      element: <MockedUI />,
     },
     {
       path: "*",

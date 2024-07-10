@@ -27,7 +27,7 @@ const useGetTrendingDestinationsAPI = () => {
     });
   }, [error]);
 
-  return { trendingDestinations, isFetching };
+  return { trendingDestinations: trendingDestinations ?? [], isFetching };
 };
 
 export default useGetTrendingDestinationsAPI;
