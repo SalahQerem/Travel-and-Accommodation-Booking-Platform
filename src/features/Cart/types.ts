@@ -1,4 +1,4 @@
-import { Room as CartItem } from "@/pages/HotelDetails/API/types";
+import { Room as CartItem } from "@/types";
 
 export interface CartState extends Array<CartItem> {}
 

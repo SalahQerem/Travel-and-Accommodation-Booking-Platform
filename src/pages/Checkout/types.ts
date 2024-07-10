@@ -1,4 +1,4 @@
-import { Room } from "@/pages/HotelDetails/API/types";
+import { Room } from "@/types";
 
 export interface CartItemProps {
   room: Room;
