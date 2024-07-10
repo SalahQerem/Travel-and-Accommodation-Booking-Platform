@@ -17,6 +17,8 @@ import City from "./components/City";
 import { defaultCity } from "./constants";
 import useGetCitiesAPI from "./hooks/useGetCitiesAPI";
 import { Plus, Search } from "lucide-react";
+import useDeleteCityAPI from "./hooks/useDeleteCityAPI";
+import ConfirmActionDialog from "@/components/ConfirmActionDialog";
 
 const Cities = () => {
   const [isCityFormDialogOpen, setIsCityFormDialogOpen] =
@@ -25,14 +27,27 @@ const Cities = () => {
   const [nameToSearch, setNameToSearch] = useState<string>("");
   const [requestQuery, setRequestQuery] =
     useState<RequestQuery>(defaultRequestQuery);
+  const [cityToDelete, setCityToDelete] = useState(defaultCity);
+  const [isConfirmDeleteDialogOpen, setIsConfirmDeleteDialogOpen] =
+    useState<boolean>(false);
 
-  const { cities, refetchCities, isFetching } = useGetCitiesAPI(requestQuery);
+  const handleDelete = () => {
+    deleteCity({ id: cityToDelete.id });
+  };
 
   const handleOpenCityFormDialog = () => {
     setIsCityFormDialogOpen(true);
   };
   const handleCloseCityFormDialog = () => {
     setIsCityFormDialogOpen(false);
+  };
+
+  const handleOpenConfirmDeleteDialog = (city: CityType) => {
+    setIsConfirmDeleteDialogOpen(true);
+    setCityToDelete(city);
+  };
+  const handleCloseConfirmDeleteDialog = () => {
+    setIsConfirmDeleteDialogOpen(false);
   };
 
   const handleUpdateCity = (city: CityType) => {
@@ -44,12 +59,18 @@ const Cities = () => {
     setRequestQuery({ ...requestQuery, name: nameToSearch });
   };
 
+  const { cities, refetchCities, isFetching } = useGetCitiesAPI(requestQuery);
+  const { deleteCity, isPending } = useDeleteCityAPI(
+    refetchCities,
+    handleCloseConfirmDeleteDialog
+  );
+
   const renderCities = cities?.map((city) => (
     <Grid item xs={12} md={6} key={city.id}>
       <City
         city={city}
-        refetchCities={refetchCities}
         handleUpdateCity={handleUpdateCity}
+        handleOpenConfirmDeleteDialog={handleOpenConfirmDeleteDialog}
       />
     </Grid>
   ));
@@ -107,6 +128,27 @@ const Cities = () => {
         cityToUpdate={cityToUpdate}
         refetchCities={refetchCities}
         handleCloseCityFormDialog={handleCloseCityFormDialog}
+      />
+      <ConfirmActionDialog
+        isOpen={isConfirmDeleteDialogOpen}
+        title="Delete Hotel Room"
+        description={`Are you sure you want to delete a ${cityToDelete.name} city`}
+        handleClose={handleCloseConfirmDeleteDialog}
+        actions={[
+          {
+            text: "Yes, Sure!",
+            onClick: handleDelete,
+            variant: "contained",
+            loading: isPending,
+            size: "small",
+          },
+          {
+            text: "Cancel",
+            onClick: handleCloseConfirmDeleteDialog,
+            variant: "outlined",
+            size: "small",
+          },
+        ]}
       />
     </StyledContainer>
   );
