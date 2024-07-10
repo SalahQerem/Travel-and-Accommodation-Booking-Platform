@@ -51,3 +51,13 @@ export interface Room {
   price: number;
   availability: boolean;
 }
+
+export interface Hotel {
+  id: string;
+  name: string;
+  description: string;
+  hotelType: string;
+  starRating: number;
+  latitude: number;
+  longitude: number;
+}

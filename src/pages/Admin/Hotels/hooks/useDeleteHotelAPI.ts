@@ -5,7 +5,7 @@ import {
   useMutation,
 } from "@tanstack/react-query";
 import { deleteHotelAPI } from "../API";
-import { GetHotelsResponseWithTotalPagesCount } from "../API/types";
+import { GetHotelsResponseWithTotalPagesCount } from "../../hooks/API/types";
 
 const useDeleteHotelAPI = (
   refetchHotels: (

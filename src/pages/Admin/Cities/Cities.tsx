@@ -15,10 +15,10 @@ import { ChangeEvent, useState } from "react";
 import AddCityDialog from "./components/AddCityDialog";
 import City from "./components/City";
 import { defaultCity } from "./constants";
-import useGetCitiesAPI from "./hooks/useGetCitiesAPI";
 import { Plus, Search } from "lucide-react";
 import useDeleteCityAPI from "./hooks/useDeleteCityAPI";
 import ConfirmActionDialog from "@/components/ConfirmActionDialog";
+import useGetCitiesAPI from "../hooks/useGetCitiesAPI";
 
 const Cities = () => {
   const [isCityFormDialogOpen, setIsCityFormDialogOpen] =

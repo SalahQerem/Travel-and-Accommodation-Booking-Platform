@@ -17,13 +17,13 @@ import {
 } from "@mui/material";
 import { Plus, Search } from "lucide-react";
 import { ChangeEvent, useState } from "react";
-import { Hotel as HotelType } from "./API/types";
+import useGetHotelsAPI from "../hooks/useGetHotelsAPI";
+import { Hotel as HotelType } from "@/types";
 import AddHotelDialog from "./components/AddHotelDialog";
 import Hotel from "./components/Hotel";
 import UpdateHotelDialog from "./components/UpdateHotelDialog";
 import { defaultHotel } from "./constants";
 import useDeleteHotelAPI from "./hooks/useDeleteHotelAPI";
-import useGetHotelsAPI from "./hooks/useGetHotelsAPI";
 
 const Hotels = () => {
   const [isAddHotelDialogOpen, setIsAddHotelDialogOpen] =

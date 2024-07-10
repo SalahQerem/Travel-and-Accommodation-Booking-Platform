@@ -8,7 +8,7 @@ import { Form, FormikProvider, useFormik } from "formik";
 import { Plus } from "lucide-react";
 import { FC } from "react";
 import { InferType } from "yup";
-import useGetCitiesAPI from "../../Cities/hooks/useGetCitiesAPI";
+import useGetCitiesAPI from "../../hooks/useGetCitiesAPI";
 import { addHotelInitialValues } from "../constants";
 import { addHotelValidationSchema } from "../formSchema";
 import useAddHotelAPI from "../hooks/useAddHotelAPI";
