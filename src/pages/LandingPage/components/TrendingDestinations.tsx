@@ -6,7 +6,7 @@ import Destination from "./Destination";
 const TrendingDestinations = () => {
   const { trendingDestinations, isFetching } = useGetTrendingDestinationsAPI();
 
-  const renderTrendingDestinations = trendingDestinations?.map(
+  const renderTrendingDestinations = trendingDestinations.map(
     (destination, index) => (
       <Grid item key={destination.cityId} xs={12} md={6} xl={index > 1 ? 4 : 6}>
         <Destination destination={destination} />

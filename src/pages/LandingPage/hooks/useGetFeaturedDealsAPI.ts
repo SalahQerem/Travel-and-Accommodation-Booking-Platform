@@ -27,7 +27,7 @@ const useGetFeaturedDealsAPI = () => {
     });
   }, [error]);
 
-  return { featuredDeals, isFetching };
+  return { featuredDeals: featuredDeals ?? [], isFetching };
 };
 
 export default useGetFeaturedDealsAPI;

@@ -65,7 +65,7 @@ const Cities = () => {
     handleCloseConfirmDeleteDialog
   );
 
-  const renderCities = cities?.map((city) => (
+  const renderCities = cities.map((city) => (
     <Grid item xs={12} md={6} key={city.id}>
       <City
         city={city}

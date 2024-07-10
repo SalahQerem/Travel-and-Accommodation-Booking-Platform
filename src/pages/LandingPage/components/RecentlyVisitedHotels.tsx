@@ -7,7 +7,7 @@ const RecentlyVisitedHotels = () => {
   const { rencentlyVisitedHotels, isFetching } =
     useGetRencentlyVisitedHotelsAPI();
 
-  const renderRecentlyVisitedHotels = rencentlyVisitedHotels?.map((hotel) => (
+  const renderRecentlyVisitedHotels = rencentlyVisitedHotels.map((hotel) => (
     <Grid item key={hotel.hotelId} xs={6}>
       <RecentlyVisitedHotel hotel={hotel} />
     </Grid>

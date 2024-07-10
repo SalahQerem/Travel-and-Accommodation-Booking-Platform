@@ -95,7 +95,7 @@ const Hotels = () => {
     deleteHotel({ hotelId: hotelToDelete.id, cityId: hotelDetails?.cityId! });
   };
 
-  const renderHotels = hotels?.map((hotel) => (
+  const renderHotels = hotels.map((hotel) => (
     <Grid item xs={12} md={6} key={hotel.id}>
       <Hotel
         hotel={hotel}

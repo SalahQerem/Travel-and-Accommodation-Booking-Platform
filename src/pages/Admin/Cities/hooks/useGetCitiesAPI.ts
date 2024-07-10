@@ -30,7 +30,7 @@ const useGetCitiesAPI = (requestQuery: RequestQuery) => {
   }, [error]);
 
   return {
-    cities,
+    cities: cities ?? [],
     refetchCities: refetch,
     isFetching,
   };

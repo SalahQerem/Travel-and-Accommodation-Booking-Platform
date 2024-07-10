@@ -28,10 +28,9 @@ const useGetHotelGalaryAPI = (hotelId: string) => {
   }, [error]);
 
   const outdoorImage = galary?.at(0);
-  const wideImages = galary?.slice(1, 2).concat(galary?.slice(4, 5));
-  const squareImages = galary
-    ?.slice(2, 4)
-    .concat(galary?.slice(5, galary?.length));
+  const wideImages = galary?.slice(1, 2).concat(galary?.slice(4, 5)) ?? [];
+  const squareImages =
+    galary?.slice(2, 4).concat(galary?.slice(5, galary?.length)) ?? [];
 
   return {
     outdoorImage,

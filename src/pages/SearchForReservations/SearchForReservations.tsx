@@ -8,7 +8,7 @@ import routeHOC from "@/routes/HOCs/routeHOC";
 const SearchForReservations = () => {
   const { reservations, isFetching } = useSearchForReservationsAPI();
 
-  const renderReservations = reservations?.map((reservation) => (
+  const renderReservations = reservations.map((reservation) => (
     <Grid item key={reservation.hotelId} xs={12} md={6}>
       <Reservation reservation={reservation} />
     </Grid>

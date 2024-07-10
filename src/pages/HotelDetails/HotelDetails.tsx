@@ -24,16 +24,16 @@ import useGetHotelRoomsAPI from "./hooks/useGetHotelRoomsAPI";
 import styles from "./styles.module.css";
 
 const HotelDetails = () => {
-  const { hotelId } = useParams();
+  const { hotelId = "" } = useParams();
 
   const [reviewsCountToDisplay, setReviewsCountToDisplay] = useState(3);
   const [imageToDisplay, setImageToDisplay] = useState<string>("");
 
-  const { hotel, isFetchingHotel } = useGetHotelDetailsAPI(hotelId!);
+  const { hotel, isFetchingHotel } = useGetHotelDetailsAPI(hotelId);
   const { outdoorImage, squareImages, wideImages, isFetchingGalary } =
-    useGetHotelGalaryAPI(hotelId!);
-  const { reviews, isFetchingReviews } = useGetHotelReviewsAPI(hotelId!);
-  const { rooms, isFetchingRooms } = useGetHotelRoomsAPI(hotelId!);
+    useGetHotelGalaryAPI(hotelId);
+  const { reviews, isFetchingReviews } = useGetHotelReviewsAPI(hotelId);
+  const { rooms, isFetchingRooms } = useGetHotelRoomsAPI(hotelId);
 
   const handleIncreaseReviewsCount = () => {
     setReviewsCountToDisplay((prev) => prev + 3);
@@ -48,10 +48,10 @@ const HotelDetails = () => {
   ));
 
   const renderReviews = reviews
-    ?.slice(0, reviewsCountToDisplay)
+    .slice(0, reviewsCountToDisplay)
     .map((review) => <Review key={review.reviewId} review={review} />);
 
-  const renderWideImages = wideImages?.map((galaryItem) => (
+  const renderWideImages = wideImages.map((galaryItem) => (
     <Grid item key={galaryItem.id} xs={12}>
       <img
         src={galaryItem.url}
@@ -62,7 +62,7 @@ const HotelDetails = () => {
     </Grid>
   ));
 
-  const renderSquareImages = squareImages?.map((galaryItem) => (
+  const renderSquareImages = squareImages.map((galaryItem) => (
     <Grid item key={galaryItem.id} xs={12} sm={4}>
       <img
         src={galaryItem.url}
@@ -73,7 +73,7 @@ const HotelDetails = () => {
     </Grid>
   ));
 
-  const renderAvailableRooms = rooms?.map((room) => (
+  const renderAvailableRooms = rooms.map((room) => (
     <Grid item key={room.roomId} xs={12} sm={6}>
       <AvailableRoom room={room} />
     </Grid>
