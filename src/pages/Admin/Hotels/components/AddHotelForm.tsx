@@ -53,6 +53,7 @@ const AddHotelForm: FC<AddHotelFormProps> = ({
               <Grid item xs={12} sm={5}>
                 <AutoCompleteField
                   name="cityname"
+                  size="small"
                   placeholder="City"
                   options={cities ?? []}
                   getOptionLabel={(option) => (option as City).name || ""}

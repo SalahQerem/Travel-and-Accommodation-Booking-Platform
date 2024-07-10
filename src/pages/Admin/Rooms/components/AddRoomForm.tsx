@@ -52,6 +52,7 @@ const AddRoomForm: FC<AddRoomFormProps> = ({
                 <AutoCompleteField
                   name="hotelId"
                   placeholder="Hotel"
+                  size="small"
                   options={hotels}
                   getOptionLabel={(option) => (option as Hotel).name || ""}
                   value={values.hotel}

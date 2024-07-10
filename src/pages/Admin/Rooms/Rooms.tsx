@@ -100,7 +100,7 @@ const Rooms = () => {
             <Stack>
               <Autocomplete
                 disablePortal
-                id="combo-box-demo"
+                size="small"
                 options={hotels ?? []}
                 onChange={handleSelectHotel}
                 value={selectedHotel}

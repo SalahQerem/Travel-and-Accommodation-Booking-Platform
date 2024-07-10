@@ -92,6 +92,7 @@ const Cities = () => {
             <Stack direction="row" gap={2}>
               <TextField
                 placeholder="Search by name"
+                size="small"
                 value={nameToSearch}
                 onChange={(event: ChangeEvent<HTMLInputElement>) => {
                   if (event.target.value) setNameToSearch(event.target.value);
