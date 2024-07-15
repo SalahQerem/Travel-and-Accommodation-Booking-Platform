@@ -3,7 +3,7 @@
     <img src="https://user-images.githubusercontent.com/62269745/174906068-aad23112-20fe-4ec8-877f-3ee1d9ec0a69.png#gh-dark-mode-only" width="40%">
 </p>
 
-# Safer
+# Safer 🌐✈️🏨
 
 Welcome to Safer! Your ultimate travel accommodation booking platform. Seamlessly find and book the safest and most comfortable stays, from charming B&Bs to luxurious resorts, ensuring your travel is not just memorable but also secure. Dive into a hassle-free booking experience and set off on your next adventure with Safer.
 
