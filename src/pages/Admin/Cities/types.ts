@@ -13,7 +13,7 @@ export interface AddCityDialogProps {
   cityToUpdate: City;
   handleCloseCityFormDialog: () => void;
   refetchCities: (
-    options?: RefetchOptions
+    options?: RefetchOptions | undefined
   ) => Promise<QueryObserverResult<GetCitiesResponse, Error>>;
 }
 
