@@ -44,6 +44,7 @@ describe("Login Form tests", () => {
     const submitBtn = getters.getLoginButton();
     expect(submitBtn).toBeInTheDocument();
   });
+
   it("should display a error message for required fields", async () => {
     render(
       <Providers>

@@ -12,6 +12,7 @@ dist
 dist-ssr
 .env
 mock-UI
+coverage
 *.local
 
 # Editor directories and files
