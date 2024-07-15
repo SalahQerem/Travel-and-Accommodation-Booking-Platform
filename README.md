@@ -7,7 +7,7 @@
 
 Welcome to Safer! Your ultimate travel accommodation booking platform. Seamlessly find and book the safest and most comfortable stays, from charming B&Bs to luxurious resorts, ensuring your travel is not just memorable but also secure. Dive into a hassle-free booking experience and set off on your next adventure with Safer.
 
-## Technologies
+## 🚀 Technologies
 
 In this project, I've used the following libraries:
 
