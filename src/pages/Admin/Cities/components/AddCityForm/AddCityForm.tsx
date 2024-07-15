@@ -5,11 +5,11 @@ import { Form, FormikProvider, useFormik } from "formik";
 import { Check, Plus } from "lucide-react";
 import { FC } from "react";
 import { InferType } from "yup";
-import { initialValues } from "../constants";
-import { validationSchema } from "../formSchema";
-import useAddCityAPI from "../hooks/useAddCityAPI";
-import useUpdateCityAPI from "../hooks/useUpdateCityAPI";
-import { AddCityFormProps } from "../types";
+import { initialValues } from "../../constants";
+import { validationSchema } from "../../formSchema";
+import useAddCityAPI from "../../hooks/useAddCityAPI";
+import useUpdateCityAPI from "../../hooks/useUpdateCityAPI";
+import { AddCityFormProps } from "../../types";
 
 type FormValuesTypes = InferType<typeof validationSchema>;
 
@@ -50,7 +50,7 @@ const AddCityForm: FC<AddCityFormProps> = ({
             </Typography>
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <TextField name="name" placeholder="Hotel name" />
+                <TextField name="name" placeholder="City name" />
               </Grid>
 
               <Grid item xs={12}>
