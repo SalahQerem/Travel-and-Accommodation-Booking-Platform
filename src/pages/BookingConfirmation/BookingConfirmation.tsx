@@ -52,7 +52,7 @@ const BookingConfirmation = () => {
               variant="contained"
               color="primary"
               component={Link}
-              to={`/`}
+              to={`/me`}
               sx={{ m: "auto" }}
             >
               Return to Home
