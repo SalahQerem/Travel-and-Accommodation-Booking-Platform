@@ -7,19 +7,19 @@ import { Card, Stack, Typography } from "@mui/material";
 import { Form, FormikProvider, useFormik } from "formik";
 import { ChangeEvent, FC } from "react";
 import { InferType } from "yup";
-import { initialValues, paymentMethods } from "../constants";
-import { validationSchema } from "../formSchema";
-import useAddBookingAPI from "../hooks/useAddBookingAPI";
-import { PaymentMethod } from "../types";
+import { initialValues, paymentMethods } from "../../constants";
+import { validationSchema } from "../../formSchema";
+import useAddBookingAPI from "../../hooks/useAddBookingAPI";
+import { PaymentMethod } from "../../types";
 
-type FormValues = InferType<typeof validationSchema>;
+export type FormValuesType = InferType<typeof validationSchema>;
 
 const CheckoutForm: FC = () => {
   const cart = useAppSelector(selectCartItems);
   const cartItemCount = useAppSelector(selectCartItemsCount);
   const { addBooking, isPending } = useAddBookingAPI();
 
-  const onSubmit = (values: FormValues) => {
+  const onSubmit = (values: FormValuesType) => {
     addBooking({
       roomNumber: cart[0].roomNumber,
       roomType: cart[0].roomType,
