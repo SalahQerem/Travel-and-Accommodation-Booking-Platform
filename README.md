@@ -3,7 +3,7 @@
     <img src="https://user-images.githubusercontent.com/62269745/174906068-aad23112-20fe-4ec8-877f-3ee1d9ec0a69.png#gh-dark-mode-only" width="40%">
 </p>
 
-<h1>Safer</h1>
+# Safer
 
 Welcome to Safer! Your ultimate travel accommodation booking platform. Seamlessly find and book the safest and most comfortable stays, from charming B&Bs to luxurious resorts, ensuring your travel is not just memorable but also secure. Dive into a hassle-free booking experience and set off on your next adventure with Safer.
 
@@ -24,36 +24,23 @@ In this project, I've used the following libraries:
 - **[formik](https://formik.org/)**: Forms in React, without the tears.
 - **[yup](https://github.com/jquense/yup)**: Dead simple Object schema validation.
 - **[react-router-dom](https://reactrouter.com/web/guides/quick-start)**: DOM bindings for React Router.
-- **[react-toastify](https://fkhadra.github.io/react-toastify/introduction)**: Easy toast notifications for React applications.
-- **[@emotion/react](https://emotion.sh/docs/@emotion/react)**: A library designed for writing css styles with JavaScript.
-- **[@emotion/styled](https://emotion.sh/docs/styled)**: Styled component library for Emotion.
 - **[dayjs](https://day.js.org/)**: Fast 2kB alternative to Moment.js with the same modern API.
 - **[date-fns](https://date-fns.org/)**: Modern JavaScript date utility library.
 - **[leaflet](https://leafletjs.com/)**: An open-source JavaScript library for mobile-friendly interactive maps.
 - **[react-leaflet](https://react-leaflet.js.org/)**: React components for Leaflet maps.
 - **[lottie-react](https://lottiefiles.com/web-player)**: Lottie for React.
 - **[react-slick](https://react-slick.neostack.com/)**: Carousel component built with React.
-- **[slick-carousel](https://kenwheeler.github.io/slick/)**: The last carousel you'll ever need.
 - **[react-spinners](https://www.npmjs.com/package/react-spinners)**: A collection of loading spinner components for React.
 - **[react-world-flags](https://www.npmjs.com/package/react-world-flags)**: React component for displaying world flags.
 - **[jwt-decode](https://github.com/auth0/jwt-decode)**: Decode JWT tokens, mostly useful for browser applications.
 - **[js-cookie](https://github.com/js-cookie/js-cookie)**: A simple, lightweight JavaScript API for handling cookies.
-- **[@types/react](https://www.npmjs.com/package/@types/react)**: TypeScript definitions for React.
 - **[react-date-range](https://hypeserver.github.io/react-date-range/)**: A date library agnostic date picker.
 - **[i18n-iso-countries](https://www.npmjs.com/package/i18n-iso-countries)**: ISO country codes for i18n.
 - **[jest-environment-jsdom](https://jestjs.io/docs/configuration#testenvironment-string)**: Jest environment for jsdom.
 - **[jest-preview](https://www.npmjs.com/package/jest-preview)**: Preview Jest snapshots in a browser.
-- **[ts-jest](https://kulshekhar.github.io/ts-jest/)**: A Jest transformer with source map support that lets you use Jest to test projects written in TypeScript.
-- **[ts-node](https://typestrong.org/ts-node/)**: TypeScript execution environment and REPL for Node.js.
-- **[whatwg-fetch](https://github.com/github/fetch)**: A window.fetch polyfill.
 - **[lucide-react](https://lucide.dev/docs/lucide-react)**: Beautiful and consistent icon toolkit.
-- **[react-lucid](https://lucide.dev)**: A set of clear and elegant React icons for building visually appealing interfaces.
 
-## Live Preview
-
-<h4 align="left">Live Preview is available at https://travel-and-accommodation-booking-platform-nine.vercel.app/</h4>
-
-## Public Pages
+## 🌟 Public Pages
 
 - **Login page**
 <img src="./src/assets/Readme-images/login-page.png" alt="Login page"/>
@@ -124,3 +111,50 @@ In this project, I've used the following libraries:
 - **Not found page**
 <img src="./src/assets/Readme-images/not-found.png" alt="Not found page"/>
 <br/>
+
+## 🌙 Dark Mode
+<img src="./src/assets/Readme-images/home-page-dark.png" alt="Home page with dark mode"/>
+<br/>
+
+## 💾 Installation
+
+To get this project up and running on your machine, follow these simple steps:
+
+1. **Clone the repository:**
+  ```bash
+   git clone https://github.com/SalahQerem/Travel-and-Accommodation-Booking-Platform.git
+  ```
+ 
+2. **Install npm packages:**
+Navigate to the project directory and install the required dependencies.
+  ```bash
+   npm install
+  ```
+If you encounter any issues, try forcing the npm installation:
+  ```bash
+  npm install --force
+  ```
+
+3. **Run the project:**
+Start the development server and begin exploring.
+  ```bash
+    npm run dev
+  ```
+**Enjoy your journey through the Travel Booking Platform! 🚀**
+
+## 📬 Contact
+
+If you have any questions or want to reach out, feel free to connect with me:
+
+<p align="center">
+  <a href="mailto:salahqerem@gmail.com">
+    <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" height="30">
+  </a>
+  <a href="https://www.linkedin.com/in/salah-al-din-qerem-83833423a/">
+    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" height="30">
+  </a>
+</p>
+
+## 💖 Acknowledgement
+
+I extend my heartfelt thanks to **[Foothill Technology Solutions](https://www.linkedin.com/company/foothill-technology-solutions-llc./mycompany/)** for offering me the opportunity to participate in this internship cycle. Their consistent support has been crucial in the development of this project.
