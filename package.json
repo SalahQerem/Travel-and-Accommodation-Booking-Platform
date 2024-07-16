@@ -44,7 +44,6 @@
     "react-spinners": "^0.13.8",
     "react-world-flags": "^1.6.0",
     "redux-persist": "^6.0.0",
-    "slick-carousel": "^1.8.1",
     "ts-jest": "^29.2.2",
     "ts-node": "^10.9.2",
     "whatwg-fetch": "^3.6.20",

@@ -10,20 +10,20 @@ export interface SessionData {
 }
 
 export const setSession = (token: string) => {
-  // Cookies.set(import.meta.env.VITE_TOKEN_ACCESS_KEY, token, {
-  //   expires: 1 / 24,
-  // });
-  Cookies.set("Safer-Auth-Token", token, {
+  Cookies.set(import.meta.env.VITE_TOKEN_ACCESS_KEY, token, {
     expires: 1 / 24,
   });
+  // Cookies.set("Safer-Auth-Token", token, {
+  //   expires: 1 / 24,
+  // });
 };
 
 export const getSession = () => {
-  // return Cookies.get(import.meta.env.VITE_TOKEN_ACCESS_KEY);
-  return Cookies.get("Safer-Auth-Token");
+  return Cookies.get(import.meta.env.VITE_TOKEN_ACCESS_KEY);
+  // return Cookies.get("Safer-Auth-Token");
 };
 
 export const clearSession = () => {
-  // Cookies.remove(import.meta.env.VITE_TOKEN_ACCESS_KEY);
-  Cookies.remove("Safer-Auth-Token");
+  Cookies.remove(import.meta.env.VITE_TOKEN_ACCESS_KEY);
+  // Cookies.remove("Safer-Auth-Token");
 };
