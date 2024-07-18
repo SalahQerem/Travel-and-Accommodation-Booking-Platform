@@ -77,11 +77,11 @@ const SearchForm: FC<SearchFormProps> = ({
     >
       <Typography variant="h5">{label}</Typography>
       <UpDownCounter
-        value={formikProps.values[name]!}
+        value={formikProps.values[name] ?? 0}
         onChange={(newValue: number) =>
           formikProps.setFieldValue(name, newValue)
         }
-        min={min || 0}
+        min={min}
       />
     </Stack>
   ));

@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { AddToCartPayload, CartState, RemoveFromCartItem } from "./types";
+import { AddToCartPayload, CartState, RemoveFromCartPayload } from "./types";
 const cashedCart = localStorage.getItem(import.meta.env.VITE_CART_ACCESS_KEY);
 // const cashedCart = localStorage.getItem("Safer-cart");
 
@@ -24,7 +24,7 @@ const cartSlice = createSlice({
       // localStorage.setItem("Safer-cart", JSON.stringify(state));
       return state;
     },
-    removeFromCart: (state, action: PayloadAction<RemoveFromCartItem>) => {
+    removeFromCart: (state, action: PayloadAction<RemoveFromCartPayload>) => {
       state = state.filter(
         (cartItem) => cartItem.roomNumber !== action.payload.roomNumber
       );
