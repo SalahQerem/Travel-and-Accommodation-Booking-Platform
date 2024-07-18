@@ -1,10 +1,10 @@
 import { selectThemeMode } from "@/features/AppSettings/selectors";
 import { useAppSelector } from "@/store";
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
-import { PropsWithChildren } from "react";
+import { FC, PropsWithChildren } from "react";
 import getSaferTheme from "./getSaferTheme";
 
-const SaferThemeProvider = ({ children }: PropsWithChildren) => {
+const SaferThemeProvider: FC<PropsWithChildren> = ({ children }) => {
   const themeMode = useAppSelector(selectThemeMode);
   const saferTheme = createTheme(getSaferTheme(themeMode));
 

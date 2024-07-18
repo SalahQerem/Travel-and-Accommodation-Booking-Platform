@@ -9,14 +9,14 @@ import {
   Stack,
 } from "@mui/material";
 import { TransitionProps } from "@mui/material/transitions";
-import React, { FC, forwardRef } from "react";
+import { FC, forwardRef, ReactElement, Ref } from "react";
 import { ConfirmDialogProps } from "./types";
 
 const Transition = forwardRef(function Transition(
   props: TransitionProps & {
-    children: React.ReactElement<any, any>;
+    children: ReactElement<any, any>;
   },
-  ref: React.Ref<unknown>
+  ref: Ref<unknown>
 ) {
   return <Slide direction="up" ref={ref} {...props} />;
 });

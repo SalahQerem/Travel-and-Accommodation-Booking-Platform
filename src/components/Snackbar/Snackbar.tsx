@@ -1,13 +1,13 @@
-import React from "react";
-import Stack from "@mui/material/Stack";
-import Snackbar from "@mui/material/Snackbar";
-import Alert from "./Alert";
-import AlertTitle from "@mui/material/AlertTitle";
-import Slide from "@mui/material/Slide";
 import { hideSnackbar, selectSnackbar } from "@/features/Snackbar";
 import { useAppDispatch, useAppSelector } from "@/store";
+import AlertTitle from "@mui/material/AlertTitle";
+import Slide from "@mui/material/Slide";
+import Snackbar from "@mui/material/Snackbar";
+import Stack from "@mui/material/Stack";
+import React from "react";
+import Alert from "./Alert";
 
-const AnharSnackbar = () => {
+const SaferSnackbar = () => {
   const dispatch = useAppDispatch();
   const {
     isOpen,
@@ -55,4 +55,4 @@ const AnharSnackbar = () => {
   );
 };
 
-export default AnharSnackbar;
+export default SaferSnackbar;
