@@ -4,6 +4,6 @@ export interface CartState extends Array<CartItem> {}
 
 export interface AddToCartPayload extends CartItem {}
 
-export interface RemoveFromCartItem {
+export interface RemoveFromCartPayload {
   roomNumber: string;
 }
