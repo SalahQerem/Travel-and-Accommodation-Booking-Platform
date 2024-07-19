@@ -14,6 +14,7 @@ import {
 import { Baby, UsersRound } from "lucide-react";
 import { FC } from "react";
 import { AvailableRoomProps } from "../types";
+import { useSnackBar } from "@/hooks/useSnackbar";
 
 const AvailableRoom: FC<AvailableRoomProps> = ({ room }) => {
   const {
@@ -28,6 +29,7 @@ const AvailableRoom: FC<AvailableRoomProps> = ({ room }) => {
   } = room;
 
   const dispatch = useAppDispatch();
+  const { showSuccessSnackbar } = useSnackBar();
 
   const isItemInCart = useAppSelector((state) =>
     selectIsItemInCart(state, roomNumber)
@@ -35,6 +37,9 @@ const AvailableRoom: FC<AvailableRoomProps> = ({ room }) => {
 
   const handleAddToCart = () => {
     dispatch(addToCart(room));
+    showSuccessSnackbar({
+      message: "Your Booking has been added to your Cart!",
+    });
   };
 
   const renderAmenities = roomAmenities.map((amenity) => (
