@@ -6,8 +6,13 @@ import FeaturedDeals from "./components/FeaturedDeals";
 import RecentlyVisitedHotels from "./components/RecentlyVisitedHotels";
 import TrendingDestinations from "./components/TrendingDestinations";
 import styles from "./style.module.css";
+import { useEffect } from "react";
 
 const LandingPage = () => {
+  useEffect(() => {
+    throw new Error("I crashed!");
+  }, []);
+
   return (
     <StyledContainer id="header" minHeight="auto">
       <Container sx={{ pt: 20 }}>
