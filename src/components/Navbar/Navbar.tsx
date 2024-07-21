@@ -166,17 +166,18 @@ const Navbar: FC = () => {
                     mode={themeMode}
                     toggleColorMode={() => dispatch(toggleThemeMode())}
                   />
-
-                  <Badge badgeContent={4} color="primary">
+                  {isUser && (
                     <Button
                       size="small"
-                      className={styles.cartBtn}
                       component={Link}
                       to={"/me/checkout"}
+                      className={styles.cartBtn}
                     >
-                      <ShoppingCart color="primary" />
+                      <Badge badgeContent={cartItemsCount} color="primary">
+                        <ShoppingCart color="primary" />
+                      </Badge>
                     </Button>
-                  </Badge>
+                  )}
                   <Button
                     color="primary"
                     variant="contained"

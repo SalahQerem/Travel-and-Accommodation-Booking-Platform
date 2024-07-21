@@ -2,7 +2,7 @@ import StyledContainer from "@/containers/StyledContainer";
 import { selectCartItems } from "@/features/Cart";
 import routeHOC from "@/routes/HOCs/routeHOC";
 import { useAppSelector } from "@/store";
-import { Container, Grid } from "@mui/material";
+import { Container, Grid, Typography } from "@mui/material";
 import CartItem from "./components/CartItem";
 import CheckoutForm from "./components/CheckoutForm";
 
@@ -20,7 +20,13 @@ const Checkout = () => {
       <Container sx={{ py: 14 }}>
         <Grid container spacing={2}>
           <Grid item container xs={12} sm={6} md={8} spacing={2}>
-            {renderCart}
+            {cart.length ? (
+              renderCart
+            ) : (
+              <Typography variant="h5" textAlign="center" width="100%" mt={3}>
+                Yout Cart is empty ☹️
+              </Typography>
+            )}
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
             <CheckoutForm />

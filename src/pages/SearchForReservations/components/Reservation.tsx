@@ -12,6 +12,7 @@ import {
 import { MapPin, University } from "lucide-react";
 import { FC } from "react";
 import { ReservationProps } from "../types";
+import { Link } from "react-router-dom";
 
 const Reservation: FC<ReservationProps> = ({ reservation }) => {
   const {
@@ -23,6 +24,7 @@ const Reservation: FC<ReservationProps> = ({ reservation }) => {
     discount,
     roomType,
     amenities,
+    hotelId,
   } = reservation;
 
   const renderAmenities = amenities.map((amenity) => (
@@ -94,6 +96,8 @@ const Reservation: FC<ReservationProps> = ({ reservation }) => {
           size="small"
           variant="contained"
           color="primary"
+          component={Link}
+          to={`/me/hotel/${hotelId}`}
           sx={{ m: "auto" }}
         >
           Show more details

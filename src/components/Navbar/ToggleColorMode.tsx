@@ -9,7 +9,7 @@ const ToggleColorMode: FC<ToggleColorModeProps> = ({
   toggleColorMode,
 }) => {
   return (
-    <Box sx={{ maxWidth: "32px" }}>
+    <Box sx={{ maxWidth: "32px", mx: 2 }}>
       <Button
         variant="text"
         onClick={toggleColorMode}
