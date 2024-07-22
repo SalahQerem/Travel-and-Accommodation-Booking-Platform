@@ -1,22 +1,21 @@
-import { FC, PropsWithChildren } from "react";
-import SaferThemeProvider from "./style/SaferThemeProvider";
-import { QueryClientProvider } from "@tanstack/react-query";
-import saferQueryClient from "@/config/queryClient";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { Provider } from "react-redux";
 import saferStore from "@/store/store";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { FC, PropsWithChildren } from "react";
+import { Provider } from "react-redux";
+import SaferQueryClientProvider from "./containers/SaferQueryClientProvider";
+import SaferThemeProvider from "./style/SaferThemeProvider";
 
 const Providers: FC<PropsWithChildren> = ({ children }) => {
   return (
     <Provider store={saferStore}>
-      <QueryClientProvider client={saferQueryClient}>
+      <SaferQueryClientProvider>
         <SaferThemeProvider>{children}</SaferThemeProvider>
         <ReactQueryDevtools
           initialIsOpen={false}
           position="left"
           buttonPosition="bottom-left"
         />
-      </QueryClientProvider>
+      </SaferQueryClientProvider>
     </Provider>
   );
 };
