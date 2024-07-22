@@ -1,10 +1,12 @@
-import { QueryClient, QueryCache } from "@tanstack/react-query";
+import { AxiosBaseError } from "@/types/axios";
+import { extractErrorMessage } from "@/utils/errorHandling";
+import { QueryCache, QueryClient } from "@tanstack/react-query";
 
 const saferQueryClient = new QueryClient({
   queryCache: new QueryCache({
     onError: (error) => {
-      // const errorMessage = extractErrorMessage(error as AxiosBaseError)
-      console.error(`Something went wrong: ${error}`);
+      const errorMessage = extractErrorMessage(error as AxiosBaseError);
+      console.error(`Something went wrong: ${errorMessage}`);
     },
   }),
   defaultOptions: {
