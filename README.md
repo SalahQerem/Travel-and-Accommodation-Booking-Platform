@@ -115,6 +115,10 @@ In this project, I've used the following libraries:
 <img src="./src/assets/Readme-images/home-page-dark.png" alt="Home page with dark mode"/>
 <br/>
 
+## 💫 Starting point
+
+I followed this UX: [https://excalidraw.com/](https://excalidraw.com/#json=E95OwtS_yCQIeY6z2C1y2,hVOE2l7QvJXilwsDqrIqDg)
+
 ## 💾 Installation
 
 To get this project up and running on your machine, follow these simple steps:
