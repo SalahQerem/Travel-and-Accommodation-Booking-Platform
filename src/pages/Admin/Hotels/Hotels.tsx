@@ -2,8 +2,8 @@ import ConfirmActionDialog from "@/components/ConfirmActionDialog";
 import { defaultRequestQuery, paginationOptions } from "@/constants";
 import BlockUI from "@/containers/BlockUI";
 import StyledContainer from "@/containers/StyledContainer";
-import useGetHotelDetailsAPI from "@/services/useGetHotelDetailsAPI";
 import routeHOC from "@/routes/HOCs/routeHOC";
+import useGetHotelDetailsAPI from "@/services/useGetHotelDetailsAPI";
 import useGetHotelsAPI from "@/services/useGetHotelsAPI";
 import {
   Hotel as HotelType,
