@@ -25,7 +25,6 @@ In this project, I've used the following libraries:
 - **[yup](https://github.com/jquense/yup)**: Dead simple Object schema validation.
 - **[react-router-dom](https://reactrouter.com/web/guides/quick-start)**: DOM bindings for React Router.
 - **[dayjs](https://day.js.org/)**: Fast 2kB alternative to Moment.js with the same modern API.
-- **[date-fns](https://date-fns.org/)**: Modern JavaScript date utility library.
 - **[leaflet](https://leafletjs.com/)**: An open-source JavaScript library for mobile-friendly interactive maps.
 - **[react-leaflet](https://react-leaflet.js.org/)**: React components for Leaflet maps.
 - **[lottie-react](https://lottiefiles.com/web-player)**: Lottie for React.
@@ -36,83 +35,83 @@ In this project, I've used the following libraries:
 - **[js-cookie](https://github.com/js-cookie/js-cookie)**: A simple, lightweight JavaScript API for handling cookies.
 - **[react-date-range](https://hypeserver.github.io/react-date-range/)**: A date library agnostic date picker.
 - **[i18n-iso-countries](https://www.npmjs.com/package/i18n-iso-countries)**: ISO country codes for i18n.
-- **[jest-environment-jsdom](https://jestjs.io/docs/configuration#testenvironment-string)**: Jest environment for jsdom.
 - **[jest-preview](https://www.npmjs.com/package/jest-preview)**: Preview Jest snapshots in a browser.
 - **[lucide-react](https://lucide.dev/docs/lucide-react)**: Beautiful and consistent icon toolkit.
 
 ## 🌟 Public Pages
 
 - **Login page**
-<img src="./src/assets/Readme-images/login-page.png" alt="Login page"/>
-<br/>
+  <img src="./src/assets/Readme-images/login-page.png" alt="Login page"/>
+  <br/>
 
 ## User Pages
 
 - **Home page**
-<img src="./src/assets/Readme-images/home-page.png" alt="Home page"/>
-<br/>
+  <img src="./src/assets/Readme-images/home-page.png" alt="Home page"/>
+  <br/>
 
 - **Search page**
-<img src="./src/assets/Readme-images/search-page.png" alt="Search page"/>
-<br/>
+  <img src="./src/assets/Readme-images/search-page.png" alt="Search page"/>
+  <br/>
 
 - **Search page**
-<img src="./src/assets/Readme-images/search-page-ramallah.png" alt="Search page"/>
-<br/>
+  <img src="./src/assets/Readme-images/search-page-ramallah.png" alt="Search page"/>
+  <br/>
 
 - **Hotel details page**
-<img src="./src/assets/Readme-images/hotel-details-page.png" alt="Hotel details page"/>
-<br/>
+  <img src="./src/assets/Readme-images/hotel-details-page.png" alt="Hotel details page"/>
+  <br/>
 
 - **Checkout page**
-<img src="./src/assets/Readme-images/checkout-page.png" alt="Checkout page"/>
-<br/>
+  <img src="./src/assets/Readme-images/checkout-page.png" alt="Checkout page"/>
+  <br/>
 
 - **Booking Confirmation page**
-<img src="./src/assets/Readme-images/confirmation-page.png" alt="Booking Confirmation page"/>
-<br/>
+  <img src="./src/assets/Readme-images/confirmation-page.png" alt="Booking Confirmation page"/>
+  <br/>
 
 ## Admin Pages
 
 - **Cities page**
-<img src="./src/assets/Readme-images/cities-page.png" alt="Cities page"/>
-<br/>
+  <img src="./src/assets/Readme-images/cities-page.png" alt="Cities page"/>
+  <br/>
 
 - **Add City form**
-<img src="./src/assets/Readme-images/add-city-form.png" alt="Add City form"/>
-<br/>
+  <img src="./src/assets/Readme-images/add-city-form.png" alt="Add City form"/>
+  <br/>
 
 - **Hotels page**
-<img src="./src/assets/Readme-images/hotels-page.png" alt="Hotels page"/>
-<br/>
+  <img src="./src/assets/Readme-images/hotels-page.png" alt="Hotels page"/>
+  <br/>
 
 - **Add Hotels form**
-<img src="./src/assets/Readme-images/add-hotel-form.png" alt="Add Hotels form"/>
-<br/>
+  <img src="./src/assets/Readme-images/add-hotel-form.png" alt="Add Hotels form"/>
+  <br/>
 
 - **Rooms page**
-<img src="./src/assets/Readme-images/rooms-page.png" alt="Rooms page"/>
-<br/>
+  <img src="./src/assets/Readme-images/rooms-page.png" alt="Rooms page"/>
+  <br/>
 
 - **Add Rooms form**
-<img src="./src/assets/Readme-images/add-room-form.png" alt="Add Rooms form"/>
-<br/>
+  <img src="./src/assets/Readme-images/add-room-form.png" alt="Add Rooms form"/>
+  <br/>
 
 ## Other Pages
 
 - **Access denied page**
-<img src="./src/assets/Readme-images/access-denied.png" alt="Access denied page"/>
-<br/>
+  <img src="./src/assets/Readme-images/access-denied.png" alt="Access denied page"/>
+  <br/>
 
 - **Unauthenticated page**
-<img src="./src/assets/Readme-images/unauthenticated.png" alt="Unauthenticated page"/>
-<br/>
+  <img src="./src/assets/Readme-images/unauthenticated.png" alt="Unauthenticated page"/>
+  <br/>
 
 - **Not found page**
-<img src="./src/assets/Readme-images/not-found.png" alt="Not found page"/>
-<br/>
+  <img src="./src/assets/Readme-images/not-found.png" alt="Not found page"/>
+  <br/>
 
 ## 🌙 Dark Mode
+
 <img src="./src/assets/Readme-images/home-page-dark.png" alt="Home page with dark mode"/>
 <br/>
 
@@ -121,25 +120,31 @@ In this project, I've used the following libraries:
 To get this project up and running on your machine, follow these simple steps:
 
 1. **Clone the repository:**
-  ```bash
-   git clone https://github.com/SalahQerem/Travel-and-Accommodation-Booking-Platform.git
-  ```
- 
+
+```bash
+ git clone https://github.com/SalahQerem/Travel-and-Accommodation-Booking-Platform.git
+```
+
 2. **Install npm packages:**
-Navigate to the project directory and install the required dependencies.
-  ```bash
-   npm install
-  ```
+   Navigate to the project directory and install the required dependencies.
+
+```bash
+ npm install
+```
+
 If you encounter any issues, try forcing the npm installation:
-  ```bash
-  npm install --force
-  ```
+
+```bash
+npm install --force
+```
 
 3. **Run the project:**
-Start the development server and begin exploring.
-  ```bash
-    npm run dev
-  ```
+   Start the development server and begin exploring.
+
+```bash
+  npm run dev
+```
+
 **Enjoy your journey through the Travel Booking Platform! 🚀**
 
 ## 📬 Contact

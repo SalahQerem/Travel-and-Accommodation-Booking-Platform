@@ -16,8 +16,8 @@ const UnexpectedError: FC<UnexpectedErrorProps> = ({
     return (
       <ContainerStack gap={2} isProduction>
         <ErrorTypography variant="h4">
-          <ErrorOutlineIcon fontSize={"large"} sx={{ m: 10 }} /> Unexpected
-          Error
+          <ErrorOutlineIcon fontSize={"large"} sx={{ m: 10 }} />
+          Unexpected Error
         </ErrorTypography>
         <Button
           onClick={resetErrorBoundary}
@@ -40,7 +40,7 @@ const UnexpectedError: FC<UnexpectedErrorProps> = ({
       <ErrorDetail isErrorStack>
         <Typography>{error?.stack}</Typography>
       </ErrorDetail>
-      <Stack direction="row" sx={{ justifyContent: "center" }}>
+      <Stack direction="row" justifyContent="center">
         <Button
           onClick={resetErrorBoundary}
           fullWidth={false}

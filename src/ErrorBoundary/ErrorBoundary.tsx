@@ -15,7 +15,6 @@ const ErrorBoundary: FC<PropsWithChildren> = ({ children }) => {
     error,
     info
   ) => {
-    // Use your preferred error logging service
     console.error("Caught an error:", error, info);
   };
 
@@ -24,7 +23,7 @@ const ErrorBoundary: FC<PropsWithChildren> = ({ children }) => {
       FallbackComponent={UnexpectedError}
       onError={logErrorToService}
       onReset={resetErrorBoundary} // reset the state of your app here
-      resetKeys={[someKey]} //when changed, will trigger a reset of the error boundary.
+      resetKeys={[someKey]} // when changed, will trigger a reset of the error boundary.
     >
       {children}
     </ErrorBoundaryComponent>
