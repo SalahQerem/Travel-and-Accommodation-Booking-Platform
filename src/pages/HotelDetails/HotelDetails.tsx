@@ -1,6 +1,6 @@
 import Amenity from "@/components/Amenity";
 import InteractiveMap from "@/components/InteractiveMap";
-import BlockUI from "@/containers/BlockUI";
+import Loader from "@/components/Loader";
 import StyledContainer from "@/containers/StyledContainer";
 import routeHOC from "@/routes/HOCs/routeHOC";
 import useGetHotelDetailsAPI from "@/services/useGetHotelDetailsAPI";
@@ -79,76 +79,86 @@ const HotelDetails = () => {
     </Grid>
   ));
 
-  let isLoading =
-    isFetchingHotel || isFetchingGalary || isFetchingReviews || isFetchingRooms;
-
-  if (isLoading) return <BlockUI />;
-
   return (
     <StyledContainer>
       <Container sx={{ py: 14 }}>
         <Grid container spacing={2} alignItems="flex-start">
-          <Grid item xs={12} md={4}>
-            <Card sx={{ p: 2 }}>
-              <Stack gap={2}>
-                <Stack
-                  direction="row"
-                  justifyContent="space-between"
-                  alignItems="center"
-                >
-                  <Typography component="h1" variant="h5">
-                    {hotel?.hotelName}
-                  </Typography>
-                  <Rating value={hotel?.starRating} readOnly />
-                </Stack>
-                <Typography variant="body1">{hotel?.description}</Typography>
-                <Stack gap={1}>
-                  <Typography component="h2" variant="h6">
-                    Amenities
-                  </Typography>
-                  {renderAmenities}
-                </Stack>
-                <InteractiveMap
-                  popupLabel={hotel?.hotelName!}
-                  longitude={hotel?.longitude!}
-                  latitude={hotel?.latitude!}
-                  className={styles.locationContainer}
-                />
-                <Stack gap={1}>
-                  <Typography component="h2" variant="h6">
-                    Reviews
-                  </Typography>
-                  {renderReviews}
-                  <Button
-                    variant="contained"
-                    onClick={handleIncreaseReviewsCount}
-                    disabled={reviewsCountToDisplay >= reviews!.length}
+          {isFetchingHotel ? (
+            <Loader />
+          ) : (
+            <Grid item xs={12} md={4}>
+              <Card sx={{ p: 2 }}>
+                <Stack gap={2}>
+                  <Stack
+                    direction="row"
+                    justifyContent="space-between"
+                    alignItems="center"
                   >
-                    Load more
-                  </Button>
-                </Stack>
-              </Stack>
-            </Card>
-          </Grid>
-          <Grid item container spacing={3} xs={12} md={8}>
-            <Grid container item spacing={1}>
-              {outdoorImage && (
-                <Grid item xs={12} sm={5.5}>
-                  <img
-                    src={outdoorImage.url}
-                    alt={hotel?.hotelName}
-                    className={styles.hotelImg}
-                    onClick={() => handleSelectGalaryItem(outdoorImage.url)}
+                    <Typography component="h1" variant="h5">
+                      {hotel?.hotelName}
+                    </Typography>
+                    <Rating value={hotel?.starRating} readOnly />
+                  </Stack>
+                  <Typography variant="body1">{hotel?.description}</Typography>
+                  <Stack gap={1}>
+                    <Typography component="h2" variant="h6">
+                      Amenities
+                    </Typography>
+                    {renderAmenities}
+                  </Stack>
+                  <InteractiveMap
+                    popupLabel={hotel?.hotelName!}
+                    longitude={hotel?.longitude!}
+                    latitude={hotel?.latitude!}
+                    className={styles.locationContainer}
                   />
-                </Grid>
-              )}
-              <Grid container item xs={12} sm={6.5} spacing={1}>
-                {renderWideImages}
-              </Grid>
-              <Grid container item xs={12} spacing={1} justifyContent="center">
-                {renderSquareImages}
-              </Grid>
+                  <Stack gap={1}>
+                    <Typography component="h2" variant="h6">
+                      Reviews
+                    </Typography>
+                    {isFetchingReviews ? <Loader /> : renderReviews}
+                    <Button
+                      variant="contained"
+                      onClick={handleIncreaseReviewsCount}
+                      disabled={reviewsCountToDisplay >= reviews!.length}
+                    >
+                      Load more
+                    </Button>
+                  </Stack>
+                </Stack>
+              </Card>
             </Grid>
+          )}
+
+          <Grid item container spacing={3} xs={12} md={8}>
+            {isFetchingGalary ? (
+              <Loader />
+            ) : (
+              <Grid container item spacing={1}>
+                {outdoorImage && (
+                  <Grid item xs={12} sm={5.5}>
+                    <img
+                      src={outdoorImage.url}
+                      alt={hotel?.hotelName}
+                      className={styles.hotelImg}
+                      onClick={() => handleSelectGalaryItem(outdoorImage.url)}
+                    />
+                  </Grid>
+                )}
+                <Grid container item xs={12} sm={6.5} spacing={1}>
+                  {renderWideImages}
+                </Grid>
+                <Grid
+                  container
+                  item
+                  xs={12}
+                  spacing={1}
+                  justifyContent="center"
+                >
+                  {renderSquareImages}
+                </Grid>
+              </Grid>
+            )}
 
             <Grid container item xs={12} spacing={1} justifyContent="center">
               <Grid item xs={12}>
@@ -156,7 +166,7 @@ const HotelDetails = () => {
                   Available Rooms
                 </Typography>
               </Grid>
-              {renderAvailableRooms}
+              {isFetchingRooms ? <Loader /> : renderAvailableRooms}
             </Grid>
           </Grid>
         </Grid>

@@ -8,10 +8,6 @@ import TrendingDestinations from "./components/TrendingDestinations";
 import styles from "./style.module.css";
 
 const LandingPage = () => {
-  // useEffect(() => {
-  //   throw new Error("I crashed!");
-  // }, []);
-
   return (
     <StyledContainer id="header" minHeight="auto">
       <Container sx={{ pt: 20 }}>

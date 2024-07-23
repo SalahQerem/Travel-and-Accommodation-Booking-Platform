@@ -1,4 +1,4 @@
-import BlockUI from "@/containers/BlockUI";
+import Loader from "@/components/Loader";
 import { Container, Grid, Typography } from "@mui/material";
 import useGetTrendingDestinationsAPI from "../hooks/useGetTrendingDestinationsAPI";
 import Destination from "./Destination";
@@ -14,7 +14,7 @@ const TrendingDestinations = () => {
     )
   );
 
-  if (isFetching) return <BlockUI />;
+  if (isFetching) return <Loader />;
 
   return (
     <Container id="trending destinations" sx={{ py: { xs: 2, sm: 4 } }}>

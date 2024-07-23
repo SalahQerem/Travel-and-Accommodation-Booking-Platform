@@ -1,4 +1,4 @@
-import BlockUI from "@/containers/BlockUI";
+import Loader from "@/components/Loader";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import { Typography } from "@mui/material";
 import Container from "@mui/material/Container";
@@ -24,7 +24,7 @@ const FeaturedDeals = () => {
     autoplay: true,
   };
 
-  if (isFetching) return <BlockUI />;
+  if (isFetching) return <Loader />;
 
   return (
     <Container

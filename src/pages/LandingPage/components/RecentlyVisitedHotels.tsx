@@ -1,4 +1,4 @@
-import BlockUI from "@/containers/BlockUI";
+import Loader from "@/components/Loader";
 import { Container, Grid, Typography } from "@mui/material";
 import useGetRencentlyVisitedHotelsAPI from "../hooks/useGetRencentlyVisitedHotelsAPI";
 import RecentlyVisitedHotel from "./RecentlyVisitedHotel";
@@ -13,7 +13,7 @@ const RecentlyVisitedHotels = () => {
     </Grid>
   ));
 
-  if (isFetching) return <BlockUI />;
+  if (isFetching) return <Loader />;
 
   return (
     <Container id="recently visited hotels" sx={{ py: { xs: 2, sm: 4 } }}>

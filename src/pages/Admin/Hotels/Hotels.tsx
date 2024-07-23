@@ -1,6 +1,6 @@
 import ConfirmActionDialog from "@/components/ConfirmActionDialog";
+import Loader from "@/components/Loader";
 import { defaultRequestQuery, paginationOptions } from "@/constants";
-import BlockUI from "@/containers/BlockUI";
 import StyledContainer from "@/containers/StyledContainer";
 import routeHOC from "@/routes/HOCs/routeHOC";
 import useGetHotelDetailsAPI from "@/services/useGetHotelDetailsAPI";
@@ -108,8 +108,6 @@ const Hotels = () => {
     </Grid>
   ));
 
-  if (isFetching) return <BlockUI />;
-
   return (
     <StyledContainer>
       <Container sx={{ pt: 14 }}>
@@ -175,7 +173,7 @@ const Hotels = () => {
             </Stack>
           </Stack>
           <Grid container spacing={2}>
-            {renderHotels}
+            {isFetching ? <Loader /> : renderHotels}
           </Grid>
         </Stack>
         <Stack justifyContent="center" alignItems="center" my={5}>
