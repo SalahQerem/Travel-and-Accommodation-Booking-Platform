@@ -119,6 +119,10 @@ In this project, I've used the following libraries:
 
 I followed this UX: [https://excalidraw.com/](https://excalidraw.com/#json=E95OwtS_yCQIeY6z2C1y2,hVOE2l7QvJXilwsDqrIqDg)
 
+## 🎯 Project Scrum Board
+My project is managed using an agile scrum board to track tasks and sprints.
+<img src="./src/assets/Readme-images/safer-board.png" alt="safer scrum board"/>
+
 ## 💾 Installation
 
 To get this project up and running on your machine, follow these simple steps:
