@@ -22,7 +22,7 @@ const useAddCityAPI = (
     onSuccess: () => {
       showSuccessSnackbar({ message: "City Added Successfully" });
       handleCloseCityFormDialog();
-      setTimeout(() => refetchCities(), 500); // remove this for all hooks
+      refetchCities();
     },
     onError: (error) => {
       const errorMessage = extractErrorMessage(error as AxiosBaseError);

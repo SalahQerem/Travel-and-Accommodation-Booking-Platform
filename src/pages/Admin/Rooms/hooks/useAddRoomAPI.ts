@@ -22,7 +22,7 @@ const useAddRoomAPI = (
     onSuccess: () => {
       showSuccessSnackbar({ message: "Room Added Successfully" });
       handleCloseAddRoomDialog();
-      setTimeout(() => refetchRooms(), 500);
+      refetchRooms();
     },
     onError: (error) => {
       const errorMessage = extractErrorMessage(error as AxiosBaseError);

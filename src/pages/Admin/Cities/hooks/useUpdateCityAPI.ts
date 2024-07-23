@@ -20,7 +20,7 @@ const useUpdateCityAPI = (
     onSuccess: () => {
       showSuccessSnackbar({ message: "City Updated Successfully" });
       handleCloseCityFormDialog();
-      setTimeout(() => refetchCities(), 500);
+      refetchCities();
     },
     onError: () => {
       showErrorSnackbar({ message: "Can't update this City" });

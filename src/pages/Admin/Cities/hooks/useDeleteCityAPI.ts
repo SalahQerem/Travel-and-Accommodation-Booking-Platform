@@ -20,7 +20,7 @@ const useDeleteCityAPI = (
     onSuccess: () => {
       showSuccessSnackbar({ message: "City Deleted Successfully" });
       handleCloseConfirmDeleteDialog();
-      setTimeout(() => refetchCities(), 500);
+      refetchCities();
     },
     onError: () => {
       showErrorSnackbar({ message: "Can't delete this City" });

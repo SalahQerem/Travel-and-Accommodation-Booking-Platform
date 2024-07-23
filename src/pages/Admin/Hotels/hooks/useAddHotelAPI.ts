@@ -24,7 +24,7 @@ const useAddHotelAPI = (
     onSuccess: () => {
       showSuccessSnackbar({ message: "Hotel Added Successfully" });
       handleCloseAddHotelDialog();
-      setTimeout(() => refetchHotels(), 500);
+      refetchHotels();
     },
     onError: (error) => {
       const errorMessage = extractErrorMessage(error as AxiosBaseError);
