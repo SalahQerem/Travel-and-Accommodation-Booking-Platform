@@ -1,20 +1,13 @@
 import ConfirmActionDialog from "@/components/ConfirmActionDialog";
-import { defaultRequestQuery } from "@/constants";
-import BlockUI from "@/containers/BlockUI";
+import FilterForm from "@/components/FilterForm";
+import Loader from "@/components/Loader";
 import StyledContainer from "@/containers/StyledContainer";
 import routeHOC from "@/routes/HOCs/routeHOC";
 import useGetCitiesAPI from "@/services/useGetCitiesAPI";
-import { City as CityType, RequestQuery } from "@/types";
-import {
-  Button,
-  Container,
-  Grid,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { Plus, Search } from "lucide-react";
-import { ChangeEvent, useState } from "react";
+import { City as CityType } from "@/types";
+import { Button, Container, Grid, Stack, Typography } from "@mui/material";
+import { Plus } from "lucide-react";
+import { useState } from "react";
 import AddCityDialog from "./components/AddCityDialog";
 import City from "./components/City";
 import { defaultCity } from "./constants";
@@ -24,9 +17,7 @@ const Cities = () => {
   const [isCityFormDialogOpen, setIsCityFormDialogOpen] =
     useState<boolean>(false);
   const [cityToUpdate, setCityToUpdate] = useState<CityType>(defaultCity);
-  const [nameToSearch, setNameToSearch] = useState<string>("");
-  const [requestQuery, setRequestQuery] =
-    useState<RequestQuery>(defaultRequestQuery);
+  const [searchQuery, setSearchQuery] = useState<string>("");
   const [cityToDelete, setCityToDelete] = useState(defaultCity);
   const [isConfirmDeleteDialogOpen, setIsConfirmDeleteDialogOpen] =
     useState<boolean>(false);
@@ -55,27 +46,27 @@ const Cities = () => {
     setCityToUpdate(city);
   };
 
-  const handleSearchForCity = () => {
-    setRequestQuery({ ...requestQuery, name: nameToSearch });
-  };
-
-  const { cities, refetchCities, isFetching } = useGetCitiesAPI(requestQuery);
+  const { cities, refetchCities, isFetching } = useGetCitiesAPI();
   const { deleteCity, isPending } = useDeleteCityAPI(
     refetchCities,
     handleCloseConfirmDeleteDialog
   );
 
-  const renderCities = cities.map((city) => (
-    <Grid item xs={12} md={6} key={city.id}>
-      <City
-        city={city}
-        handleUpdateCity={handleUpdateCity}
-        handleOpenConfirmDeleteDialog={handleOpenConfirmDeleteDialog}
-      />
-    </Grid>
-  ));
-
-  if (isFetching) return <BlockUI />;
+  const renderCities = cities
+    .filter(
+      (city) =>
+        city.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        city.description.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+    .map((city) => (
+      <Grid item xs={12} md={6} key={city.id}>
+        <City
+          city={city}
+          handleUpdateCity={handleUpdateCity}
+          handleOpenConfirmDeleteDialog={handleOpenConfirmDeleteDialog}
+        />
+      </Grid>
+    ));
 
   return (
     <StyledContainer>
@@ -90,24 +81,10 @@ const Cities = () => {
               Cities
             </Typography>
             <Stack direction="row" gap={2}>
-              <TextField
-                placeholder="Search by name"
-                size="small"
-                value={nameToSearch}
-                onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                  if (event.target.value) setNameToSearch(event.target.value);
-                  else setRequestQuery({ ...requestQuery, name: "" });
-                }}
+              <FilterForm
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
               />
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleSearchForCity}
-                disabled={requestQuery.name === nameToSearch}
-                endIcon={<Search />}
-              >
-                Search
-              </Button>
               <Button
                 variant="contained"
                 color="primary"
@@ -119,7 +96,7 @@ const Cities = () => {
             </Stack>
           </Stack>
           <Grid container spacing={2}>
-            {renderCities}
+            {isFetching ? <Loader /> : renderCities}
           </Grid>
         </Stack>
         <Stack justifyContent="center" alignItems="center" my={5}></Stack>

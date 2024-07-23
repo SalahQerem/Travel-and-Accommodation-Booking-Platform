@@ -22,14 +22,14 @@ const useAddCityAPI = (
     onSuccess: () => {
       showSuccessSnackbar({ message: "City Added Successfully" });
       handleCloseCityFormDialog();
-      setTimeout(() => refetchCities(), 500);
+      setTimeout(() => refetchCities(), 500); // remove this for all hooks
     },
     onError: (error) => {
       const errorMessage = extractErrorMessage(error as AxiosBaseError);
       showErrorSnackbar({ message: errorMessage });
     },
   });
-
+  // Todo add new city to the cashed data
   return {
     addCity,
     isPending,
