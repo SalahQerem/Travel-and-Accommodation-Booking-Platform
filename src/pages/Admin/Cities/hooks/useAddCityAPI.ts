@@ -1,35 +1,29 @@
 import { useSnackBar } from "@/hooks/useSnackbar";
-import { GetCitiesResponse } from "@/services/API/types";
 import { AxiosBaseError } from "@/types/axios";
 import { extractErrorMessage } from "@/utils/errorHandling";
-import {
-  QueryObserverResult,
-  RefetchOptions,
-  useMutation,
-} from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addCityAPI } from "../API";
+import { City } from "@/types";
 
-const useAddCityAPI = (
-  refetchCities: (
-    options?: RefetchOptions
-  ) => Promise<QueryObserverResult<GetCitiesResponse, Error>>,
-  handleCloseCityFormDialog: () => void
-) => {
+const useAddCityAPI = (handleCloseCityFormDialog: () => void) => {
   const { showSuccessSnackbar, showErrorSnackbar } = useSnackBar();
+  const queryClient = useQueryClient();
 
   const { mutate: addCity, isPending } = useMutation({
     mutationFn: addCityAPI,
-    onSuccess: () => {
+    onSuccess: (response) => {
       showSuccessSnackbar({ message: "City Added Successfully" });
       handleCloseCityFormDialog();
-      refetchCities();
+      queryClient.setQueryData(
+        ["cities"],
+        [...(queryClient.getQueryData(["cities"]) as Array<City>), response]
+      );
     },
     onError: (error) => {
       const errorMessage = extractErrorMessage(error as AxiosBaseError);
       showErrorSnackbar({ message: errorMessage });
     },
   });
-  // Todo add new city to the cashed data
   return {
     addCity,
     isPending,

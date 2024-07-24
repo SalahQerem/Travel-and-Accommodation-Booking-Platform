@@ -17,8 +17,8 @@ const Cities = () => {
   const [isCityFormDialogOpen, setIsCityFormDialogOpen] =
     useState<boolean>(false);
   const [cityToUpdate, setCityToUpdate] = useState<CityType>(defaultCity);
-  const [searchQuery, setSearchQuery] = useState<string>("");
   const [cityToDelete, setCityToDelete] = useState(defaultCity);
+  const [searchQuery, setSearchQuery] = useState<string>("");
   const [isConfirmDeleteDialogOpen, setIsConfirmDeleteDialogOpen] =
     useState<boolean>(false);
 
@@ -46,9 +46,9 @@ const Cities = () => {
     setCityToUpdate(city);
   };
 
-  const { cities, refetchCities, isFetching } = useGetCitiesAPI();
+  const { cities, isFetching } = useGetCitiesAPI();
   const { deleteCity, isPending } = useDeleteCityAPI(
-    refetchCities,
+    cityToDelete,
     handleCloseConfirmDeleteDialog
   );
 
@@ -104,7 +104,7 @@ const Cities = () => {
       <AddCityDialog
         isOpen={isCityFormDialogOpen}
         cityToUpdate={cityToUpdate}
-        refetchCities={refetchCities}
+        setCityToUpdate={setCityToUpdate}
         handleCloseCityFormDialog={handleCloseCityFormDialog}
       />
       <ConfirmActionDialog
