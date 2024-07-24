@@ -5,12 +5,13 @@ import StyledContainer from "@/containers/StyledContainer";
 import routeHOC from "@/routes/HOCs/routeHOC";
 import useGetCitiesAPI from "@/services/useGetCitiesAPI";
 import { City as CityType } from "@/types";
+import { globalFilter } from "@/utils";
 import { Button, Container, Grid, Stack, Typography } from "@mui/material";
 import { Plus } from "lucide-react";
 import { useState } from "react";
 import AddCityDialog from "./components/AddCityDialog";
 import City from "./components/City";
-import { defaultCity } from "./constants";
+import { defaultCity, searchOptions } from "./constants";
 import useDeleteCityAPI from "./hooks/useDeleteCityAPI";
 
 const Cities = () => {
@@ -52,13 +53,8 @@ const Cities = () => {
     handleCloseConfirmDeleteDialog
   );
 
-  const renderCities = cities
-    .filter(
-      (city) =>
-        city.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        city.description.toLowerCase().includes(searchQuery.toLowerCase())
-    )
-    .map((city) => (
+  const renderCities = globalFilter(cities, searchOptions, searchQuery).map(
+    (city) => (
       <Grid item xs={12} md={6} key={city.id}>
         <City
           city={city}
@@ -66,11 +62,12 @@ const Cities = () => {
           handleOpenConfirmDeleteDialog={handleOpenConfirmDeleteDialog}
         />
       </Grid>
-    ));
+    )
+  );
 
   return (
     <StyledContainer>
-      <Container sx={{ pt: 14 }}>
+      <Container sx={{ py: 14 }}>
         <Stack gap={2}>
           <Stack
             direction="row"
@@ -99,7 +96,6 @@ const Cities = () => {
             {isFetching ? <Loader /> : renderCities}
           </Grid>
         </Stack>
-        <Stack justifyContent="center" alignItems="center" my={5}></Stack>
       </Container>
       <AddCityDialog
         isOpen={isCityFormDialogOpen}

@@ -39,3 +39,12 @@ export const defaultHotel: Hotel = {
   latitude: 0,
   longitude: 0,
 };
+
+export const searchOptions = [
+  "name",
+  "description",
+  "hotelType",
+  "starRating",
+  "latitude",
+  "longitude",
+];

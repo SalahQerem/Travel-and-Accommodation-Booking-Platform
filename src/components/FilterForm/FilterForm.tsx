@@ -33,5 +33,3 @@ const FilterForm: FC<FilterFormProps> = ({ searchQuery, setSearchQuery }) => {
 };
 
 export default FilterForm;
-
-// Todo

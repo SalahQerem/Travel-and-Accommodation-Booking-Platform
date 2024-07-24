@@ -19,3 +19,15 @@ export const formatCamelCaseText = (text: string): string => {
 
   return formatted;
 };
+
+export const globalFilter = <T extends { [index: string]: any }>(
+  items: Array<T>,
+  options: Array<string>,
+  filterValue: string
+): Array<T> => {
+  return items.filter((item) =>
+    options.some((option) =>
+      `${item[option]}`.toLowerCase().includes(filterValue.toLowerCase())
+    )
+  );
+};
