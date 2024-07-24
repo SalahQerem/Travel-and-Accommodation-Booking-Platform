@@ -30,6 +30,7 @@ const AddRoomToCartDialog: FC<AddRoomToCartDialogProps> = ({
     showSuccessSnackbar({
       message: "Your Booking has been added to your Cart!",
     });
+    handleCloseAddRoomToCartDialog();
   };
 
   return (
