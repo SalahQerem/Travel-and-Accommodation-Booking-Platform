@@ -4,6 +4,7 @@ import Loader from "@/components/Loader";
 import StyledContainer from "@/containers/StyledContainer";
 import routeHOC from "@/routes/HOCs/routeHOC";
 import useGetHotelDetailsAPI from "@/services/useGetHotelDetailsAPI";
+import { Room } from "@/types";
 import {
   Button,
   Card,
@@ -16,8 +17,10 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import AddRoomToCartDialog from "./components/AddRoomToCartDialog";
 import AvailableRoom from "./components/AvailableRoom";
 import Review from "./components/Review";
+import { defaultRoom } from "./constants";
 import useGetHotelGalaryAPI from "./hooks/useGetHotelGalaryAPI";
 import useGetHotelReviewsAPI from "./hooks/useGetHotelReviewsAPI";
 import useGetHotelRoomsAPI from "./hooks/useGetHotelRoomsAPI";
@@ -28,6 +31,9 @@ const HotelDetails = () => {
 
   const [reviewsCountToDisplay, setReviewsCountToDisplay] = useState(3);
   const [imageToDisplay, setImageToDisplay] = useState<string>("");
+  const [roomToAddToCart, setRoomToAddToCart] = useState<Room>(defaultRoom);
+  const [isAddRoomToCartDialogOpen, setIsAddRoomToCartDialogOpen] =
+    useState<boolean>(false);
 
   const { hotel, isFetchingHotel } = useGetHotelDetailsAPI(hotelId);
   const { outdoorImage, squareImages, wideImages, isFetchingGalary } =
@@ -37,6 +43,13 @@ const HotelDetails = () => {
 
   const handleIncreaseReviewsCount = () => {
     setReviewsCountToDisplay((prev) => prev + 3);
+  };
+
+  const handleOpenAddRoomToCartDialog = () => {
+    setIsAddRoomToCartDialogOpen(true);
+  };
+  const handleCloseAddRoomToCartDialog = () => {
+    setIsAddRoomToCartDialogOpen(false);
   };
 
   const handleSelectGalaryItem = (galaryItemUrl: string) => {
@@ -75,7 +88,11 @@ const HotelDetails = () => {
 
   const renderAvailableRooms = rooms.map((room) => (
     <Grid item key={room.roomId} xs={12} sm={6}>
-      <AvailableRoom room={room} />
+      <AvailableRoom
+        room={room}
+        setRoomToAddToCart={setRoomToAddToCart}
+        handleOpenAddRoomToCartDialog={handleOpenAddRoomToCartDialog}
+      />
     </Grid>
   ));
 
@@ -186,6 +203,11 @@ const HotelDetails = () => {
           </Stack>
         </Modal>
       )}
+      <AddRoomToCartDialog
+        isOpen={isAddRoomToCartDialogOpen}
+        roomToAddToCart={roomToAddToCart}
+        handleCloseAddRoomToCartDialog={handleCloseAddRoomToCartDialog}
+      />
     </StyledContainer>
   );
 };
