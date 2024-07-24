@@ -1,10 +1,9 @@
 import Providers from "@/Providers";
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { BrowserRouter } from "react-router-dom";
 import { defaultCity } from "../../constants";
 import AddCityForm from "./AddCityForm";
-import { mockRefetchCities } from "./fixtures";
-import userEvent from "@testing-library/user-event";
 
 const getters = {
   getCitynameInput: () => screen.getByPlaceholderText(/^City name/),
@@ -19,8 +18,8 @@ describe("AddCityForm", () => {
         <BrowserRouter>
           <AddCityForm
             cityToUpdate={defaultCity}
+            setCityToUpdate={() => {}}
             handleCloseCityFormDialog={() => {}}
-            refetchCities={mockRefetchCities}
           />
         </BrowserRouter>
       </Providers>
@@ -37,7 +36,7 @@ describe("AddCityForm", () => {
           <AddCityForm
             cityToUpdate={defaultCity}
             handleCloseCityFormDialog={() => {}}
-            refetchCities={mockRefetchCities}
+            setCityToUpdate={() => {}}
           />
         </BrowserRouter>
       </Providers>

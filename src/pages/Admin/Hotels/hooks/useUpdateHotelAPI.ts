@@ -22,7 +22,7 @@ const useUpdateHotelAPI = (
     onSuccess: () => {
       showSuccessSnackbar({ message: "Hotel Updated Successfully" });
       handleCloseUpdateHotelDialog();
-      setTimeout(() => refetchHotels(), 500);
+      refetchHotels();
     },
     onError: () => {
       showErrorSnackbar({ message: "Can't update this Hotel" });

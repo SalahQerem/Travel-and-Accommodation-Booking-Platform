@@ -1,6 +1,7 @@
 import ConfirmActionDialog from "@/components/ConfirmActionDialog";
+import FilterForm from "@/components/FilterForm";
+import Loader from "@/components/Loader";
 import { defaultRequestQuery, paginationOptions } from "@/constants";
-import BlockUI from "@/containers/BlockUI";
 import StyledContainer from "@/containers/StyledContainer";
 import routeHOC from "@/routes/HOCs/routeHOC";
 import useGetHotelDetailsAPI from "@/services/useGetHotelDetailsAPI";
@@ -10,6 +11,7 @@ import {
   PaginationLimitOption,
   RequestQuery,
 } from "@/types";
+import { globalFilter } from "@/utils";
 import {
   Autocomplete,
   Button,
@@ -20,12 +22,12 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { Plus, Search } from "lucide-react";
+import { Plus } from "lucide-react";
 import { ChangeEvent, useState } from "react";
 import AddHotelDialog from "./components/AddHotelDialog";
 import Hotel from "./components/Hotel";
 import UpdateHotelDialog from "./components/UpdateHotelDialog";
-import { defaultHotel } from "./constants";
+import { defaultHotel, searchOptions } from "./constants";
 import useDeleteHotelAPI from "./hooks/useDeleteHotelAPI";
 
 const Hotels = () => {
@@ -34,7 +36,7 @@ const Hotels = () => {
   const [isUpdateHotelDialogOpen, setIsUpdateHotelDialogOpen] =
     useState<boolean>(false);
   const [hotelToUpdate, setHotelToUpdate] = useState<HotelType>(defaultHotel);
-  const [nameToSearch, setNameToSearch] = useState<string>("");
+  const [searchQuery, setSearchQuery] = useState<string>("");
   const [requestQuery, setRequestQuery] =
     useState<RequestQuery>(defaultRequestQuery);
   const [hotelToDelete, setHotelToDelete] = useState(defaultHotel);
@@ -57,10 +59,6 @@ const Hotels = () => {
         ...requestQuery,
         pageSize: newOption.value,
       });
-  };
-
-  const handleSearchForHotel = () => {
-    setRequestQuery({ ...requestQuery, name: nameToSearch });
   };
 
   const handleOpenAddHotelDialog = () => {
@@ -98,17 +96,17 @@ const Hotels = () => {
     deleteHotel({ hotelId: hotelToDelete.id, cityId: hotelDetails?.cityId! });
   };
 
-  const renderHotels = hotels.map((hotel) => (
-    <Grid item xs={12} md={6} key={hotel.id}>
-      <Hotel
-        hotel={hotel}
-        handleUpdateHotel={handleUpdateHotel}
-        handleOpenConfirmDeleteDialog={handleOpenConfirmDeleteDialog}
-      />
-    </Grid>
-  ));
-
-  if (isFetching) return <BlockUI />;
+  const renderHotels = globalFilter(hotels, searchOptions, searchQuery).map(
+    (hotel) => (
+      <Grid item xs={12} md={6} key={hotel.id}>
+        <Hotel
+          hotel={hotel}
+          handleUpdateHotel={handleUpdateHotel}
+          handleOpenConfirmDeleteDialog={handleOpenConfirmDeleteDialog}
+        />
+      </Grid>
+    )
+  );
 
   return (
     <StyledContainer>
@@ -123,24 +121,10 @@ const Hotels = () => {
               Hotels
             </Typography>
             <Stack direction="row" gap={2}>
-              <TextField
-                placeholder="Search by name"
-                size="small"
-                value={nameToSearch}
-                onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                  if (event.target.value) setNameToSearch(event.target.value);
-                  else setRequestQuery({ ...requestQuery, name: "" });
-                }}
+              <FilterForm
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
               />
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleSearchForHotel}
-                disabled={requestQuery.name === nameToSearch}
-                endIcon={<Search />}
-              >
-                Search
-              </Button>
               <Button
                 variant="contained"
                 color="primary"
@@ -175,7 +159,7 @@ const Hotels = () => {
             </Stack>
           </Stack>
           <Grid container spacing={2}>
-            {renderHotels}
+            {isFetching ? <Loader /> : renderHotels}
           </Grid>
         </Stack>
         <Stack justifyContent="center" alignItems="center" my={5}>

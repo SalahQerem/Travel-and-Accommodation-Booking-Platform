@@ -30,6 +30,7 @@ export interface PaginationLimitOption {
 }
 
 export interface City {
+  [index: string]: string;
   id: string;
   name: string;
   description: string;
@@ -53,6 +54,7 @@ export interface Room {
 }
 
 export interface Hotel {
+  [index: string]: string | number;
   id: string;
   name: string;
   description: string;

@@ -1,6 +1,6 @@
 import Amenity from "@/components/Amenity";
-import { addToCart, selectIsItemInCart } from "@/features/Cart";
-import { useAppDispatch, useAppSelector } from "@/store";
+import { selectIsItemInCart } from "@/features/Cart";
+import { useAppSelector } from "@/store";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import {
   Button,
@@ -14,9 +14,12 @@ import {
 import { Baby, UsersRound } from "lucide-react";
 import { FC } from "react";
 import { AvailableRoomProps } from "../types";
-import { useSnackBar } from "@/hooks/useSnackbar";
 
-const AvailableRoom: FC<AvailableRoomProps> = ({ room }) => {
+const AvailableRoom: FC<AvailableRoomProps> = ({
+  room,
+  setRoomToAddToCart,
+  handleOpenAddRoomToCartDialog,
+}) => {
   const {
     roomPhotoUrl,
     capacityOfAdults,
@@ -28,18 +31,13 @@ const AvailableRoom: FC<AvailableRoomProps> = ({ room }) => {
     roomNumber,
   } = room;
 
-  const dispatch = useAppDispatch();
-  const { showSuccessSnackbar } = useSnackBar();
-
   const isItemInCart = useAppSelector((state) =>
     selectIsItemInCart(state, roomNumber)
   );
 
   const handleAddToCart = () => {
-    dispatch(addToCart(room));
-    showSuccessSnackbar({
-      message: "Your Booking has been added to your Cart!",
-    });
+    handleOpenAddRoomToCartDialog();
+    setRoomToAddToCart(room);
   };
 
   const renderAmenities = roomAmenities.map((amenity) => (

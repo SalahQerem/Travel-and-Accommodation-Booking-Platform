@@ -7,4 +7,12 @@ export interface ReviewProps {
 
 export interface AvailableRoomProps {
   room: Room;
+  setRoomToAddToCart: (room: Room) => void;
+  handleOpenAddRoomToCartDialog: () => void;
+}
+
+export interface AddRoomToCartDialogProps {
+  isOpen: boolean;
+  roomToAddToCart: Room;
+  handleCloseAddRoomToCartDialog: () => void;
 }

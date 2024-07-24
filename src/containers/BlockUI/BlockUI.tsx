@@ -1,8 +1,9 @@
 import { Stack, useTheme } from "@mui/material";
 import Modal from "@mui/material/Modal";
+import { FC } from "react";
 import { SyncLoader } from "react-spinners";
 
-const BlockUI = () => {
+const BlockUI: FC = () => {
   const theme = useTheme();
 
   return (
@@ -14,10 +15,10 @@ const BlockUI = () => {
       hideBackdrop
     >
       <Stack
+        alignItems="center"
+        justifyContent="center"
+        height="100vh"
         sx={{
-          height: "100vh",
-          alignItems: "center",
-          justifyContent: "center",
           outline: "none",
           bgcolor: "background.paper",
         }}

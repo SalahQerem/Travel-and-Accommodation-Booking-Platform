@@ -45,7 +45,7 @@ const DateRangeField: FC<DateRangeFieldProps> = ({
   };
 
   return (
-    <Box sx={{ position: "relative", width: "fit-content", m: "auto" }}>
+    <Box sx={{ position: "relative", width: "fit-content", mx: "auto" }}>
       <Button
         type="button"
         className={styles.dateBtn}

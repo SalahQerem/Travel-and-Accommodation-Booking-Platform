@@ -7,10 +7,8 @@ import {
   GetHotelsResponse,
 } from "./types";
 
-export const getCitiesAPI = async (query: QueryObj) => {
-  const requestUrl = getUrlQueryString("/cities", query);
-
-  const res = await axiosInstance.get<GetCitiesResponse>(requestUrl);
+export const getCitiesAPI = async () => {
+  const res = await axiosInstance.get<GetCitiesResponse>("/cities");
   return res.data;
 };
 

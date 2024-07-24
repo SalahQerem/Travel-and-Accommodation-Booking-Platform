@@ -1,6 +1,5 @@
 import AutoCompleteField from "@/components/Fields/AutoCompleteField";
 import TextField from "@/components/Fields/TextField";
-import { defaultRequestQuery } from "@/constants";
 import useGetCitiesAPI from "@/services/useGetCitiesAPI";
 import { City } from "@/types";
 import { LoadingButton } from "@mui/lab";
@@ -20,14 +19,15 @@ const AddHotelForm: FC<AddHotelFormProps> = ({
   refetchHotels,
   handleCloseAddHotelDialog,
 }) => {
-  const { cities, isFetching } = useGetCitiesAPI(defaultRequestQuery);
+  const { cities, isFetching } = useGetCitiesAPI();
   const { addHotel, isPending } = useAddHotelAPI(
     refetchHotels,
     handleCloseAddHotelDialog
   );
 
   const onSubmit = (values: FormValuesTypes) => {
-    addHotel({ ...values, cityId: values.city.id! });
+    const { city, ...payload } = values;
+    addHotel({ ...payload, cityId: values.city.id! });
   };
 
   const formikProps = useFormik({

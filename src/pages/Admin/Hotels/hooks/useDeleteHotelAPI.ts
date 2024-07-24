@@ -22,7 +22,7 @@ const useDeleteHotelAPI = (
     onSuccess: () => {
       showSuccessSnackbar({ message: "Hotel Deleted Successfully" });
       handleCloseConfirmDeleteDialog();
-      setTimeout(() => refetchHotels(), 500);
+      refetchHotels();
     },
     onError: () => {
       showErrorSnackbar({ message: "Can't delete this Hotel" });

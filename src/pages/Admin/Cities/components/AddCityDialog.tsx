@@ -6,7 +6,7 @@ import AddCityForm from "./AddCityForm";
 const AddCityDialog: FC<AddCityDialogProps> = ({
   isOpen,
   cityToUpdate,
-  refetchCities,
+  setCityToUpdate,
   handleCloseCityFormDialog,
 }) => {
   return (
@@ -20,7 +20,7 @@ const AddCityDialog: FC<AddCityDialogProps> = ({
       <DialogContent dividers>
         <AddCityForm
           cityToUpdate={cityToUpdate}
-          refetchCities={refetchCities}
+          setCityToUpdate={setCityToUpdate}
           handleCloseCityFormDialog={handleCloseCityFormDialog}
         />
       </DialogContent>

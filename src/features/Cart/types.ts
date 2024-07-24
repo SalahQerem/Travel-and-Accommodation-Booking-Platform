@@ -1,4 +1,9 @@
-import { Room as CartItem } from "@/types";
+import { Room } from "@/types";
+
+export interface CartItem extends Room {
+  checkInDate: string;
+  checkOutDate: string;
+}
 
 export interface CartState extends Array<CartItem> {}
 

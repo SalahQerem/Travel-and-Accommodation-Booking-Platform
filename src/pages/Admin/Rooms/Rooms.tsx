@@ -1,6 +1,6 @@
 import ConfirmActionDialog from "@/components/ConfirmActionDialog";
+import Loader from "@/components/Loader";
 import { defaultRequestQuery } from "@/constants";
-import BlockUI from "@/containers/BlockUI";
 import StyledContainer from "@/containers/StyledContainer";
 import routeHOC from "@/routes/HOCs/routeHOC";
 import useGetHotelsAPI from "@/services/useGetHotelsAPI";
@@ -29,7 +29,7 @@ const Rooms = () => {
   const [isConfirmDeleteDialogOpen, setIsConfirmDeleteDialogOpen] =
     useState<boolean>(false);
 
-  const { hotels, isFetching } = useGetHotelsAPI({
+  const { hotels, isFetching: isFetchingHotels } = useGetHotelsAPI({
     ...defaultRequestQuery,
     pageSize: 200,
   });
@@ -83,8 +83,6 @@ const Rooms = () => {
     </Grid>
   ));
 
-  if (isFetching || isFetchingRooms) return <BlockUI />;
-
   return (
     <StyledContainer>
       <Container sx={{ py: 14 }}>
@@ -103,6 +101,7 @@ const Rooms = () => {
                 size="small"
                 options={hotels ?? []}
                 onChange={handleSelectHotel}
+                loading={isFetchingHotels}
                 value={selectedHotel}
                 sx={{ width: 300 }}
                 getOptionLabel={(option) => (option as Hotel).name + ""}
@@ -124,7 +123,7 @@ const Rooms = () => {
             </Button>
           </Stack>
           <Grid container spacing={2}>
-            {renderRooms}
+            {isFetchingRooms ? <Loader /> : renderRooms}
           </Grid>
         </Stack>
       </Container>

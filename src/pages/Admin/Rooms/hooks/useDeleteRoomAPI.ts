@@ -20,7 +20,7 @@ const useDeleteRoomAPI = (
     onSuccess: () => {
       showSuccessSnackbar({ message: "Room Deleted Successfully" });
       handleCloseConfirmDeleteDialog();
-      setTimeout(() => refetchRooms(), 500);
+      refetchRooms();
     },
     onError: () => {
       showErrorSnackbar({ message: "Can't delete this Room" });

@@ -8,7 +8,7 @@ const saferStore = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
-    }),
+    }), // remove this middleware
 });
 
 export const persistor = persistStore(saferStore);

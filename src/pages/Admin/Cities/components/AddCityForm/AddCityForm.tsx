@@ -15,21 +15,19 @@ type FormValuesTypes = InferType<typeof validationSchema>;
 
 const AddCityForm: FC<AddCityFormProps> = ({
   cityToUpdate,
-  refetchCities,
+  setCityToUpdate,
   handleCloseCityFormDialog,
 }) => {
   const isUpdateAction: boolean = !!cityToUpdate.id;
 
-  const { addCity, isPending } = useAddCityAPI(
-    refetchCities,
-    handleCloseCityFormDialog
-  );
+  const { addCity, isPending } = useAddCityAPI(handleCloseCityFormDialog);
   const { updateCity, isUpdating } = useUpdateCityAPI(
-    refetchCities,
+    cityToUpdate,
     handleCloseCityFormDialog
   );
 
   const onSubmit = (values: FormValuesTypes) => {
+    setCityToUpdate({ id: cityToUpdate.id, ...values });
     if (isUpdateAction) updateCity({ id: cityToUpdate.id, ...values });
     else addCity({ ...values });
   };
@@ -41,44 +39,42 @@ const AddCityForm: FC<AddCityFormProps> = ({
   });
 
   return (
-    <Stack>
-      <FormikProvider value={formikProps}>
-        <Form>
-          <Paper variant="outlined" component="fieldset" sx={{ padding: 2 }}>
-            <Typography variant="caption" component="legend" sx={{ m: 0 }}>
-              City Details
-            </Typography>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField name="name" placeholder="City name" />
-              </Grid>
-
-              <Grid item xs={12}>
-                <TextField name="description" placeholder="Description" />
-              </Grid>
+    <FormikProvider value={formikProps}>
+      <Form>
+        <Paper variant="outlined" component="fieldset" sx={{ padding: 2 }}>
+          <Typography variant="caption" component="legend" sx={{ m: 0 }}>
+            City Details
+          </Typography>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField name="name" placeholder="City name" />
             </Grid>
-          </Paper>
-          <Stack direction="row" justifyContent="flex-end" gap={2} mt={2}>
-            <LoadingButton
-              variant="contained"
-              color="primary"
-              type="submit"
-              endIcon={isUpdateAction ? <Check /> : <Plus />}
-              loading={isPending || isUpdating}
-            >
-              {isUpdateAction ? "Save" : "Add"}
-            </LoadingButton>
-            <Button
-              variant="contained"
-              color="warning"
-              onClick={handleCloseCityFormDialog}
-            >
-              Cancel
-            </Button>
-          </Stack>
-        </Form>
-      </FormikProvider>
-    </Stack>
+
+            <Grid item xs={12}>
+              <TextField name="description" placeholder="Description" />
+            </Grid>
+          </Grid>
+        </Paper>
+        <Stack direction="row" justifyContent="flex-end" gap={2} mt={2}>
+          <LoadingButton
+            variant="contained"
+            color="primary"
+            type="submit"
+            endIcon={isUpdateAction ? <Check /> : <Plus />}
+            loading={isPending || isUpdating}
+          >
+            {isUpdateAction ? "Save" : "Add"}
+          </LoadingButton>
+          <Button
+            variant="contained"
+            color="warning"
+            onClick={handleCloseCityFormDialog}
+          >
+            Cancel
+          </Button>
+        </Stack>
+      </Form>
+    </FormikProvider>
   );
 };
 
